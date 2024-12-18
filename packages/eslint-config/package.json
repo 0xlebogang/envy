@@ -1,10 +1,13 @@
 {
   "name": "@envyper/eslint-config",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
   "private": true,
   "exports": {
     "default": "./base.js"
+  },
+  "scripts": {
+    "install": "bun i"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.15.0",

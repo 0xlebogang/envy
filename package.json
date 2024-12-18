@@ -2,6 +2,7 @@
   "name": "envyper",
   "private": true,
   "devDependencies": {
+    "@types/bun": "^1.1.14",
     "prettier": "^3.2.5",
     "turbo": "^2.3.3",
     "typescript": "5.5.4"

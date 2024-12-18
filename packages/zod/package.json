@@ -2,8 +2,13 @@
   "name": "@envyper/zod",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
+  "exports": {
+    "default": "./index.ts"
+  },
   "scripts": {
-    "lint": "bunx eslint src/**/*.ts"
+    "lint": "bunx eslint .",
+    "install": "bun i"
   },
   "dependencies": {
     "zod": "^3.24.1",

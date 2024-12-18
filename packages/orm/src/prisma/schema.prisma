@@ -18,26 +18,29 @@ model User {
   userId    String    @unique
   createdAt DateTime  @default(now())
   projects  Project[] @relation("creator")
-  members      Project[] @relation("members")
+  members   Project[] @relation("members")
 }
 
 model Project {
-  id           BigInt        @id @default(autoincrement())
-  name         String        @db.VarChar(150)
-  description  String        @db.Text
-  createdAt    DateTime      @default(now())
-  creator      User          @relation(fields: [creatorId], references: [id], name: "creator")
-  creatorId    BigInt
-  users        User[]        @relation("members")
-  environments Environment[] @relation("project")
+  id          BigInt        @id @default(autoincrement())
+  name        String        @db.VarChar(150)
+  description String        @db.Text
+  createdAt   DateTime      @default(now())
+  creator     User          @relation(fields: [creatorId], references: [id], name: "creator")
+  creatorId   BigInt
+  users       User[]        @relation("members")
+  variables   EnvVariable[] @relation("variables")
 }
 
-model Environment {
-  id        BigInt        @id @default(autoincrement())
-  type      EnvType
-  project   Project       @relation(fields: [projectId], references: [id], name: "project")
+model EnvVariable {
+  id        BigInt  @id @default(autoincrement())
+  key       String
+  value     String  @unique
+  envType   EnvType
+  project   Project @relation(fields: [projectId], references: [id], name: "variables")
   projectId BigInt
-  variables EnvVariable[] @relation("environment")
+
+  @@unique([key, projectId])
 }
 
 enum EnvType {
@@ -45,14 +48,4 @@ enum EnvType {
   TEST
   STAGING
   PRODUCTION
-}
-
-model EnvVariable {
-  id            BigInt      @id @default(autoincrement())
-  key           String
-  value         String      @unique
-  environment   Environment @relation(fields: [environmentId], references: [id], name: "environment")
-  environmentId BigInt
-
-  @@unique([key, environmentId])
 }
