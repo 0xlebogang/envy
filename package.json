@@ -1,18 +1,16 @@
 {
   "name": "envyper",
+  "packageManager": "bun@1.1.40",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "^1.1.14",
-    "prettier": "^3.2.5",
-    "turbo": "^2.3.3",
-    "typescript": "5.5.4"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "bun@1.1.38",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "@types/bun": "^1.1.14",
+    "turbo": "^2.3.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.2"
+  }
 }

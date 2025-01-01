@@ -1,3 +1,14 @@
-import { config as baseConfig } from "@envyper/eslint-config/base.js";
+import { config as baseConfig } from "@envyper/eslint-config/base";
 
-export default [...baseConfig];
+/** @type {import("eslint").Linter.Config} */
+export default [
+  ...baseConfig,
+  {
+    languageOptions: {
+      parserOptions: {
+        project: ["./tsconfig.json"],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+];

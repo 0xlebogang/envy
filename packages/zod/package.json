@@ -7,12 +7,11 @@
     "default": "./index.ts"
   },
   "scripts": {
-    "lint": "bunx eslint .",
-    "install": "bun i"
+    "lint": "eslint \"**/*.ts\""
   },
   "dependencies": {
     "zod": "^3.24.1",
-    "@envyper/eslint-config": "*",
-    "@envyper/typescript-config": "*"
+    "@envyper/eslint-config": "workspace:*",
+    "@envyper/typescript-config": "workspace:*"
   }
 }

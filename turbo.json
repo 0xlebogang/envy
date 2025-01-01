@@ -3,16 +3,29 @@
   "ui": "tui",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env.production.local"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "dependsOn": ["test", "^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env.production", "**/*.ts", "**/*.tsx"],
+      "outputs": ["dist/**"]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "inputs": ["$TURBO_DEFAULT$", "**/*.ts", "**/*.tsx"]
     },
     "test": {
       "dependsOn": ["^test"],
-      "inputs": ["$TURBO_DEFAULT$", ".env.test"]
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env.test",
+        "**/*.test.ts",
+        "**/*.test.tsx"
+      ]
+    },
+    "start": {
+      "inputs": ["dist/*"]
+    },
+    "clean": {
+      "dependsOn": ["build", "test"],
+      "inputs": ["dist/**"]
     }
   }
 }

@@ -1,0 +1,26 @@
+{
+  "name": "@envyper/web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 4000 --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^6.9.6",
+    "@nextui-org/react": "^2.6.10",
+    "framer-motion": "^11.15.0",
+    "next": "^15.1.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@envyper/eslint-config": "workspace:*",
+    "@envyper/zod": "workspace:*",
+    "@envyper/tailwind-config": "workspace:*"
+  }
+}

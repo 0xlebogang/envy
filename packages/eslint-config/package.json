@@ -4,19 +4,19 @@
   "type": "module",
   "private": true,
   "exports": {
-    "default": "./base.js"
+    "./base": "./base.js"
   },
-  "scripts": {
-    "install": "bun i"
-  },
-  "devDependencies": {
+  "dependencies": {
     "@typescript-eslint/eslint-plugin": "^8.15.0",
     "@typescript-eslint/parser": "^8.15.0",
     "eslint": "^9.15.0",
+    "eslint-config-airbnb-typescript": "17.1.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-config-next": "13.4.1",
     "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
     "eslint-plugin-turbo": "^2.3.0",
     "globals": "^15.12.0",
     "typescript": "^5.3.3",

@@ -1,4 +1,15 @@
-import { config as baseConfig } from '@envyper/eslint-config/base'
+import * as base from "@envyper/eslint-config/base";
 
 /** @type {import("eslint").Linter.Config} */
-export default [...baseConfig]
+export default [
+  ...base.config,
+  {
+    languageOptions: {
+      ecmaVersion: 2020,
+      parserOptions: {
+        project: ["./tsconfig.json"],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+];

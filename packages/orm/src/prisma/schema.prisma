@@ -14,31 +14,44 @@ datasource db {
 }
 
 model User {
-  id        BigInt    @id @default(autoincrement())
-  userId    String    @unique
-  createdAt DateTime  @default(now())
-  projects  Project[] @relation("creator")
-  members   Project[] @relation("members")
+  id          Int      @id @default(autoincrement())
+  clerkUserId String   @unique
+  email       String   @unique
+  firstName   String?
+  lastName    String?
+  createdAt   DateTime @default(now())
+
+  projects Project[] @relation("creator")
+  members  Project[] @relation("members")
+  token    Token?    @relation("token")
+}
+
+model Token {
+  id     Int    @id @default(autoincrement())
+  token  String @unique
+  user   User   @relation(fields: [userId], references: [id], name: "token")
+  userId Int    @unique
+  createdAt  DateTime @default(now())
 }
 
 model Project {
-  id          BigInt        @id @default(autoincrement())
+  id          Int           @id @default(autoincrement())
   name        String        @db.VarChar(150)
   description String        @db.Text
   createdAt   DateTime      @default(now())
   creator     User          @relation(fields: [creatorId], references: [id], name: "creator")
-  creatorId   BigInt
+  creatorId   Int
   users       User[]        @relation("members")
   variables   EnvVariable[] @relation("variables")
 }
 
 model EnvVariable {
-  id        BigInt  @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   key       String
   value     String  @unique
   envType   EnvType
   project   Project @relation(fields: [projectId], references: [id], name: "variables")
-  projectId BigInt
+  projectId Int
 
   @@unique([key, projectId])
 }
