@@ -6,11 +6,15 @@ import { auth } from "@clerk/nextjs/server";
 const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 export default async function Index() {
-  const { sessionId, userId } = await auth();
+  const { sessionId, userId, getToken } = await auth();
 
   if (sessionId) {
-    const res = await fetch(`${API_URL}/tokens?clerkUserId=${userId}`);
-    const data = await res.json();
+    const res = await fetch(`${API_URL}/tokens?clerkUserId=${userId}`, {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`,
+      },
+    });
+    const { data } = await res.json();
 
     return (
       <>
@@ -20,7 +24,7 @@ export default async function Index() {
             Your secure environment variable management solution. Sign in to get
             started.
           </p>
-          <p>Client ID: {data?.accessToken?.token}</p>
+          <p>Client ID: {data?.token}</p>
           <Button
             href="/projects"
             as={Link}

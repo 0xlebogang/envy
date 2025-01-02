@@ -10,12 +10,13 @@
     "test": "bun test",
     "test:watch": "bun --watch test",
     "lint": "eslint src/**/*.ts",
-    "seed": "bun src/scripts/seed.ts",
     "clean": "rm -rf dist/",
     "start": "bun dist/index.js"
   },
   "dependencies": {
+    "@clerk/backend": "^1.21.4",
     "@envyper/orm": "workspace:*",
+    "@hono/clerk-auth": "^2.0.0",
     "@hono/zod-validator": "^0.4.2",
     "hono": "^4.6.14",
     "svix": "^1.44.0"

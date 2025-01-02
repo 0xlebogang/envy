@@ -17,14 +17,6 @@ describe("Projects Enpoints", () => {
 
   let projectId: number;
 
-  // beforeAll(async () => {
-  //   await prisma.user.findFirst({
-  //     where: {
-  //       userId: "test-user",
-  //     },
-  //   });
-  // });
-
   it("should create a new project", async () => {
     const res = await testClient(app).projects.$post({ json: testData });
 

@@ -11,25 +11,21 @@ describe("Tokens Endpoints", () => {
   };
 
   it("should get access token for user", async () => {
-    const res = await testClient(app).tokens.$get({
-      query: testData,
-    });
+    const res = await testClient(app).tokens.$get();
     const data = await res.json();
 
     if ("accessToken" in data) {
       expect(data.accessToken).toBeDefined();
       expect(res.status).toBe(200);
     } else {
-      expect(res.status).toBe(400);
+      expect(res.status).toBe(401);
     }
   });
 
   it("should fail to get token for invalid user", async () => {
-    const res = await testClient(app).tokens.$get({
-      query: { clerkUserId: "invalid-user" },
-    });
+    const res = await testClient(app).tokens.$get();
 
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(401);
   });
 
   it("should refresh access token", async () => {

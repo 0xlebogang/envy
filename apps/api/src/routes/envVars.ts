@@ -6,11 +6,17 @@ import {
   updateEnvVariable,
 } from "@envyper/orm/envVars";
 import { CreateEnvVariableSchema } from "@envyper/zod";
+import { getAuth } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 
 const envVars = new Hono()
   .post("/", zValidator("json", CreateEnvVariableSchema), async (c) => {
+    const auth = getAuth(c);
+    if (!auth?.userId) {
+      return c.json({ message: "User not authenticated" }, 401);
+    }
+
     const data = c.req.valid("json");
 
     const variable = await createEnvVariable({ ...data });
@@ -22,6 +28,11 @@ const envVars = new Hono()
     "/:id{[0-9]+}",
     zValidator("json", CreateEnvVariableSchema.partial()),
     async (c) => {
+      const auth = getAuth(c);
+      if (!auth?.userId) {
+        return c.json({ message: "User not authenticated" }, 401);
+      }
+
       const data = c.req.valid("json");
 
       const variableId = parseInt(c.req.param("id"));
@@ -41,6 +52,11 @@ const envVars = new Hono()
   )
 
   .get("/", async (c) => {
+    const auth = getAuth(c);
+    if (!auth?.userId) {
+      return c.json({ message: "User not authenticated" }, 401);
+    }
+
     try {
       const projectId = parseInt(c.req.query("projectId") || "");
       if (isNaN(projectId)) {
@@ -55,6 +71,11 @@ const envVars = new Hono()
   })
 
   .get("/:id{[0-9]+}", async (c) => {
+    const auth = getAuth(c);
+    if (!auth?.userId) {
+      return c.json({ message: "User not authenticated" }, 401);
+    }
+
     const variableId = parseInt(c.req.param("id"));
     const variable = await getEnvVariableById(variableId);
     if (!variable) {
@@ -65,6 +86,11 @@ const envVars = new Hono()
   })
 
   .delete("/:id{[0-9]+}", async (c) => {
+    const auth = getAuth(c);
+    if (!auth?.userId) {
+      return c.json({ message: "User not authenticated" }, 401);
+    }
+
     const variableId = parseInt(c.req.param("id"));
 
     try {

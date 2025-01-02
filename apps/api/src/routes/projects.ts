@@ -13,18 +13,24 @@ import {
   getProjects,
   updateProject,
 } from "@envyper/orm/projects";
-import { getUser } from "@envyper/orm/utils";
+import { getUser } from "@envyper/orm/users";
+import { getAuth } from "@hono/clerk-auth";
 
 const projects = new Hono()
   .post(
     "/",
     zValidator("json", CreateProjectSchema.omit({ creatorId: true })),
     async (c) => {
+      const auth = getAuth(c);
+      if (!auth?.userId) {
+        return c.json({ message: "User not authenticated" }, 401);
+      }
+
       const data = c.req.valid("json");
 
-      const user: User | null = await getUser("test-user");
+      const user: User | null = await getUser(auth?.userId as string);
       if (!user) {
-        return c.json({ error: "User not found" }, 401);
+        return c.json({ error: "User not found" }, 404);
       }
 
       const project: Project = await createProject({
@@ -41,24 +47,33 @@ const projects = new Hono()
   )
 
   .get("/", async (c) => {
-    const user = await getUser("test-user");
+    const auth = getAuth(c);
+    if (!auth?.userId) {
+      return c.json({ message: "User not authenticated" }, 401);
+    }
+
+    const user = await getUser(auth?.userId as string);
     if (!user) {
-      return c.json({ message: "User not found" }, 401);
+      return c.json({ message: "User not found" }, 404);
     }
 
     try {
       const projects = await getProjects(user?.id);
       return c.json({ data: projects }, 200);
     } catch (e) {
-      console.log(e);
       return c.json({ error: "Failed to fetch projects" }, 500);
     }
   })
 
   .get("/:id{[0-9]+}", async (c) => {
-    const user = await getUser("test-user");
+    const auth = getAuth(c);
+    if (!auth?.userId) {
+      return c.json({ message: "User not authenticated" }, 401);
+    }
+
+    const user = await getUser(auth?.userId as string);
     if (!user) {
-      return c.json({ error: "User not found" }, 401);
+      return c.json({ error: "User not found" }, 404);
     }
 
     const projectId = parseInt(c.req.param("id"));
@@ -70,7 +85,6 @@ const projects = new Hono()
 
       return c.json({ data: project }, 200);
     } catch (e) {
-      console.log(e);
       return c.json({ error: "Failed to fetch project" }, 500);
     }
   })
@@ -79,7 +93,12 @@ const projects = new Hono()
     "/:id{[0-9]+}",
     zValidator("json", CreateProjectSchema.partial().omit({ creatorId: true })),
     async (c) => {
-      const user = await getUser("test-user");
+      const auth = getAuth(c);
+      if (!auth?.userId) {
+        return c.json({ message: "User not authenticated" }, 401);
+      }
+
+      const user = await getUser(auth?.userId);
       if (!user) {
         return c.json({ message: "User not found" }, 401);
       }
@@ -95,16 +114,20 @@ const projects = new Hono()
         const updatedProject = await updateProject(projectId, data);
         return c.json({ data: updatedProject }, 200);
       } catch (e) {
-        console.log(e);
         return c.json({ error: "Failed to update project" }, 500);
       }
     },
   )
 
   .delete("/:id{[0-9]+}", async (c) => {
-    const user = await getUser("test-user");
+    const auth = getAuth(c);
+    if (!auth?.userId) {
+      return c.json({ message: "User not authenticated" }, 401);
+    }
+
+    const user = await getUser(auth?.userId);
     if (!user) {
-      return c.json({ message: "User not found" }, 401);
+      return c.json({ message: "User not found" }, 404);
     }
 
     const projectId = parseInt(c.req.param("id"));
@@ -117,7 +140,6 @@ const projects = new Hono()
       await deleteProject(projectId);
       return c.json({ data: project }, 200);
     } catch (e) {
-      console.log(e);
       return c.json({ error: "Failed to delete project" }, 500);
     }
   });

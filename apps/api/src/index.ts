@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { etag } from "hono/etag";
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
+import { clerkMiddleware } from "@hono/clerk-auth";
 
 import projects from "./routes/projects";
 import envVars from "./routes/envVars";
@@ -13,6 +14,7 @@ const isProd = process.env.NODE_ENV === "production";
 const app = new Hono().basePath("/api");
 
 app.use(etag(), logger());
+app.use("*", clerkMiddleware());
 app.use(
   "*",
   cors({

@@ -2,56 +2,58 @@ import { getUser } from "@envyper/orm/utils";
 import { UserSchema } from "@envyper/zod";
 import { zValidator } from "@hono/zod-validator";
 import { generateAccessToken, getAccessToken } from "@envyper/orm/accessTokens";
+import { getAuth } from "@hono/clerk-auth";
 import { Hono } from "hono";
 
 const tokens = new Hono()
 
-  .get(
-    "/",
-    zValidator("query", UserSchema.pick({ clerkUserId: true })),
-    async (c) => {
-      const { clerkUserId } = c.req.valid("query");
+  .get("/", async (c) => {
+    const auth = getAuth(c);
+    if (!auth?.userId) {
+      return c.json({ message: "User not authenticated" }, 401);
+    }
 
-      const accessToken = await getAccessToken(clerkUserId);
-      if (!accessToken) {
-        return c.json(
-          {
-            message:
-              "Could not find access token. Make sure you are authenticated",
-          },
-          400,
-        );
-      }
-
+    const data = await getAccessToken(auth?.userId as string);
+    if (!data) {
       return c.json(
         {
-          accessToken: accessToken,
+          message: "No access token associated with this user",
         },
-        200,
+        404,
       );
-    },
-  )
+    }
+
+    return c.json(
+      {
+        data,
+      },
+      200,
+    );
+  })
 
   .post(
     "/refresh",
     zValidator("json", UserSchema.pick({ clerkUserId: true })),
     async (c) => {
-      const { clerkUserId } = c.req.valid("json");
+      const auth = getAuth(c);
+      if (!auth?.userId) {
+        return c.json({ message: "User not authenticated" }, 401);
+      }
 
-      const user = await getUser(clerkUserId);
+      const user = await getUser(auth?.userId as string);
       if (!user) {
         return c.json(
           {
-            message: "User not authorized",
+            message: "No provided user id",
           },
-          401,
+          400,
         );
       }
 
-      const newToken = await generateAccessToken(clerkUserId);
+      const newToken = await generateAccessToken(auth?.userId as string);
       return c.json(
         {
-          accessToken: newToken.token,
+          data: newToken,
         },
         200,
       );
