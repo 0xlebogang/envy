@@ -1,6 +1,7 @@
 import React from "react";
 import { Inter } from "next/font/google";
 import Providers from "@/context/Providers";
+import { Component as Navbar } from "@/components/Navbar";
 import "./globals.css";
 
 import type { Metadata } from "next";
@@ -34,8 +35,13 @@ type RootLayoutProps = {
 export default function RootLayout(props: RootLayoutProps) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className}`}>
-        <Providers>{props.children}</Providers>
+      <body
+        className={`${inter.className}  selection:text-black selection:bg-white`}
+      >
+        <Providers>
+          <Navbar />
+          <main className="container mx-auto w-full">{props.children}</main>
+        </Providers>
       </body>
     </html>
   );

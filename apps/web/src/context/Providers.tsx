@@ -22,7 +22,12 @@ export default function Providers(props: ProvidersProps) {
   const router = useRouter();
 
   return (
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider
+      publishableKey={PUBLISHABLE_KEY}
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      afterSignOutUrl="/"
+    >
       <NextUIProvider navigate={router.push}>{props.children}</NextUIProvider>
     </ClerkProvider>
   );
