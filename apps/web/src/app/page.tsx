@@ -4,8 +4,6 @@ import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import Banner from "@/components/Banner";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
-
 export default async function Index() {
   const { getToken } = await auth();
 
