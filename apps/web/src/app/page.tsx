@@ -3,6 +3,7 @@ import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import Banner from "@/components/Banner";
+import ContentCard from "@/components/ContentCard";
 
 export default async function Index() {
   const { getToken } = await auth();
@@ -10,8 +11,22 @@ export default async function Index() {
   if (await getToken()) {
     return (
       <>
-        <main className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-start p-8">
+        <main className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-start p-8 gap-6">
           <Banner />
+          <div className="w-full grid grid-rows-2 lg:grid-cols-2 gap-6">
+            <ContentCard
+              title="My Projects"
+              cols={1}
+              pageUrl="/projects"
+              noContentMessage="No projects yet"
+            />
+            <ContentCard
+              title="My Environments"
+              cols={1}
+              pageUrl="/environments"
+              noContentMessage="No environments yet"
+            />
+          </div>
         </main>
       </>
     );

@@ -6,13 +6,12 @@ import { Card, CardFooter, CardHeader } from "@nextui-org/card";
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
-import { Divider } from "@nextui-org/react";
 
 export default function Banner() {
   const { user } = useClerk();
 
   return (
-    <Card fullWidth className="p-4">
+    <Card fullWidth className="hidden md:flex p-4">
       <CardHeader className="flex gap-3 mb-2">
         <Avatar
           alt={user?.fullName}
@@ -27,7 +26,6 @@ export default function Banner() {
           </p>
         </div>
       </CardHeader>
-      <Divider />
       <CardFooter className="flex justify-end">
         <Button as={Link} href="/settings" size="lg" color="primary">
           Client ID
