@@ -5,6 +5,8 @@ import { auth } from "@clerk/nextjs/server";
 import Banner from "@/components/Banner";
 import ContentCard from "@/components/ContentCard";
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
+
 export default async function Index() {
   const { getToken } = await auth();
 
@@ -19,12 +21,14 @@ export default async function Index() {
               cols={1}
               pageUrl="/projects"
               noContentMessage="No projects yet"
+              fetchHref={`${apiUrl}/projects`}
             />
             <ContentCard
               title="My Environments"
               cols={1}
               pageUrl="/environments"
               noContentMessage="No environments yet"
+              fetchHref={`${apiUrl}/variables`}
             />
           </div>
         </main>
