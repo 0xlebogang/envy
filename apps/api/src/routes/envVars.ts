@@ -18,6 +18,7 @@ const envVars = new Hono()
     }
 
     const data = c.req.valid("json");
+    console.log(data);
 
     const variable = await createEnvVariable({ ...data });
 
@@ -45,7 +46,6 @@ const envVars = new Hono()
         const updatedVariable = await updateEnvVariable(variableId, data);
         return c.json({ data: updatedVariable }, 200);
       } catch (e) {
-        console.log(e);
         return c.json({ error: "Failed to update variable." }, 500);
       }
     },

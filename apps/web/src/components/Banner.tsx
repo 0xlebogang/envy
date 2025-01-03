@@ -11,24 +11,42 @@ export default function Banner() {
   const { user } = useClerk();
 
   return (
-    <Card fullWidth className="hidden md:flex p-4">
-      <CardHeader className="flex gap-3 mb-2">
+    <Card
+      fullWidth
+      className="hidden md:flex flex-col justify-start md:col-span-1 p-4"
+    >
+      <CardHeader className="flex justify-start items-start gap-3 mb-2">
         <Avatar
           alt={user?.fullName}
           src={user?.imageUrl}
           isBordered
-          size="lg"
+          size="sm"
         />
-        <div className="flex flex-col">
-          <p className="text-md">{user?.fullName}</p>
-          <p className="text-small text-default-500">
+        <div className="flex flex-col text-start">
+          <p className="text-sm">{user?.fullName}</p>
+          <p className="text-xs text-default-500">
             {user?.emailAddresses[0]?.emailAddress}
           </p>
         </div>
       </CardHeader>
-      <CardFooter className="flex justify-end">
-        <Button as={Link} href="/settings" size="lg" color="primary">
-          Client ID
+      <CardFooter className="flex flex-col gap-2 justify-start">
+        <Button
+          size="md"
+          href="/settings"
+          as={Link}
+          className="font-semibold"
+          fullWidth
+        >
+          Setiings
+        </Button>
+        <Button
+          size="md"
+          href="/projects"
+          as={Link}
+          className="font-semibold"
+          fullWidth
+        >
+          My Projects
         </Button>
       </CardFooter>
     </Card>
