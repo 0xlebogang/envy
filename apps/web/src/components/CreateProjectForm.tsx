@@ -20,7 +20,7 @@ type ModalFormProps = {
   submitText: string;
 };
 
-export function Component(props: ModalFormProps) {
+export default function CreateProjectForm(props: ModalFormProps) {
   const { getToken } = useAuth();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [payload, setPayload] = React.useState({

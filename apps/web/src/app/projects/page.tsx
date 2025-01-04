@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
-import ProjectsTable from "@/components/ProjectsTable";
 import { fetchProjects } from "@/data/fetchProjects";
+import type { Metadata } from "next";
+
+import CreateProjectForm from "@/components/CreateProjectForm";
+import ProjectsTable from "@/components/ProjectsTable";
 
 export const metadata: Metadata = {
   title: "Projects | Envyper",
@@ -21,7 +23,14 @@ export default async function Projects() {
 
   return (
     <>
-      <h1 className="text-4xl font-bold mb-6">My Projects</h1>
+      <div className="w-full flex justify-between items-start">
+        <h1 className="text-4xl font-bold mb-6">My Projects</h1>
+        <CreateProjectForm
+          openModalBtnText="Add New"
+          submitText="Create"
+          title="Create New Project"
+        />
+      </div>
       <ProjectsTable data={data} />
     </>
   );

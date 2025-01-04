@@ -2,8 +2,8 @@ import React from "react";
 import { Button } from "@nextui-org/button";
 import { auth } from "@clerk/nextjs/server";
 import { fetchProjects } from "@/data/fetchProjects";
-import { Component as CreateModalForm } from "@/components/CreateProjectForm";
 
+import CreateProjectForm from "@/components/CreateProjectForm";
 import ContentCard from "@/components/ContentCard";
 import Banner from "@/components/Banner";
 import ItemCard from "@/components/ui/ItemCard";
@@ -29,7 +29,7 @@ export default async function Index() {
               noContentMessage="No projects yet"
               fetchHref={`${apiUrl}/projects`}
               modalForm={
-                <CreateModalForm
+                <CreateProjectForm
                   openModalBtnText="Add New"
                   title="Create New Project"
                   submitText="Create"
