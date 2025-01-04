@@ -1,7 +1,7 @@
 import React from "react";
 import { fetchProjectById } from "@/data/fetchProjects";
 import { fetchVariables } from "@/data/fetchVariables";
-import DeleteProjectModal from "@/components/ui/DeleteProjectModal";
+import DeleteProjectModal from "@/components/DeleteProjectModal";
 import VariablesTable from "@/components/VariablesTable";
 import CreateVariableForm from "@/components/CreateVariableForm";
 

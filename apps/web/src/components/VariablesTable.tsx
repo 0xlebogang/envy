@@ -9,18 +9,21 @@ import {
   TableCell,
   Skeleton,
 } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
+import DeleteVariableModal from "./DeleteaVariable";
 
-type ProjectsTableProps = {
+type VariablesTableProps = {
   data?: Record<string, string>[];
 };
 
-export default function VariablesTable(props: ProjectsTableProps) {
+export default function VariablesTable(props: VariablesTableProps) {
   return (
     <Table isStriped aria-label="Collection table">
       <TableHeader>
-        <TableColumn>Key</TableColumn>
-        <TableColumn>Value</TableColumn>
-        <TableColumn>Environment</TableColumn>
+        <TableColumn>KEY</TableColumn>
+        <TableColumn>VALUE</TableColumn>
+        <TableColumn>ENVIRONMENT</TableColumn>
+        <TableColumn>ACTION</TableColumn>
       </TableHeader>
       <TableBody>
         {props.data.length > 0 ? (
@@ -30,6 +33,12 @@ export default function VariablesTable(props: ProjectsTableProps) {
                 <TableCell>{item.key}</TableCell>
                 <TableCell>{item.value}</TableCell>
                 <TableCell>{item.envType}</TableCell>
+                <TableCell className="flex gap-4">
+                  <DeleteVariableModal
+                    variableId={item.id}
+                    projectId={item.projectId}
+                  />
+                </TableCell>
               </TableRow>
             ))}
           </>
