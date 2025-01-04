@@ -32,12 +32,12 @@ export default function Banner() {
       <CardFooter className="flex flex-col gap-2 justify-start">
         <Button
           size="md"
-          href="/settings"
+          href="/"
           as={Link}
           className="font-semibold"
           fullWidth
         >
-          Setiings
+          Home
         </Button>
         <Button
           size="md"
@@ -47,6 +47,15 @@ export default function Banner() {
           fullWidth
         >
           My Projects
+        </Button>
+        <Button
+          size="md"
+          href="/settings"
+          as={Link}
+          className="font-semibold"
+          fullWidth
+        >
+          Setiings
         </Button>
       </CardFooter>
     </Card>

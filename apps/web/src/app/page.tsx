@@ -23,14 +23,14 @@ export default async function Index() {
           <Banner />
           <div className="w-full col-span-3 min-h-full gap-6">
             <ContentCard
-              title="My Projects"
+              title="Dashboard"
               cols={1}
               pageUrl="/projects"
               noContentMessage="No projects yet"
               fetchHref={`${apiUrl}/projects`}
               modalForm={
                 <CreateProjectForm
-                  openModalBtnText="Add New"
+                  openModalBtnText="New Project"
                   title="Create New Project"
                   submitText="Create"
                 />
