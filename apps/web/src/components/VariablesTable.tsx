@@ -9,7 +9,6 @@ import {
   TableCell,
   Skeleton,
 } from "@nextui-org/react";
-import { Button } from "@nextui-org/button";
 import DeleteVariableModal from "./DeleteaVariable";
 
 type VariablesTableProps = {
