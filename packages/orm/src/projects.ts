@@ -78,9 +78,19 @@ export const updateProject = async (
  * @throws Will throw an error if the project doesn't exist or if the deletion fails
  */
 export const deleteProject = async (projectId: number): Promise<void> => {
-  await prisma.project.delete({
-    where: {
-      id: projectId,
-    },
-  });
+  await prisma.$transaction([
+    // Delete all environment variables associated with the project
+    prisma.envVariable.deleteMany({
+      where: {
+        projectId: projectId,
+      },
+    }),
+
+    // Delete the project itself
+    prisma.project.delete({
+      where: {
+        id: projectId,
+      },
+    }),
+  ]);
 };

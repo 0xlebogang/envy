@@ -140,6 +140,7 @@ const projects = new Hono()
       await deleteProject(projectId);
       return c.json({ data: project }, 200);
     } catch (e) {
+      console.log(e);
       return c.json({ error: "Failed to delete project" }, 500);
     }
   });

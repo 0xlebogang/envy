@@ -20,7 +20,7 @@ type DeleteProjectModalProps = {
 const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
 
 export default function DeleteProjectModal(props: DeleteProjectModalProps) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const { getToken } = useAuth();
   const [payload, setPayload] = React.useState({
     isLoading: false,
@@ -42,6 +42,7 @@ export default function DeleteProjectModal(props: DeleteProjectModalProps) {
       if (res.status === 200) {
         setPayload({ ...payload, isLoading: false, error: null });
         router.push("/projects");
+        onClose();
       } else {
         setPayload({
           isLoading: false,

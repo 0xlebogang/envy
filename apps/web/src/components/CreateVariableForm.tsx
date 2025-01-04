@@ -3,6 +3,7 @@
 import React from "react";
 import { useAuth } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 import {
   Modal,
   ModalContent,
@@ -25,7 +26,7 @@ type ModalFormProps = {
 
 export default function CreateVariableForm(props: ModalFormProps) {
   const { getToken } = useAuth();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [selectedEnv, setSelectedEnv] = React.useState("DEV");
   const [payload, setPayload] = React.useState({
     key: "",
@@ -37,6 +38,7 @@ export default function CreateVariableForm(props: ModalFormProps) {
 
   async function onSubmit() {
     setPayload({ ...payload, isLoading: true });
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/variables`, {
         method: "POST",
@@ -52,7 +54,7 @@ export default function CreateVariableForm(props: ModalFormProps) {
         }),
       });
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         const { data } = await res.json();
 
         setPayload({
@@ -64,6 +66,7 @@ export default function CreateVariableForm(props: ModalFormProps) {
         });
 
         revalidatePath(`/projects/${props.projectId}`);
+        onClose();
       } else {
         console.log(await res.json());
         setPayload({
