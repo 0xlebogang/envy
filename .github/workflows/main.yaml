@@ -34,7 +34,6 @@ jobs:
 
       - name: Build and Push API
         uses: docker/build-push-action@v6
-        if: contains(github.event.head_commit.modified, 'apps/') || contains(github.event.head_commit.modified, 'packages/')
         with:
           push: true
           tags: ghcr.io/${{ github.repository }}-api:latest, ghcr.io/${{ github.repository }}-api:${{ github.sha }}
@@ -43,7 +42,6 @@ jobs:
 
       - name: Build and Push Web Client
         uses: docker/build-push-action@v6
-        if: contains(github.event.head_commit.modified, 'apps/') || contains(github.event.head_commit.modified, 'packages/')
         with:
           push: true
           tags: ghcr.io/${{ github.repository }}-web:latest, ghcr.io/${{ github.repository }}-web:${{ github.sha }}
