@@ -1,0 +1,19 @@
+name: Remove outdated packages
+
+on:
+  push:
+    branches: ["main"]
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  remove-old-packages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: dataaxiom/ghcr-cleanup-action@v1
+        with:
+          exclude-tags: dev,latest,pr*
+          keep-n-tagged: 10
