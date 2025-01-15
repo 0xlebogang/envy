@@ -35,7 +35,7 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v41
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' || github.event_name == 'push'
 
       - name: Build and Push API
         uses: docker/build-push-action@v6
@@ -63,24 +63,24 @@ jobs:
 
       - name: Push API to Dokku
         uses: dokku/github-action@master
-        if: |
-          github.event_name == 'push' ||
-          contains(steps.changed-files.outputs.all_changed_files, 'apps/') ||
-          contains(steps.changed-files.outputs.all_changed_files, 'packages/')
+        # if: |
+        #   github.event_name == 'push' ||
+        #   contains(steps.changed-files.outputs.all_changed_files, 'apps/') ||
+        #   contains(steps.changed-files.outputs.all_changed_files, 'packages/')
         with:
           git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/api"
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+          ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+          ssh_host_key: ${{ secrets.DOKKU_SSH_HOST_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
 
       - name: Push Web to Dokku
         uses: dokku/github-action@master
-        if: |
-          github.event_name == 'push' ||
-          contains(steps.changed-files.outputs.all_changed_files, 'apps/') ||
-          contains(steps.changed-files.outputs.all_changed_files, 'packages/')
+        # if: |
+        #   github.event_name == 'push' ||
+        #   contains(steps.changed-files.outputs.all_changed_files, 'apps/') ||
+        #   contains(steps.changed-files.outputs.all_changed_files, 'packages/')
         with:
           git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/00-default"
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+          ssh_private_key: ${{ secrets.DOKKU_SSH_PRIVATE_KEY }}
+          ssh_host_key: ${{ secrets.DOKKU_SSH_HOST_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:${{ github.sha }}
