@@ -13,6 +13,13 @@ jobs:
       contents: read
       packages: write
     steps:
+      - name: Login to registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: dataaxiom/ghcr-cleanup-action@v1
         with:
           packages: "ghcr.io/phantomleii/envyper-*"
