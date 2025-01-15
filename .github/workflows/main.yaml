@@ -66,6 +66,6 @@ jobs:
         uses: dokku/github-action@master
         if: contains(github.event.head_commit.modified, 'apps/web') || contains(github.event.head_commit.modified, 'packages')
         with:
-          git_remote_url: "ssh://dokku@envyper/.lebogangphoshoko.tech:22/00-default"
+          git_remote_url: "ssh://dokku@envyper.lebogangphoshoko.tech:22/00-default"
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest
