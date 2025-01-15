@@ -6,10 +6,6 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-permissions:
-  contents: read
-  packages: write
-
 jobs:
   login-to-ghcr:
     runs-on: ubuntu-latest
@@ -19,7 +15,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.PAT }}
 
   build-and-publish:
     runs-on: ubuntu-latest
