@@ -55,7 +55,7 @@ jobs:
       - name: Push API to Dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://dokku@vyper.lebogangphoshoko.tech:22/api"
+          git_remote_url: "ssh://lebea@vyper.lebogangphoshoko.tech:22/api"
           ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest
@@ -63,7 +63,7 @@ jobs:
       - name: Push Web Client to Dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://dokku@vyper.lebogangphoshoko.tech:22/00-default"
+          git_remote_url: "ssh://lebea@vyper.lebogangphoshoko.tech:22/00-default"
           ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest
