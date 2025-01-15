@@ -55,9 +55,9 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          sudo echo "${{ secrets.DOKKU_SSH_KEY }}" > /root/.ssh/id_rsa
+          echo "${{ secrets.DOKKU_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa vyper.lebogangphoshoko.tech >> ~/.ssh/known_hosts
+          ssh-keyscan -H vyper.lebogangphoshoko.tech >> ~/.ssh/known_hosts
 
       - name: Push API to Dokku
         uses: dokku/github-action@master
