@@ -11,20 +11,16 @@ permissions:
   packages: write
 
 jobs:
-  login-to-ghcr:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Github Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-  build-and-publish:
-    runs-on: ubuntu-latest
-    needs: login-to-ghcr
-    steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -40,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/${{ vars.USERNAME }}/${{ vars.REPO_NAME }}-api:latest, ghcr.io/${{ vars.USERNAME }}/${{ vars.REPO_NAME }}-api:${{ github.sha }}
+          tags: ghcr.io/${{ github.event.repository.owner }}/${{ github.event.repository.name }}-api:latest, ghcr.io/${{ github.event.repository.owner }}/${{ github.event.repository.name }}-api:${{ github.sha }}
           context: .
           file: apps/api/Dockerfile
 
@@ -48,6 +44,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/${{ vars.USERNAME }}/${{ vars.REPO_NAME }}-web:latest, ghcr.io/${{ vars.USERNAME }}/${{ vars.REPO_NAME }}-web:${{ github.sha }}
+          tags: ghcr.io/${{ vars.USERNAME }}/${{ github.event.repository.name }}-web:latest, ghcr.io/${{ vars.USERNAME }}/${{ github.event.repository.name }}-web:${{ github.sha }}
           context: .
           file: apps/web/Dockerfile
