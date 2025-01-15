@@ -1,16 +1,15 @@
 {
   "name": "envyper",
-  "packageManager": "bun@1.1.40",
+  "version": "1.0.0",
+  "license": "ISC",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test"
+  },
   "devDependencies": {
-    "@types/bun": "^1.1.14",
     "turbo": "^2.3.3"
   },
-  "peerDependencies": {
-    "typescript": "^5.7.2"
-  }
+  "packageManager": "pnpm@9.15.2"
 }
