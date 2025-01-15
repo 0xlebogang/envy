@@ -58,25 +58,30 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          sudo echo "${{ secrets.SSH_PRIVATE_KEY }}" > /root/.ssh/id_rsa
+          sudo echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H evyper.lebogangphoshoko.tech >> ~/.ssh/known_hosts
 
       - name: Debug SSH Key
         run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no azureuser@evyper.lebogangphoshoko.tech "echo SSH connection successful"
 
-      - name: Push API to Dokku
-        uses: dokku/github-action@master
-        with:
-          git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/api"
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
-          deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
+      - name: Send API Image to Dokku
+        run: |
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+          ssh azureuser@evyper.lebogangphoshoko.tech "dokku git:from-image ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}"
 
-      - name: Push Web to Dokku
-        uses: dokku/github-action@master
-        with:
-          git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/00-default"
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
-          deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:${{ github.sha }}
+      # - name: Push API to Dokku
+      #   uses: dokku/github-action@master
+      #   with:
+      #     git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/api"
+      #     ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+      #     deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
+
+      # - name: Push Web to Dokku
+      #   uses: dokku/github-action@master
+      #   with:
+      #     git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/00-default"
+      #     ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+      #     deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:${{ github.sha }}
