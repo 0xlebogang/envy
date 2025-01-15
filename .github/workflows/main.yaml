@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/${{ github.repository }}-api:latest, ghcr.io/${{ github.repository }}-api:${{ github.sha }}
+          tags: ghcr.io/${{ github.repository_owner }}-api:latest, ghcr.io/${{ github.repository }}-api:${{ github.sha }}
           context: .
           file: apps/api/Dockerfile
 
@@ -44,6 +44,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/${{ github.repository }}-web:latest, ghcr.io/${{ github.repository }}-web:${{ github.sha }}
+          tags: ghcr.io/${{ github.repository_owner }}-web:latest, ghcr.io/${{ github.repository }}-web:${{ github.sha }}
           context: .
           file: apps/web/Dockerfile
