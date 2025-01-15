@@ -55,7 +55,7 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DOKKU_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.DOKKU_SSH_KEY }}" > /root/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa vyper.lebogangphoshoko.tech >> ~/.ssh/known_hosts
 
@@ -63,7 +63,7 @@ jobs:
         uses: dokku/github-action@master
         with:
           git_remote_url: "ssh://dokku@vyper.lebogangphoshoko.tech:22/api"
-          # ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest
 
@@ -71,6 +71,6 @@ jobs:
         uses: dokku/github-action@master
         with:
           git_remote_url: "ssh://dokku@vyper.lebogangphoshoko.tech:22/00-default"
-          # ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest
