@@ -6,6 +6,10 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   login-to-ghcr:
     runs-on: ubuntu-latest
@@ -14,16 +18,12 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
   build-and-publish:
     runs-on: ubuntu-latest
     needs: login-to-ghcr
-    permissions:
-      contents: read
-      packages: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
