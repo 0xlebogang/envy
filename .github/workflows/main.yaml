@@ -63,5 +63,6 @@ jobs:
         uses: dokku/github-action@master
         with:
           git_remote_url: "ssh://dokku@envyper.lebogangphoshoko.tech:22/00-default"
+          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest
