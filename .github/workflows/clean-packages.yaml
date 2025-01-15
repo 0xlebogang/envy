@@ -15,5 +15,6 @@ jobs:
     steps:
       - uses: dataaxiom/ghcr-cleanup-action@v1
         with:
+          packages: "ghcr.io/phantomleii/envyper-*"
           exclude-tags: dev,latest,pr*
           keep-n-tagged: 10
