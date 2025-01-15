@@ -43,3 +43,11 @@ model Secret {
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade, name: "secrets")
 }
+
+// model AccessToken {
+//   id        String   @id @default(cuid())
+//   token     String
+//   userId    String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
