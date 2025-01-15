@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/${{ github.event.repository.owner }}/${{ github.event.repository.name }}-api:latest, ghcr.io/${{ github.event.repository.owner }}/${{ github.event.repository.name }}-api:${{ github.sha }}
+          tags: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest, ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
           context: .
           file: apps/api/Dockerfile
 
@@ -44,6 +44,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ghcr.io/${{ vars.USERNAME }}/${{ github.event.repository.name }}-web:latest, ghcr.io/${{ vars.USERNAME }}/${{ github.event.repository.name }}-web:${{ github.sha }}
+          tags: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest, ghcr.io/phantomleii/${{ github.event.repository.name }}-web:${{ github.sha }}
           context: .
           file: apps/web/Dockerfile
