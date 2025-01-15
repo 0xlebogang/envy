@@ -52,18 +52,25 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-publish
     steps:
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DOKKU_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa vyper.lebogangphoshoko.tech >> ~/.ssh/known_hosts
+
       - name: Push API to Dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://dokku@envyper.lebogangphoshoko.tech:22/api"
-          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+          git_remote_url: "ssh://dokku@vyper.lebogangphoshoko.tech:22/api"
+          # ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest
 
       - name: Push Web Client to Dokku
         uses: dokku/github-action@master
         with:
-          git_remote_url: "ssh://dokku@envyper.lebogangphoshoko.tech:22/00-default"
-          ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
+          git_remote_url: "ssh://dokku@vyper.lebogangphoshoko.tech:22/00-default"
+          # ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           ssh_private_key: ${{ secrets.DOKKU_SSH_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest
