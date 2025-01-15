@@ -55,7 +55,7 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.DOKKU_SSH_KEY }}" > /root/.ssh/id_rsa
+          sudo echo "${{ secrets.DOKKU_SSH_KEY }}" > /root/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa vyper.lebogangphoshoko.tech >> ~/.ssh/known_hosts
 
