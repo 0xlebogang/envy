@@ -6,25 +6,19 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-permissions:
-  contents: read
-  packages: write
-
 jobs:
-  build-and-publish:
+  setup:
     runs-on: ubuntu-latest
     steps:
-      - name: Login to Github Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        if: github.event_name == 'pull_request' || github.event_name == 'push'
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
@@ -32,55 +26,68 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v41
-        if: github.event_name == 'pull_request' || github.event_name == 'push'
-
-      - name: Build and Push API
-        uses: docker/build-push-action@v6
-        if: |
-          github.event_name == 'push' ||
-          contains(steps.changed-files.outputs.all_changed_files, 'apps/') ||
-          contains(steps.changed-files.outputs.all_changed_files, 'packages/')
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v3
         with:
-          push: true
-          tags: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest, ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    runs-on: ubuntu-latest
+    needs: setup
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Build API Docker Image
+        uses: docker/build-push-action@v3
+        if: |
+          contains(steps.changed-files.outputs.files, 'api/') ||
+          contains(steps.changed-files.outputs.files, 'packages/')
+        with:
           context: .
           file: apps/api/Dockerfile
-
-      - name: Build and Push Web Client
-        uses: docker/build-push-action@v6
-        if: |
-          github.event_name == 'push' ||
-          contains(steps.changed-files.outputs.all_changed_files, 'apps/') ||
-          contains(steps.changed-files.outputs.all_changed_files, 'packages/')
-        with:
           push: true
-          tags: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest, ghcr.io/phantomleii/${{ github.event.repository.name }}-web:${{ github.sha }}
+          tags: |
+            ghcr.io/phantomleii/${{ github.event.repository.na:latest, me }}-api:latest, |
+            ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
+
+      - name: Build Web Docker Image
+        uses: docker/build-push-action@v3
+        if: |
+          contains(steps.changed-files.outputs.files, 'web/') ||
+          contains(steps.changed-files.outputs.files, 'packages/')
+        with:
           context: .
           file: apps/web/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest, |
+            ghcr.io/phantomleii/${{ github.event.repository.name }}-web:${{ github.sha }}
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Push API to Dokku
         uses: dokku/github-action@master
-        # if: |
-        #   github.event_name == 'push' ||
-        #   contains(steps.changed-files.outputs.all_changed_files, 'apps/') ||
-        #   contains(steps.changed-files.outputs.all_changed_files, 'packages/')
+        if: |
+          contains(steps.changed-files.outputs.files, 'api/') ||
+          contains(steps.changed-files.outputs.files, 'packages/')
         with:
           git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/api"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
-          deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
+          deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest
 
       - name: Push Web to Dokku
         uses: dokku/github-action@master
-        # if: |
-        #   github.event_name == 'push' ||
-        #   contains(steps.changed-files.outputs.all_changed_files, 'apps/') ||
-        #   contains(steps.changed-files.outputs.all_changed_files, 'packages/')
+        if: |
+          contains(steps.changed-files.outputs.files, 'api/') ||
+          contains(steps.changed-files.outputs.files, 'packages/')
         with:
           git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/00-default"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
-          deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:${{ github.sha }}
+          deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest
