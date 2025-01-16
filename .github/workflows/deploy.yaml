@@ -1,4 +1,4 @@
-name: "Build Test & Deploy To Dokku App"
+name: Deploy
 
 on:
   push:
