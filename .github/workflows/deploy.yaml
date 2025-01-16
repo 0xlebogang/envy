@@ -66,7 +66,7 @@ jobs:
           contains(steps.changed-files.outputs.files, 'api/') ||
           contains(steps.changed-files.outputs.files, 'packages/')
         with:
-          git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/api"
+          git_remote_url: "ssh://lebea@envyper.lebogangphoshoko.tech:22/api"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest
@@ -78,7 +78,7 @@ jobs:
           contains(steps.changed-files.outputs.files, 'api/') ||
           contains(steps.changed-files.outputs.files, 'packages/')
         with:
-          git_remote_url: "ssh://azureuser@evyper.lebogangphoshoko.tech:22/00-default"
+          git_remote_url: "ssh://lebea@envyper.lebogangphoshoko.tech:22/00-default"
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh_host_key: ${{ secrets.SSH_HOST_KEY }}
           deploy_docker_image: ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest
