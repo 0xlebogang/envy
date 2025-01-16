@@ -50,7 +50,7 @@ jobs:
           file: apps/api/Dockerfile
           push: true
           tags: |
-            ghcr.io/phantomleii/${{ github.event.repository.na:latest, me }}-api:latest, |
+            ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest, |
             ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
 
       - name: Build Web Docker Image
