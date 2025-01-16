@@ -36,6 +36,7 @@ jobs:
       - name: Build API Docker Image
         uses: docker/build-push-action@v3
         if: |
+          github.event_name == 'push' ||
           contains(steps.changed-files.outputs.files, 'api/') ||
           contains(steps.changed-files.outputs.files, 'packages/')
         with:
@@ -49,6 +50,7 @@ jobs:
       - name: Build Web Docker Image
         uses: docker/build-push-action@v3
         if: |
+          github.event_name == 'push' ||
           contains(steps.changed-files.outputs.files, 'web/') ||
           contains(steps.changed-files.outputs.files, 'packages/')
         with:
@@ -62,6 +64,7 @@ jobs:
       - name: Push API to Dokku
         uses: dokku/github-action@master
         if: |
+          github.event_name == 'push' ||
           contains(steps.changed-files.outputs.files, 'api/') ||
           contains(steps.changed-files.outputs.files, 'packages/')
         with:
@@ -73,6 +76,7 @@ jobs:
       - name: Push Web to Dokku
         uses: dokku/github-action@master
         if: |
+          github.event_name == 'push' ||
           contains(steps.changed-files.outputs.files, 'api/') ||
           contains(steps.changed-files.outputs.files, 'packages/')
         with:
