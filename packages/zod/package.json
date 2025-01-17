@@ -2,6 +2,9 @@
   "name": "@envyper/zod",
   "version": "0.0.0",
   "private": true,
+  "exports": {
+    "./projects": "./src/projects.ts"
+  },
   "scripts": {
     "build": "bun build src/*.ts --outdir dist --target node"
   },

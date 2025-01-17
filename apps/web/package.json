@@ -7,6 +7,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.22.0",
     "@nextui-org/react": "^2.6.11",
     "@tanstack/react-router": "^1.95.6",
     "framer-motion": "^11.18.0",
