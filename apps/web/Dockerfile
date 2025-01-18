@@ -1,17 +1,18 @@
 FROM node:18-alpine AS base
 
-RUN apk update && apk add --no-cache libc6-compat && \
-  corepack enable pnpm && \
-  corepack prepare pnpm@9.15.2 && \
-  npm i -g bun@1.1.40
+ARG VITE_CLERK_PUBLISHABLE_KEY
+ARG VITE_CLERK_SECRET_KEY
 
+RUN apk update && apk add --no-cache libc6-compat && \
+    corepack enable pnpm && \
+    corepack prepare pnpm@9.15.2 && \
+    npm i -g bun@1.1.40
 
 FROM base AS prune
 WORKDIR /app
-
 RUN npm i -g turbo@2.3.3
-COPY . .
 
+COPY . .
 RUN turbo prune @envyper/web --docker
 
 
@@ -26,6 +27,9 @@ RUN pnpx turbo build
 FROM nginx:alpine AS runner
 COPY --from=build /app/apps/web/dist /usr/share/nginx/html
 
+ENV VITE_CLERK_PUBLISHABLE_KEY=$VITE_CLERK_PUBLISHABLE_KEY \
+    VITE_CLERK_SECRET_KEY=$VITE_CLERK_SECRET_KEY
+
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "nginx", "-g", "daemon off;" ]

@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# IDE files 
+# IDE files
 .vscode
 
 # Dependencies
@@ -9,6 +9,7 @@ node_modules
 .pnp.js
 
 # Local env files
+env.*
 .env*
 .env.local
 .env.development.local

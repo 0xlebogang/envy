@@ -13,6 +13,9 @@
     },
     "test": {
       "dependsOn": ["^test"]
+    },
+    "migrate": {
+      "cache": false
     }
   }
 }

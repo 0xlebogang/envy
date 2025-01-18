@@ -26,9 +26,6 @@ importers:
       '@prisma/client':
         specifier: ^6.2.1
         version: 6.2.1(prisma@6.2.1)
-      '@types/bun':
-        specifier: ^1.1.16
-        version: 1.1.16
       bun:
         specifier: ^1.1.40
         version: 1.1.43
@@ -45,6 +42,9 @@ importers:
       '@envyper/zod':
         specifier: workspace:*
         version: link:../../packages/zod
+      '@types/bun':
+        specifier: ^1.1.16
+        version: 1.1.16
 
   apps/web:
     dependencies:
@@ -1965,7 +1965,6 @@ packages:
 
   bun@1.1.43:
     resolution: {integrity: sha512-8Acq5NuECRXx62jVera3rnLcsaHh4/k5Res3dOQFv783nyRKo39W3DHlenGlXB9bNWbtRybBEvkKaH+zdwzLHw==}
-    cpu: [arm64, x64, aarch64]
     os: [darwin, linux, win32]
     hasBin: true
 

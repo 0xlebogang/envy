@@ -33,22 +33,29 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build API Docker Image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: apps/api/Dockerfile
           push: true
           tags: |
             ghcr.io/phantomleii/${{ github.event.repository.name }}-api:latest, ghcr.io/phantomleii/${{ github.event.repository.name }}-api:${{ github.sha }}
+          build-args: |
+            CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
+            CLERK_SECRET_KEY=${{ secrets.VITE_CLERK_SECRET_KEY }}
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - name: Build Web Docker Image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: apps/web/Dockerfile
           push: true
           tags: |
             ghcr.io/phantomleii/${{ github.event.repository.name }}-web:latest, ghcr.io/phantomleii/${{ github.event.repository.name }}-web:${{ github.sha }}
+          build-args: |
+            VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
+            VITE_CLERK_SECRET_KEY=${{ secrets.VITE_CLERK_SECRET_KEY }}
 
   deploy:
     runs-on: ubuntu-latest
