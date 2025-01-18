@@ -84,7 +84,7 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key
           chmod 600 private_key
-          ssh-keyscan -t rsa envyper.lebogangphoshoko.tech >> ~/.ssh/known_hosts
+          ssh-keyscan -t rsa envyper.lebogangphoshoko.tech > ~/.ssh/known_hosts
           DATABASE_URL=$(echo $DATABASE_URL) ssh -i private_key -o StrictHostKeyChecking=no lebea@envyper.lebogangphoshoko.tech dokku run api pnpm migrate
 
   deploy:
