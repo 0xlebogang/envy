@@ -57,6 +57,36 @@ jobs:
             VITE_CLERK_PUBLISHABLE_KEY=${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
             VITE_CLERK_SECRET_KEY=${{ secrets.VITE_CLERK_SECRET_KEY }}
 
+  run-migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Package Manger
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.2
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.18.x
+          cache: pnpm
+
+      - name: Run Migrations on Dokku
+        env:
+          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          ssh-keyscan -t rsa envyper.lebogangphoshoko.tech >> ~/.ssh/known_hosts
+          DATABASE_URL=$(echo $DATABASE_URL) ssh -i private_key -o StrictHostKeyChecking=no lebea@envyper.lebogangphoshoko.tech dokku run api pnpm migrate
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
