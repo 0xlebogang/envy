@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@envyper/web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,14 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.97.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@tanstack/router-plugin": "^1.97.14",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react-swc": "^3.7.2",
+    "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.17.0",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.0.0",
