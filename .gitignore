@@ -1,42 +1,69 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# IDE files
-.vscode
-
-# Dependencies
-node_modules
-.pnp
-.pnp.js
-
-# Local env files
-env.*
-.env*
+# Python / Django
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.manifest
+*.spec
+.env
+.venv
+env/
+venv/
+ENV/
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+db.sqlite3
+media/
+staticfiles/
 
-# Testing
-coverage
-
-# Turbo
-.turbo
-
-# Vercel
-.vercel
-
-# Build Outputs
-.next/
-out/
-build
-dist
-
-
-# Debug
+# Node / React
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env*
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Misc
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
 .DS_Store
-*.pem
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing
+.coverage
+.pytest_cache/
+coverage/
+htmlcov/
+
+# Production build
+build/
+dist/
