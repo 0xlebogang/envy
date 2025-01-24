@@ -1,5 +1,0 @@
-{
-  "extends": "@envyper/typescript-config/base.json",
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
-}

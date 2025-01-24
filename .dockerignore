@@ -1,8 +1,0 @@
-node_modules/
-.git/
-.gitignore
-.dockerignore
-Dockerfile
-.prettierrc
-.env*
-env.conf
