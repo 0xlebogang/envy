@@ -1,0 +1,57 @@
+# Python/Django
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+.env
+*.sqlite3
+media/
+static/
+.coverage
+htmlcov/
+
+# Node/React
+node_modules/
+dist/
+build/
+.npm
+*.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE/Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+*.sublime*
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.docker/
+
+# Testing and cache
+.pytest_cache/
+.coverage
+coverage/
+.cache/
+.tox/
+
+# Documentation
+docs/
+*.md
+
+# Temp files
+*.tmp
+.temp/
+tmp/
