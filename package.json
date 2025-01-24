@@ -4,6 +4,7 @@
   "license": "ISC",
   "private": true,
   "devDependencies": {
+    "eslint": "^9.18.0",
     "prettier": "^3.4.2",
     "turbo": "2.3.3"
   },
