@@ -1,5 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.conf import settings
+from cryptography.fernet import Fernet
+
 from ..models import Projects, Variables
 
 
@@ -18,12 +21,12 @@ class TestSetup(TestCase):
         }
 
         self.project = Projects.objects.create(**self.project_data)
-        
+
 
 class ProjectsModelTests(TestSetup):
     def setUp(self):
         super().setUp()
-        
+
     def test_project_creation(self):
         self.assertEqual(self.project.creator, self.test_user)
         self.assertEqual(self.project.name, self.project_data["name"])
@@ -58,8 +61,10 @@ class VariablesModelTests(TestSetup):
     def test_variable_creation(self):
         self.assertEqual(self.variable.project, self.project)
         self.assertEqual(self.variable.author, self.test_user)
-        self.assertEqual(self.variable.key, self.variable_data["key"])
-        self.assertEqual(self.variable.value, self.variable_data["value"])
+        self.assertEqual(
+            self.variable.key, self.variable_data["key"].upper().replace(" ", "_")
+        )
+        self.assertIsNotNone(self.variable.value)
 
     def test_key_is_required(self):
         variable_data = {**self.variable_data, "key": ""}
@@ -82,6 +87,10 @@ class VariablesModelTests(TestSetup):
             Variables.objects.create(**variable_data)
 
     def test_value_is_encrypted(self):
+        f = Fernet(settings.ENCRYPTION_KEY)
+
         self.assertNotEqual(self.variable.value, self.variable_data["value"])
-        # implement a check_value method in the model to decrypt the value and compare it
-        # self.assertEqual(self.variable.value, self.variable_data["value"])
+        self.assertEqual(
+            f.decrypt(self.variable.value.encode()).decode(),
+            self.variable_data["value"],
+        )

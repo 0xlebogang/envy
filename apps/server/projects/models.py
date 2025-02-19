@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from cryptography.fernet import Fernet
 
 
 class ProjectsManager(models.Manager):
@@ -14,14 +16,14 @@ class ProjectsManager(models.Manager):
         if not creator:
             raise ValueError("Creator is required")
 
+        f = Fernet(settings.ENCRYPTION_KEY)
+
         return super().create(**attrs)
 
 
 class Projects(models.Model):
     creator = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    name = models.CharField(
-        max_length=150,
-    )
+    name = models.CharField(max_length=150)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -33,25 +35,35 @@ class Projects(models.Model):
 
 
 class VaraiblesManager(models.Manager):
-    def create(self, **attrs):
+    @staticmethod
+    def normalize_key(key):
         """
-        Ensure key, value, project & author fields are provided before creating a variable
+        Normalizes the key by:
+        - Removing any leading or trailing whitespaces
+        - Converting the key to uppercase
+        - Replacing any spaces with underscores
+
+        :param key: The key to be normalized
         """
-        key = attrs.get("key")
-        if not key:
-            raise ValueError("Key is required")
+        # Implement regex to look for any special characters and reject the key
+        return key.strip().upper().replace(" ", "_")
 
-        value = attrs.pop("value")
-        if not value:
-            raise ValueError("Value is required")
+    def create(self, key, value, **attrs):
+        """
+        Ensure key, value, project & author fields are provided and
+        encrypts the value before creating a variable
+        """
+        if not key or not value:
+            raise ValueError("Key and value are required fields")
 
-        if not attrs.get("author"):
-            raise ValueError("Author is required")
+        if not attrs.get("project") or not attrs.get("author"):
+            raise ValueError("Project and author are required fields")
 
-        if not attrs.get("project"):
-            raise ValueError("Project is required")
-
-        return super().create(**attrs, value=value)
+        key = self.normalize_key(key)
+        variable = self.model(key=key, **attrs)
+        variable.set_value(value)
+        variable.save()
+        return variable
 
 
 class Variables(models.Model):
@@ -66,3 +78,10 @@ class Variables(models.Model):
 
     def __str__(self):
         return self.key
+
+    def set_value(self, raw_value):
+        """
+        Encrypts and sets the value of the environment variable
+        """
+        f = Fernet(settings.ENCRYPTION_KEY)
+        self.value = f.encrypt(raw_value.encode()).decode()
