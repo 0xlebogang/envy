@@ -1,3 +1,3 @@
-# ENVYPER
+# Envyper
 
-Your modern secrets management solution!
+A secrets management tool that works right in your favourite code editor.

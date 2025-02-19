@@ -1,0 +1,11 @@
+{
+  "name": "@envyper/server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "python manage.py runserver",
+    "test": "python manage.py test",
+    "format": "black .",
+    "install": "pip install -r requirements.txt"
+  }
+}

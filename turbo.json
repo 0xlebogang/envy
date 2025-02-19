@@ -2,25 +2,23 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "build": {
       "dependsOn": ["^build"],
-      "inputs": [
-        "$TURBO_DEFAULTS",
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        ".env*",
-        "!.env.test"
-      ],
+      "inputs": ["$TURBO_DEFAULTS", "src", ".env"],
       "outputs": ["dist"]
     },
     "test": {
-      "inputs": ["$TURBO_DEFAULTS", "**/*.test.{ts,tsx}"]
+      "inputs": ["$TURBO_DEFAULTS", "src", "*{spec,test}*", "**/tests/*.py"]
+    },
+    "lint": {
+      "inputs": ["$TURBO_DEFAULTS", "src", "*.{ts,tsx,js,cjs,mjs,py}"]
     },
     "format": {
       "cache": false
-    },
-    "lint": {
-      "inputs": ["src/**/*.ts", "src/**/*.tsx"]
     }
   }
 }

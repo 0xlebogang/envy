@@ -28,6 +28,7 @@ env/
 venv/
 ENV/
 .env.local
+*env.conf
 db.sqlite3
 media/
 staticfiles/
@@ -38,6 +39,7 @@ dist/
 dist-ssr/
 *.local
 .env*
+!.env.example
 logs
 *.log
 npm-debug.log*
@@ -67,3 +69,6 @@ htmlcov/
 # Production build
 build/
 dist/
+
+# Turbo
+.turbo/
