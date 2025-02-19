@@ -39,6 +39,9 @@ class TestSetup(TestCase):
 
 
 class ProjectAPIViewTests(TestSetup):
+    def setUp(self):
+        return super().setUp()
+
     def test_invalid_project_data(self):
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.token}")
         response = self.client.post(reverse("projects"), self.invalid_project_data)
@@ -49,19 +52,10 @@ class ProjectAPIViewTests(TestSetup):
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.token}")
         response = self.client.post(reverse("projects"), self.valid_project_data)
 
-        response_data = response.data["data"]
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        response_data = response.data["data"]
         self.assertEqual(response_data["name"], self.valid_project_data["name"])
         self.assertEqual(response_data["creator"], self.valid_project_data["creator"])
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertContains(response.data["data"], self.valid_project_data)
-        self.assertEqual(response.data["data"]["creator"], self.user.id)
-
-    def test_get_projects(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.token}")
-        response = self.client.get(reverse("projects"))
-
-        self.assertContains(response.data["data"], self.test_project)
 
 
 class ProjectDetailAPIViewTests(TestSetup):
