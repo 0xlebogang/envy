@@ -30,3 +30,39 @@ class Projects(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class VaraiblesManager(models.Manager):
+    def create(self, **attrs):
+        """
+        Ensure key, value, project & author fields are provided before creating a variable
+        """
+        key = attrs.get("key")
+        if not key:
+            raise ValueError("Key is required")
+
+        value = attrs.pop("value")
+        if not value:
+            raise ValueError("Value is required")
+
+        if not attrs.get("author"):
+            raise ValueError("Author is required")
+
+        if not attrs.get("project"):
+            raise ValueError("Project is required")
+
+        return super().create(**attrs, value=value)
+
+
+class Variables(models.Model):
+    project = models.ForeignKey(Projects, on_delete=models.CASCADE)
+    author = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    key = models.CharField(max_length=255)
+    value = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    objects = VaraiblesManager()
+
+    def __str__(self):
+        return self.key
