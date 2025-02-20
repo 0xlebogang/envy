@@ -1,5 +1,7 @@
+from django.conf import settings
 from rest_framework import serializers
 from .models import Projects, Variables
+from cryptography.fernet import Fernet
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -29,13 +31,28 @@ class VariableSerializer(serializers.ModelSerializer):
         read_only_fields = ("created_at", "updated_at")
 
     def validate(self, attrs):
-        if not attrs.get("key"):
-            raise serializers.ValidationError("Key is required")
-        if not attrs.get("value"):
-            raise serializers.ValidationError("Value is required")
-        if not attrs.get("author"):
-            raise serializers.ValidationError("Author is required")
-        if not attrs.get("project"):
-            raise serializers.ValidationError("Project is required")
+        if (
+            not attrs.get("key")
+            or not attrs.get("value")
+            or not attrs.get("author")
+            or not attrs.get("project")
+        ):
+            raise serializers.ValidationError(
+                "Key, Value, Author and Project are required"
+            )
 
         return attrs
+
+
+class VariableDetailSerializer(serializers.ModelSerializer):
+    class Meta(VariableSerializer.Meta):
+        read_only_fields = ("author", "project", "created_at", "updated_at")
+
+    __f = Fernet(settings.ENCRYPTION_KEY)
+
+    def validate(self, attrs):
+        if attrs.get("key"):
+            attrs["key"] = attrs["key"].strip().upper().replace(" ", "_")
+        if attrs.get("value"):
+            attrs["value"] = self.__f.encrypt(attrs["value"].encode()).decode()
+            return super().validate(attrs)

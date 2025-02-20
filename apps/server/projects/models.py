@@ -6,7 +6,7 @@ from cryptography.fernet import Fernet
 class ProjectsManager(models.Manager):
     def create(self, **attrs):
         """
-        Ensure name and creator fields are provided before creating a project
+        Ensure name and creatorself.__fields are provided before creating a project
         """
         name = attrs.get("name")
         if not name:
@@ -16,7 +16,7 @@ class ProjectsManager(models.Manager):
         if not creator:
             raise ValueError("Creator is required")
 
-        f = Fernet(settings.ENCRYPTION_KEY)
+        self.__f = Fernet(settings.ENCRYPTION_KEY)
 
         return super().create(**attrs)
 
@@ -50,7 +50,7 @@ class VaraiblesManager(models.Manager):
 
     def create(self, key, value, **attrs):
         """
-        Ensure key, value, project & author fields are provided and
+        Ensure key, value, project & authorself.__fields are provided and
         encrypts the value before creating a variable
         """
         if not key or not value:
@@ -76,6 +76,9 @@ class Variables(models.Model):
 
     objects = VaraiblesManager()
 
+    # Private fernet object for encrypting and decrypting values
+    __f = Fernet(settings.ENCRYPTION_KEY)
+
     def __str__(self):
         return self.key
 
@@ -83,5 +86,11 @@ class Variables(models.Model):
         """
         Encrypts and sets the value of the environment variable
         """
-        f = Fernet(settings.ENCRYPTION_KEY)
-        self.value = f.encrypt(raw_value.encode()).decode()
+        self.value = self.__f.encrypt(raw_value.encode()).decode()
+
+    def check_value(self, raw_value):
+        """
+        Decrypts and checks if the raw value matches the decrypted value
+        """
+        self.__f = Fernet(settings.ENCRYPTION_KEY)
+        return self.__f.decrypt(self.value.encode()).decode() == raw_value
