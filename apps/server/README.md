@@ -19,7 +19,7 @@ This is the Envyper backend implmentaion
 
 - Python 3.9+
 
-## Installation and Running the Dev Server
+## Installation
 
 > The docs here assume you have cloned the repo, activated a virtual environment and your current working directory (CWD) is in the apps/server as directed in the Main README
 
