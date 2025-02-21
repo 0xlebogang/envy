@@ -24,7 +24,7 @@ AUTH_USER_MODEL = "users.User"
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.getenv("DEBUG"))
+DEBUG = bool(os.getenv("DEBUG", False))
 
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
@@ -86,16 +86,17 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {}
+DATABASES["default"] = dj_database_url.config(conn_max_age=600, conn_health_checks=True)
 
-if DEBUG:
-    DATABASES["default"] = {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-else:
-    DATABASES["default"] = dj_database_url.config(
-        conn_max_age=600, conn_health_check=True
-    )
+# if DEBUG is True:
+#     DATABASES["default"] = {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# else:
+#     DATABASES["default"] = dj_database_url.config(
+#         conn_max_age=600, conn_health_check=True
+#     )
 
 
 # Password validation
