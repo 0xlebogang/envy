@@ -4,7 +4,7 @@ __pycache__/
 *.so
 .Python
 env/
-venv/
+*venv/
 .env
 *.sqlite3
 media/
@@ -18,10 +18,7 @@ dist/
 build/
 .npm
 *.log
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*
 
 # IDE/Editor
 .idea/
@@ -32,7 +29,7 @@ build/
 *.sublime*
 
 # Git
-.git/
+.git*
 .gitignore
 
 # Docker
@@ -41,6 +38,9 @@ docker-compose*.yml
 .docker/
 
 # Testing and cache
+test/
+**/*.test.*
+**/*.spec.*
 .pytest_cache/
 .coverage
 coverage/
