@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.conf import settings
 from rest_framework import serializers
+from cryptography.fernet import Fernet
 from ..serializers import (
     ProjectSerializer,
     ProjectDetailSerializer,
@@ -104,6 +106,8 @@ class VariableSerializerTests(TestSetUp):
 
         self.invalid_variable_data = {"key": "", "value": "Invalid value"}
 
+        self.__f = Fernet(settings.ENCRYPTION_KEY)
+
     def test_invalid_variable_(self):
         serializer = VariableSerializer(data=self.invalid_variable_data)
         self.assertFalse(serializer.is_valid())
@@ -113,5 +117,18 @@ class VariableSerializerTests(TestSetUp):
     def test_variable_validator(self):
         serializer = VariableSerializer(data=self.valid_variable_data)
         self.assertTrue(serializer.is_valid())
-        serializer.save()
-        self.assertEqual(serializer.data["key"], self.valid_variable_data["key"])
+
+    def test_create_variable(self):
+        serializer = VariableSerializer(data=self.valid_variable_data)
+        serializer.is_valid()
+        variable = serializer.save()
+        normalized_key = (
+            self.valid_variable_data["key"].strip().upper().replace(" ", "_")
+        )
+        self.assertEqual(variable.key, normalized_key)
+        self.assertEqual(
+            self.__f.decrypt(variable.value.encode()).decode(),
+            self.valid_variable_data["value"],
+        )
+        self.assertEqual(variable.author, self.user)
+        self.assertEqual(variable.project, self.test_project)
