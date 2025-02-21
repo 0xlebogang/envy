@@ -24,7 +24,7 @@ AUTH_USER_MODEL = "users.User"
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.getenv("DEBUG", False))
+DEBUG = bool(int(os.getenv("DEBUG", 0)))
 
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
@@ -85,18 +85,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {}
-DATABASES["default"] = dj_database_url.config(conn_max_age=600, conn_health_checks=True)
-
-# if DEBUG is True:
-#     DATABASES["default"] = {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# else:
-#     DATABASES["default"] = dj_database_url.config(
-#         conn_max_age=600, conn_health_check=True
-#     )
+DATABASES = {
+    "default": dj_database_url.config(conn_max_age=600, conn_health_checks=True)
+}
 
 
 # Password validation
@@ -147,12 +138,13 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
-    "UPDATE_LAST_LOGIN": True,
-    "SIGNING_KEY": SECRET_KEY,
-}
 
 ENCRYPTION_KEY = os.getenv("ENCRYPTION_KEY")
 if not ENCRYPTION_KEY:
     raise ValueError("An ENCRYPTION_KEY is required")
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "UPDATE_LAST_LOGIN": True,
+    "SIGNING_KEY": os.getenv("JWT_SIGNING_KEY"),
+}

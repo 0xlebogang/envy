@@ -206,6 +206,7 @@ Delete a variable with the provided variable ID from a project with the provided
 | ALLOWED_HOSTS        | A list of host that Django will allow to run on.                                                                                              | localhost,127.0.0.1                                    |
 | CORS_ALLOWED_ORIGINS | A list of origins that Django will allow communication with.                                                                                  | [http://localhost:3000](http://localhost:3000/)        |
 | ENCRYPTION_KEY       | An encryption key that will be used to encrypt and decrypt data. Generate one by running the [keygen](../../scripts/fernet_keygen.py) script. | ek-django-encryption-key                               |
+| JWT_SIGNING_KEY      | A signing key to be used to sign the JWT access & refresh tokens. Generate one using the [keygen](../../scripts/fernet_keygen.py) script      |
 
 ## Testing
 
@@ -217,8 +218,8 @@ python manage.py test
 
 ## Contributing
 
-Refer to the [CONTRIBUTING] for guidlines.
+Refer to the [CONTRIBUTING](../../CONTRIBUTING.md) for guidlines.
 
 ## License
 
-This project uses the [MIT] Lisence.
+This project uses the [MIT](../../LISENCE) Lisence.
