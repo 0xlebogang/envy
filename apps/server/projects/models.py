@@ -16,8 +16,6 @@ class ProjectsManager(models.Manager):
         if not creator:
             raise ValueError("Creator is required")
 
-        self.__f = Fernet(settings.ENCRYPTION_KEY)
-
         return super().create(**attrs)
 
 

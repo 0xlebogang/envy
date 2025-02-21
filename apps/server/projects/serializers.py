@@ -50,9 +50,11 @@ class VariableDetailSerializer(serializers.ModelSerializer):
 
     __f = Fernet(settings.ENCRYPTION_KEY)
 
-    def validate(self, attrs):
-        if attrs.get("key"):
-            attrs["key"] = attrs["key"].strip().upper().replace(" ", "_")
-        if attrs.get("value"):
-            attrs["value"] = self.__f.encrypt(attrs["value"].encode()).decode()
-            return super().validate(attrs)
+    def save(self, **kwargs):
+        """
+        Encrypt the value before saving the variable
+        """
+        value = self.validated_data.get("value")
+        encrypted_value = self.__f.encrypt(value.encode())
+        self.validated_data["value"] = encrypted_value.decode()
+        return super().save(**kwargs)
