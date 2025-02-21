@@ -125,7 +125,7 @@ class VariableDetailAPIView(APIView):
             return Response(
                 {"detail": "Project does not exist"}, status=status.HTTP_404_NOT_FOUND
             )
-        if variable_id is None:
+        if variable is None:
             return Response(
                 {"detail": "Variable does not exist"}, status=status.HTTP_404_NOT_FOUND
             )

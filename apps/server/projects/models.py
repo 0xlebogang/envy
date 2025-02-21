@@ -46,11 +46,14 @@ class VaraiblesManager(models.Manager):
         # Implement regex to look for any special characters and reject the key
         return key.strip().upper().replace(" ", "_")
 
-    def create(self, key, value, **attrs):
+    def create(self, **attrs):
         """
         Ensure key, value, project & authorself.__fields are provided and
         encrypts the value before creating a variable
         """
+        key = attrs.pop("key")
+        value = attrs.pop("value")
+
         if not key or not value:
             raise ValueError("Key and value are required fields")
 
@@ -86,9 +89,9 @@ class Variables(models.Model):
         """
         self.value = self.__f.encrypt(raw_value.encode()).decode()
 
-    def check_value(self, raw_value):
+    def get_value(self, raw_value):
         """
-        Decrypts and checks if the raw value matches the decrypted value
+        Retrieves and decrypts the value of the environment variable
         """
         self.__f = Fernet(settings.ENCRYPTION_KEY)
-        return self.__f.decrypt(self.value.encode()).decode() == raw_value
+        return self.__f.decrypt(self.value.encode()).decode()
