@@ -78,7 +78,7 @@ cp apps/server/core/.env.example apps/server/.env
 pnpm dev
 ```
 
-Access the api at: [http://localhost:8000]
+Access the api at: [http://localhost:8000]<br />
 Access the frontend at [http://localhost:3000]
 
 ## API Documentation
