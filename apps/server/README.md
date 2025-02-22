@@ -99,7 +99,7 @@ Delete the logged in user’s data
 
 ## Projects
 
-> Across all endpoints, if the user is not authenticated a `401 HTTP Response` with the received.
+> Across all endpoints, if the user is not authenticated a `401 HTTP Response` will be received.
 
 ### POST `/projects/`
 
@@ -147,7 +147,7 @@ Delete a project with the provided project ID
 
 ## Variables
 
-> Across all endpoints, if the user is not authenticated a `401 HTTP Response` will the received.
+> Across all endpoints, if the user is not authenticated a `401 HTTP Response` will be received.
 
 > Across all endpoints, if a project with the provided project ID does not exist a `404 HTTP Response` will be received.
 
@@ -212,8 +212,7 @@ Delete a variable with the provided variable ID from a project with the provided
 
 ```bash
 # Run tests
-python manage.py test
-
+./manage.py test
 ```
 
 ## Contributing
@@ -222,4 +221,4 @@ Refer to the [CONTRIBUTING](../../CONTRIBUTING.md) for guidlines.
 
 ## License
 
-This project uses the [MIT](../../LISENCE) Lisence.
+This project uses the [MIT](../../LISENCE) Lisence as stated in the root level [README](../../README.md).
