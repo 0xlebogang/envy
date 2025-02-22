@@ -1,0 +1,12 @@
+name: Client CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "CI Workflow for @envyper/client ready to run!"

@@ -1,0 +1,12 @@
+name: Server CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "CI Workflow for @envyper/server ready to run!"

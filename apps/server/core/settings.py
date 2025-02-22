@@ -85,9 +85,18 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    "default": dj_database_url.config(conn_max_age=600, conn_health_checks=True)
-}
+if os.getenv("GITHUB_WORKFLOW"):
+    DATABASES = {
+        "default": dj_database_url.config(
+            default="postgresql://postgres:postgres@localhost:5432/github-actions",
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+else:
+    DATABASES = {
+        "default": dj_database_url.config(conn_max_age=600, conn_health_checks=True)
+    }
 
 
 # Password validation
