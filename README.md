@@ -83,7 +83,7 @@ Access the frontend at [http://localhost:3000](http://localhost:3000/)
 
 ## API Documentation
 
-See the [API Documentation](./apps/server/README.md#api-reference) for detailed endpoint information.
+See the [API Reference](./apps/server/README.md#api-reference) for detailed endpoint information.
 
 ## Contributing
 
