@@ -55,13 +55,13 @@ Create a user.
 
 ### POST `/auth/user/token/`
 
-> This is a reimplementation of the Refresh endpoint that is build in [Django REST Framework SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html)
+> This is a reimplementation of the Refresh endpoint that is built into [Django REST Framework SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html)
 
 Authenticate an existing user.
 
 ### POST `/auth/user/token/refresh/`
 
-> This is a reimplementation of the Refresh endpoint that is build in [Django REST Framework SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html)
+> This is a reimplementation of the Refresh endpoint that is built into [Django REST Framework SimpleJWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html)
 
 Refresh the currnetly logged in user’s access token
 
@@ -77,7 +77,7 @@ Access the currently logged in user’s data.
 | 404        | The user does not exist              |
 | 401        | This current users is unauthorized   |
 
-### GET `/auth/user/me/`
+### PATCH `/auth/user/me/`
 
 Update the logged in user’s data
 
