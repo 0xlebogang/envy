@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "python manage.py runserver",
-    "test": "python manage.py test",
+    "test": "python manage.py migrate && python manage.py test",
     "format": "black .",
-    "install": "pip install -r requirements.txt"
+    "install": "pip install -r requirements.txt",
+    "start": "gunicorn --bind 0.0.0.0:8000 --workers 3 core.wsgi:application"
   }
 }

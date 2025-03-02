@@ -1,0 +1,67 @@
+name: Server CI/CD Workflow
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    env:
+      DEBUG: 0
+      DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+      CORS_ORIGIN_WHITELIST: ${{ secrets.CORS_ORIGIN_WHITELIST }}
+      ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+      JWT_SIGNING_KEY: ${{ secrets.JWT_SIGNING_KEY }}
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+          cache: "pip"
+
+      - name: Activate Virtual Environment
+        run: |
+          python -m venv env
+          source env/bin/activate
+          pip install --upgrade pip
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: |
+          pnpm add -g turbo
+
+      - name: Run Tests
+        run: |
+          source env/bin/activate
+          pnpm --filter=@envyper/server install
+          pnpm --filter=@envyper/server test

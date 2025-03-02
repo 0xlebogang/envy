@@ -78,7 +78,7 @@ class Variables(models.Model):
     objects = VaraiblesManager()
 
     # Private fernet object for encrypting and decrypting values
-    __f = Fernet(settings.ENCRYPTION_KEY)
+    __f = Fernet(settings.ENCRYPTION_KEY.encode())
 
     def __str__(self):
         return self.key

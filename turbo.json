@@ -24,6 +24,14 @@
     },
     "format": {
       "cache": false
+    },
+    "install": {
+      "inputs": ["requirements.txt", "**/package.json", "pnpm-lock.yaml"],
+      "outputs": [
+        ".venv/lib64/python3.12/site-packages",
+        "node_modules",
+        "pnpm-lock.yaml"
+      ]
     }
   }
 }
