@@ -60,5 +60,5 @@ jobs:
         run: python3 app/server/manage.py migrate
         env:
           DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
-          ALLOWED_HOSTS: ${{ secret.SECRET_KEY }}
+          ALLOWED_HOSTS: ${{ secrets.SECRET_KEY }}
           ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
