@@ -49,7 +49,7 @@ jobs:
         run: python3 apps/server/manage.py migrate && pnpm test
         env:
           DATABASE_URL: postgres://testuser:test658user@localhost:5432/envyper_test_db
-          DEBUG: 0
+          DEBUG: 1
           ALLOWED_HOSTS: localhost,127.0.0.1
           SECRET_KEY: secret-key
           ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
