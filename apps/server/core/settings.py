@@ -140,7 +140,7 @@ REST_FRAMEWORK = {
 
 
 ENCRYPTION_KEY = os.getenv(
-    "ENCRYPTION_KEY", "wmQBoHUtPHsIUHFCVN6iaW1HsPjXbjnN77lY8QHmZ_w="
+    "ENCRYPTION_KEY"
 )
 if not ENCRYPTION_KEY:
     raise ValueError("An ENCRYPTION_KEY is required")
