@@ -16,6 +16,7 @@ jobs:
       ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
       JWT_SIGNING_KEY: jwt-signing-key
       CORS_ALLOWED_ORIGINS: http://localhost:3000
+      PROD_DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
     permissions:
       contents: read
     services:
@@ -65,8 +66,8 @@ jobs:
         run: python3 apps/server/manage.py migrate && pnpm test --filter="@envyper/server"
 
       - name: Run migrations
-        run: python3 app/server/manage.py migrate
         env:
-          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
-          ALLOWED_HOSTS: ${{ secrets.SECRET_KEY }}
-          ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+          DATABASE_URL: ${{ env.PROD_DATABASE_URL }}
+          ALLOWED_HOSTS: ${{ env.SECRET_KEY }}
+          ENCRYPTION_KEY: ${{ env.ENCRYPTION_KEY }}
+        run: python3 apps/server/manage.py migrate
