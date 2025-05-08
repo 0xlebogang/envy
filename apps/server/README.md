@@ -151,7 +151,7 @@ Delete a project with the provided project ID
 
 > Across all endpoints, if a project with the provided project ID does not exist a `404 HTTP Response` will be received.
 
-### POST `/projects/{project_id/variables/`
+### POST `/projects/{project_id}/variables/`
 
 Create a new variable in a project with the provided project ID and with the current user as the author.
 
@@ -160,7 +160,7 @@ Create a new variable in a project with the provided project ID and with the cur
 | 201        | Success                           |
 | 400        | Provided variable data is invalid |
 
-### GET `/projects/{project_id/variables/`
+### GET `/projects/{project_id}/variables/`
 
 Get all variables in a project with the provided project ID and with the current user as the author.
 
@@ -168,7 +168,7 @@ Get all variables in a project with the provided project ID and with the current
 | ---------- | --------------- |
 | 200        | Success         |
 
-### GET `/projects/{project_id/variables/{variable_id}/`
+### GET `/projects/{project_id}/variables/{variable_id}/`
 
 Get a variable with the provided variable ID from a project with the provided project ID and with the current user as the author.
 
@@ -177,7 +177,7 @@ Get a variable with the provided variable ID from a project with the provided pr
 | 200        | Success                     |
 | 404        | The variable does not exist |
 
-### PATCH `/projects/{project_id/variables/{variable_id}/`
+### PATCH `/projects/{project_id}/variables/{variable_id}/`
 
 Update a variable with the provided variable ID from a project with the provided project ID and with the current user as the author.
 
@@ -187,7 +187,7 @@ Update a variable with the provided variable ID from a project with the provided
 | 400        | The provided variable data is invalid |
 | 404        | The variable does not exist           |
 
-### DELETE `/projects/{project_id/variables/{variable_id}/`
+### DELETE `/projects/{project_id}/variables/{variable_id}/`
 
 Delete a variable with the provided variable ID from a project with the provided project ID and with the current user as the author.
 
