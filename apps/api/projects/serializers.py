@@ -13,6 +13,9 @@ class ProjectSerializer(serializers.ModelSerializer):
         """
         Validate the project attributes. Checks if the name is provided.
         """
-        if not attrs.get("name"):
+        if not self.instance and not attrs.get("name"):
             raise serializers.ValidationError("Project name is required.")
         return attrs
+
+    def update(self, instance, validated_data):
+        return super().update(instance, validated_data)

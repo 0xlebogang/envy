@@ -42,18 +42,71 @@ class ProjectDetailView(APIView):
         """
         Handle GET requests to retrieve details of a specific project.
         """
-        # Placeholder for actual project detail retrieval logic
-        return Response(
-            {"message": f"Details for project {project_id} retrieved successfully."},
-            status=status.HTTP_200_OK,
-        )
+        try:
+            project = Project.objects.get(id=project_id, user=request.user)
+            serializer = ProjectSerializer(project)
+            raise ValueError("This is a simulated error for testing purposes.")
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Project.DoesNotExist:
+            return Response(
+                {"error": "Project not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+        except Exception as e:
+            return Response(
+                {"error": "An unexpected error occurred. Please try again later."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
     def patch(self, request, project_id):
         """
         Handle PATCH requests to update a specific project.
         """
-        # Placeholder for actual project update logic
-        return Response(
-            {"message": f"Project {project_id} updated successfully."},
-            status=status.HTTP_200_OK,
-        )
+        try:
+            project = Project.objects.get(id=project_id, user=request.user)
+            serializer = ProjectSerializer(
+                data=request.data, instance=project, partial=True
+            )
+            if not serializer.is_valid():
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            serializer.save()
+            return Response(
+                {
+                    "message": "Project updated successfully.",
+                    "project": serializer.data,
+                },
+                status=status.HTTP_200_OK,
+            )
+        except Project.DoesNotExist:
+            return Response(
+                {"error": "Project not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+        except Exception as e:
+            return Response(
+                {"error": "An unexpected error occurred. Please try again later."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    def delete(self, request, project_id):
+        """
+        Handle DELETE requests to delete a specific project.
+        """
+        try:
+            project = Project.objects.get(id=project_id, user=request.user)
+            project.delete()
+            return Response(
+                {"message": "Project deleted successfully."},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        except Project.DoesNotExist:
+            return Response(
+                {"error": "Project not found."},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+        except Exception as e:
+            return Response(
+                {"error": "An unexpected error occurred. Please try again later."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
