@@ -24,37 +24,17 @@ class UserSerializer(serializers.ModelSerializer):
             "id": {"read_only": True},
         }
 
-    def create(self, validated_data: Dict) -> "User":
+    def validate(self, attrs):
         """
-        Create a new user with the provided validated data.
+        Validate the user data before creating or updating a user.
         """
-        if "email" not in validated_data:
+        if not self.instance and not attrs.get("email"):
             raise serializers.ValidationError(
                 "Email is required.", code="email_required"
             )
-        if "password" not in validated_data:
+        if not self.instance and not attrs.get("password"):
             raise serializers.ValidationError(
                 "Password is required.", code="password_required"
             )
-        if len(validated_data["password"]) < 8:
-            raise serializers.ValidationError(
-                "Password must be at least 8 characters long.",
-                code="password_too_short",
-            )
 
-        user = self.Meta.model(**validated_data)
-        user.set_password(validated_data["password"])
-        user.save()
-        return user
-
-    def update(self, instance: "User", validated_data: Dict) -> "User":
-        """
-        Update an existing user with the provided validated data.
-        """
-        for attr, value in validated_data.items():
-            if attr == "password":
-                instance.set_password(value)
-            else:
-                setattr(instance, attr, value)
-        instance.save()
-        return instance
+        return super().validate(attrs)
