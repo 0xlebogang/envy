@@ -9,6 +9,10 @@ class User(AbstractUser, PermissionsMixin):
     This model uses email as the unique identifier instead of username.
     """
 
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+
     username = None
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=255, blank=True, null=True)
