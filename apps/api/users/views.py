@@ -31,18 +31,21 @@ def get_user(request):
 
 
 class UserDetailAPIView(APIView):
-    def patch(self, request, pk):
+    def patch(self, request):
         """Handle PATCH requests to update an existing user."""
-        try:
-            user = self.get_object(pk)
-        except User.DoesNotExist as e:
-            return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
-
-        serializer = UserSerializer(user, data=request.data, partial=True)
+        serializer = UserSerializer(
+            data=request.data, instance=request.user, partial=True
+        )
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        """Handle DELETE requests to delete the current user."""
+        request.user.delete()
         return Response(
-            {"message": "User updated successfully"}, status=status.HTTP_200_OK
+            {"message": "User deleted successfully"},
+            status=status.HTTP_204_NO_CONTENT,
         )

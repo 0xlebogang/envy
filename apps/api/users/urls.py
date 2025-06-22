@@ -4,5 +4,5 @@ from .views import UserDetailAPIView, create_user, get_user
 urlpatterns = [
     path("create/", create_user, name="user-create"),
     path("me/", get_user, name="get-user"),
-    path("<int:pk>/", UserDetailAPIView.as_view(), name="user-detail"),
+    path("detail/", UserDetailAPIView.as_view(), name="user-detail"),
 ]
