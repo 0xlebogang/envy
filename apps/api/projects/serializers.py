@@ -7,7 +7,10 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = "__all__"
-        read_only_fields = ("created_at", "updated_at")
+        extra_kwargs = {
+            "created_at": {"read_only": True},
+            "updated_at": {"read_only": True},
+        }
 
     def validate(self, attrs: Dict) -> Dict:
         """
