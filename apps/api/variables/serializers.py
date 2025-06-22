@@ -23,7 +23,7 @@ class VariableSerializer(serializers.ModelSerializer):
         required_fields = {"name", "value"}
 
         # Check if required fields are present in the attributes
-        if not required_fields.issubset(set(attrs.keys())):
+        if not self.instance and not required_fields.issubset(set(attrs.keys())):
             raise serializers.ValidationError("Name and value are required fields.")
 
         return attrs
