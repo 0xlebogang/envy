@@ -2,3 +2,5 @@
 const prettierConfig = {
   trailingComma: "es5",
 };
+
+export default prettierConfig;
