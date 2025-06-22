@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "echo 'Add dev script here'",
-    "build": "echo 'Add build script here'",
-    "test": "echo 'Add test script here'",
-    "lint": "echo 'Add lint script here'"
+    "dev": "python manage.py runserver",
+    "test": "python manage.py test",
+    "migrate:dev": "python manage.py makemigrations",
+    "migrate:deploy": "python manage.py migrate",
+    "install": "pip install -r requirements.txt"
   }
 }
