@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "python manage.py runserver",
-    "test": "python manage.py test",
-    "migrate:dev": "python manage.py makemigrations",
-    "migrate:deploy": "python manage.py migrate",
-    "install": "pip install -r requirements.txt"
+    "dev": ".venv/bin/python manage.py runserver",
+    "test": ".venv/bin/python manage.py test",
+    "migrate:dev": ".venv/bin/python manage.py makemigrations",
+    "migrate:deploy": ".venv/bin/python manage.py migrate",
+    "install": ".venv/bin/pip install -r requirements.txt"
   }
 }

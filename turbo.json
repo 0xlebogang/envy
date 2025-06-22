@@ -1,20 +1,13 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "noUpdateNotifier": true,
-  "globalDependencies": [
-    "$TURBO_DEFAULT$",
-    "!README.md",
-    "!LICENSE",
-    "!CHANGELOG.md",
-    ".env*"
-  ],
+  "globalDependencies": ["!README.md", "!LICENSE", "!CHANGELOG.md", ".env*"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", ".vercel/output/**"]
     },
-    "test": {
-    },
+    "test": {},
     "lint": {
       "dependsOn": ["^lint"]
     },
