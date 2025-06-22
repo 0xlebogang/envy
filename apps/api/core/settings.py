@@ -14,7 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 from datetime import timedelta
-import logging
+import logging.config
 import os
 
 load_dotenv()
