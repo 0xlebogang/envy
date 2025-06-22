@@ -11,10 +11,9 @@ class VariableSerializer(serializers.ModelSerializer):
     class Meta:
         model = Variable
         fields = "__all__"
-        read_only_fields = ("created_at", "updated_at", "user")
         extra_kwargs = {
-            "project": {"read_onnly": True},
-            "user": {"read_only": True},
+            "created_at": {"read_only": True},
+            "updated_at": {"read_only": True},
         }
 
     def validate(self, attrs: Dict) -> Dict:

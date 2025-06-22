@@ -27,4 +27,4 @@ class Variable(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated At")
 
     def __str__(self):
-        return f"{self.name} - {self}"
+        return f"{self.name} - {self.user.email}"

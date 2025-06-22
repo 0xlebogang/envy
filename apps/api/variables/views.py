@@ -10,24 +10,41 @@ class VariableView(APIView):
     API view for handling variable operations.
     """
 
-    def get(self, request):
+    def get(self, request, project_id):
         """
-        Retrieve all variables.
+        Handle GET requests to retrieve all variables for the authenticated user in the specific project.
         """
-        return Response(
-            VariableSerializer(Variable.objects.all(), many=True).data,
-            status=status.HTTP_200_OK,
-        )
+        try:
+            variables = Variable.objects.filter(
+                project_id=project_id, user=request.user
+            )
+            serializer = VariableSerializer(variables, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Variable.DoesNotExist:
+            return Response(
+                {"error": "Variables not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            return Response(
+                {"error": "An unexpected error occured. Please try again later"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
-    def post(self, request):
+    def post(self, request, project_id):
         """
-        Create a new variable.
+        Create a new variable for the authenticated user in the specific project.
         """
-        serializer = VariableSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = VariableSerializer(
+            data={"user": request.user.id, "project": project_id, **request.data}
+        )
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+        return Response(
+            {"message": "Variable created successfully", "variable": serializer.data},
+            status=status.HTTP_201_CREATED,
+        )
 
 
 class VariableDetailView(APIView):
