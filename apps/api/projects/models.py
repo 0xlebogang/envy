@@ -8,7 +8,7 @@ class Project(models.Model):
         verbose_name = "Project"
         verbose_name_plural = "Projects"
 
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="projects"
@@ -17,4 +17,4 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.user.email}"
