@@ -1,4 +1,4 @@
-FROM python:3.13-slim AS base
+FROM python:3.12-slim-bookworm AS base
 
 ARG SECRET_KEY
 ARG DATABASE_URL
@@ -33,7 +33,7 @@ RUN useradd -m -r appuser && \
     chown -R appuser /app
 
 # Pypi deps
-COPY --from=builder /usr/local/lib/python3.13/site-packages/ /usr/local/lib/python3.13/site-packages/
+COPY --from=builder /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
 # Django's static files
 COPY --from=builder /app/staticfiles/ /app/staticfiles/
 # Downloaded binaries
@@ -51,4 +51,4 @@ ENV ALLOWED_HOSTS=${ALLOWED_HOSTS}
 EXPOSE 8000
 
 ENTRYPOINT ["gunicorn"]
-CMD ["--workers", "3", "core.wsgi:application"]
+CMD ["--bind", "0.0.0.0:8000", "--workers", "3", "core.wsgi:application"]
