@@ -26,9 +26,8 @@ class ProjectView(APIView):
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        project = serializer.save(user=request.user)
         return Response(
-            {"message": "Project created successfully.", "project": project},
+            {"message": "Project created successfully.", "project": serializer.data},
             status=status.HTTP_201_CREATED,
         )
 
