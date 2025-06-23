@@ -28,13 +28,37 @@ class UserSerializer(serializers.ModelSerializer):
         """
         Validate the user data before creating or updating a user.
         """
-        if not self.instance and not attrs.get("email"):
+        required_fields = {"email", "password"}
+
+        if not self.instance and not required_fields.issubset(attrs):
             raise serializers.ValidationError(
-                "Email is required.", code="email_required"
-            )
-        if not self.instance and not attrs.get("password"):
-            raise serializers.ValidationError(
-                "Password is required.", code="password_required"
+                f"Missing required fields: {required_fields - attrs.keys()}"
             )
 
         return super().validate(attrs)
+
+    def create(self, validated_data: Dict) -> "User":
+        """
+        Create a new user instance.
+        """
+        password = validated_data.pop("password", None)
+
+        user = self.Meta.model(**validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def update(self, instance, validated_data: Dict) -> "User":
+        """
+        Update an existing user instance.
+        """
+        password = validated_data.pop("password", None)
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if password:
+            instance.set_password(password)
+
+        instance.save()
+        return instance

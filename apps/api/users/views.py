@@ -19,7 +19,8 @@ def create_user(request):
 
     serializer.save()
     return Response(
-        {"message": "User created successfully"}, status=status.HTTP_201_CREATED
+        {"message": "User created successfully", "user": serializer.data},
+        status=status.HTTP_201_CREATED,
     )
 
 
