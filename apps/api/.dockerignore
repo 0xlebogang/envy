@@ -1,6 +1,0 @@
-__pycache__/
-.venv/
-.env
-.git*
-README.md
-db.sqlite3
