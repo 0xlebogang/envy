@@ -1,0 +1,8 @@
+[tools]
+node = "22.19.0"
+python = "3.12.11"
+uv = "0.8.17"
+pnpm = "10.15.1"
+
+[settings]
+activate_aggressive = true
