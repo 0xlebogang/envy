@@ -1,16 +1,19 @@
 {
-  "name": "sekrets",
-  "version": "0.1.0",
-  "scripts": {
-    "dev": "turbo dev",
-    "build": "turbo build",
-    "test": "turbo test",
-    "lint": "turbo lint"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.2.5",
-    "turbo": "^2.5.8",
-    "typescript": "catalog:"
-  },
-  "packageManager": "pnpm@10.15.1"
+	"name": "sekrets",
+	"version": "0.1.0",
+	"scripts": {
+		"dev": "turbo dev",
+		"build": "turbo build",
+		"test": "turbo test",
+		"lint": "turbo lint",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.5",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.3",
+		"turbo": "^2.5.8",
+		"typescript": "catalog:"
+	},
+	"packageManager": "pnpm@10.15.1"
 }
