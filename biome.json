@@ -1,0 +1,4 @@
+{
+    "extends": ["./packages/biome-config/base.json"],
+    "root": true
+}
