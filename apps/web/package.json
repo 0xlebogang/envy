@@ -1,28 +1,28 @@
 {
-  "name": "web",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "next start",
-    "lint": "biome check ."
-  },
-  "dependencies": {
-    "@repo/ui": "workspace:*",
-    "lucide-react": "catalog:",
-    "next": "catalog:react19",
-    "next-themes": "catalog:",
-    "react": "catalog:react19",
-    "react-dom": "catalog:react19"
-  },
-  "devDependencies": {
-    "@repo/biome-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/node": "catalog:react19",
-    "@types/react": "catalog:react19",
-    "@types/react-dom": "catalog:react19",
-    "typescript": "catalog:"
-  }
+	"name": "web",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev": "next dev --turbopack",
+		"build": "next build --no-lint",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "next start",
+		"lint": "biome check ."
+	},
+	"dependencies": {
+		"@repo/ui": "workspace:*",
+		"lucide-react": "catalog:",
+		"next": "catalog:react19",
+		"next-themes": "catalog:",
+		"react": "catalog:react19",
+		"react-dom": "catalog:react19"
+	},
+	"devDependencies": {
+		"@repo/biome-config": "workspace:*",
+		"@repo/typescript-config": "workspace:*",
+		"@types/node": "catalog:react19",
+		"@types/react": "catalog:react19",
+		"@types/react-dom": "catalog:react19",
+		"typescript": "catalog:"
+	}
 }
