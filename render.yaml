@@ -1,9 +1,0 @@
-previews:
-  generation: "off"
-
-services:
-  - name: web
-    type: web
-    runtime: image
-    image:
-      url: ghcr.io/sekrets:web
