@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@repo/ui"],
-}
+	transpilePackages: ["@repo/ui"],
+	output: "standalone",
+};
 
-export default nextConfig
+export default nextConfig;
