@@ -1,6 +1,6 @@
 {
 	"$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
-    "root": false,
+	"root": false,
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -24,22 +24,22 @@
 			"quoteStyle": "double"
 		}
 	},
-    "json": {
-        "formatter": {
-            "enabled": true
-        },
-        "linter": {
-            "enabled": false
-        }
-    },
-    "css": {
-        "formatter": {
-            "enabled": true
-        },
-        "linter": {
-            "enabled": false
-        }
-    },
+	"json": {
+		"formatter": {
+			"enabled": true
+		},
+		"linter": {
+			"enabled": false
+		}
+	},
+	"css": {
+		"formatter": {
+			"enabled": true
+		},
+		"linter": {
+			"enabled": false
+		}
+	},
 	"assist": {
 		"enabled": true,
 		"actions": {
