@@ -13,12 +13,10 @@ FROM base AS builder
 WORKDIR /src
 
 COPY --from=pruner /src/out/json/ .
-RUN corepack enable pnpm \
-    && corepack prepare pnpm@10.15.1 \
-    && pnpm install --frozen-lockfile
+RUN npm ci
 
 COPY --from=pruner /src/out/full/ .
-RUN pnpm build
+RUN npm run build
 
 
 FROM base AS runner
