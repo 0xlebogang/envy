@@ -3,6 +3,9 @@ name: Main CI Pipeline
 on:
   push:
     branches: [trunk]
+  pull_request:
+    branches: [trunk]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -23,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Run linters
-        run: npm run lint
+        run: npm run lint --affected
 
   test:
     runs-on: ubuntu-latest
@@ -40,4 +43,4 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm run test
+        run: npm run test --affected
