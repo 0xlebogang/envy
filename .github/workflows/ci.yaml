@@ -1,8 +1,8 @@
-name: Main CI/CD Pipeline
+name: Main CI Pipeline
 
 on:
   push:
-    branches: [ trunk ]
+    branches: [trunk]
 
 permissions:
   contents: read
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up project tools
         uses: jdx/mise-action@v2
         with:
@@ -24,7 +24,7 @@ jobs:
 
       - name: Run linters
         run: npm run lint
-    
+
   test:
     runs-on: ubuntu-latest
     steps:
