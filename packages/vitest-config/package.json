@@ -1,0 +1,16 @@
+{
+	"name": "@repo/vitest-config",
+	"private": true,
+	"type": "module",
+	"main": "./vitest.config.ts",
+	"exports": {
+		"./vitest.config": "./vitest.config.ts"
+	},
+	"devDependencies": {
+		"@repo/biome-config": "*",
+		"@repo/typescript-config": "*",
+		"@vitejs/plugin-react": "^4.3.1",
+		"jsdom": "^25.0.0",
+		"vitest": "^2.0.5"
+	}
+}

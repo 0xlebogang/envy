@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "next build --no-lint",
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "vitest run",
 		"start": "next start",
 		"lint": "biome check ."
 	},
@@ -20,6 +20,7 @@
 	"devDependencies": {
 		"@repo/biome-config": "*",
 		"@repo/typescript-config": "*",
+		"@repo/vitest-config": "*",
 		"@types/node": "^24.7.0",
 		"@types/react": "^19.2.0",
 		"@types/react-dom": "^19.2.0",
