@@ -1,0 +1,10 @@
+{
+	"name": "backend",
+	"private": true,
+	"scripts": {
+		"dev": "uv run manage.py runserver",
+		"test": "uv run manage.py test",
+		"lint": "ruff check .",
+		"migrate": "uv run manage.py makemigrations && uv run manage.py migrate"
+	}
+}
