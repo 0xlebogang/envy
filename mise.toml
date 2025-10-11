@@ -4,6 +4,7 @@ python = "3.12.11"
 uv = "0.8.17"
 pnpm = "10.15.1"
 terraform = '0.15.5'
+ruff = "0.13.0"
 
 [settings]
 activate_aggressive = true
