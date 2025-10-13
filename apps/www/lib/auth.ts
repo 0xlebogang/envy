@@ -381,6 +381,11 @@ export const authOptions: NextAuthOptions = {
 			session.idToken = token.idToken;
 			session.accessToken = token.accessToken;
 			session.error = token.error;
+			session.user = {
+				name: token.name as string,
+				email: token.email as string,
+				image: token.picture as string,
+			};
 			return session;
 		},
 	},
