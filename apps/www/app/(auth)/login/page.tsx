@@ -1,5 +1,8 @@
 "use client";
 
+import Loading from "@repo/ui/blocks/Loading";
+import { Button } from "@repo/ui/components/button";
+import { LogIn, MoveLeft } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import type { BuiltInProviderType } from "next-auth/providers/index";
@@ -37,25 +40,19 @@ function SignInContent() {
 	}, []);
 
 	if (!providers) {
-		return (
-			<main className="min-h-screen flex-1 grid place-items-center px-6 py-24 sm:py-32 lg:px-8">
-				<div className="text-center">
-					<p className="text-gray-600">Loading...</p>
-				</div>
-			</main>
-		);
+		return <Loading />;
 	}
 
 	const provider = providers?.zitadel;
 
 	return (
-		<main className="min-h-screen flex-1 grid place-items-center px-6 py-24 sm:py-32 lg:px-8">
+		<main className="min-h-[calc(100vh-88px)] flex-1 grid place-items-center px-6 py-24 sm:py-32 lg:px-8">
 			<div className="text-center max-w-md w-full">
-				<h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">
+				<h1 className="text-4xl font-bold tracking-tight text-balance sm:text-7xl">
 					Sign in
 				</h1>
 				<p
-					className={`mt-6 text-lg font-medium text-pretty sm:text-xl/8 ${
+					className={`mt-2 font-medium text-pretty sm:text-xl/8 ${
 						error ? "text-red-600" : "text-gray-500"
 					}`}
 				>
@@ -77,47 +74,19 @@ function SignInContent() {
 								name="callbackUrl"
 								value={callbackUrl ?? undefined}
 							/>
-							<button
-								type="submit"
-								className="w-full flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200"
-							>
-								<svg
-									className="w-5 h-5"
-									fill="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<title>Sign In</title>
-									<path
-										fillRule="evenodd"
-										d="M8 10V7a4 4 0 1 1 8 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2-3a2 2 0 1 1 4 0v3h-4V7Zm2 6a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z"
-										clipRule="evenodd"
-									/>
-								</svg>
+							<Button type="submit" size="lg">
+								<LogIn className="w-5 h-5" />
 								Sign in with {provider.name}
-							</button>
+							</Button>
 						</form>
 					</div>
 				)}
-				<div className="mt-8">
+				<div className="mt-4">
 					<Link
 						href="/"
 						className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700"
 					>
-						<svg
-							aria-label="back"
-							className="w-4 h-4 mr-2"
-							fill="none"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="currentColor"
-						>
-							<title>Back Arrow</title>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-							/>
-						</svg>
+						<MoveLeft className="mr-2" />
 						Back to home
 					</Link>
 				</div>
@@ -134,7 +103,7 @@ function SignInContent() {
  */
 export default function CustomSignInPage() {
 	return (
-		<Suspense fallback={<div>Loading...</div>}>
+		<Suspense fallback={<Loading />}>
 			<SignInContent />
 		</Suspense>
 	);

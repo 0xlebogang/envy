@@ -1,3 +1,7 @@
 {
-	"extends": "//"
+  "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
+	"extends": "//",
+  "files": {
+    "includes": ["!src"]
+  }
 }

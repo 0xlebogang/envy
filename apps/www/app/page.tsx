@@ -1,15 +1,26 @@
-import { Button } from "@repo/ui/components/button";
-import Link from "next/link";
+"use client";
 
-export default function Page() {
-	return (
-		<main className="flex items-center justify-center min-h-svh">
-			<div className="flex flex-col items-center justify-center gap-4">
-				<h1 className="text-2xl font-bold">Hello World</h1>
-				<Button size="sm" asChild>
-					<Link href="/login">Sign In</Link>
-				</Button>
-			</div>
-		</main>
-	);
+import Loading from "@repo/ui/blocks/Loading";
+import { useSession } from "next-auth/react";
+import Dashboard from "./dashboard";
+import Landing from "./landing";
+
+/**
+ * The main entry point of the application.
+ *
+ * It conditionally renders different components based on the user's authentication status.
+ */
+export default function Index() {
+	const session = useSession();
+
+	switch (session.status) {
+		case "loading":
+			return <Loading />;
+
+		case "authenticated":
+			return <Dashboard />;
+
+		case "unauthenticated":
+			return <Landing />;
+	}
 }
