@@ -1,5 +1,6 @@
 import { Navbar as NavbarProvider, NavbarCenter, NavbarLeft, NavbarRight } from "@repo/ui/components/navbar";
 import { Button } from "@repo/ui/components/button";
+import NavMenu from "@repo/ui/blocks/NavMenu";
 
 export default function Navbar({ isAuthenticated }: { isAuthenticated: boolean }) {
 	return (
@@ -8,7 +9,7 @@ export default function Navbar({ isAuthenticated }: { isAuthenticated: boolean }
 					<h1 className="text-4xl font-bold">Envy</h1>
 				</NavbarLeft>
 				<NavbarCenter>
-					<h1>Navbar center</h1>
+					<NavMenu />
 				</NavbarCenter>
 				<NavbarRight>
 					{isAuthenticated ? (
