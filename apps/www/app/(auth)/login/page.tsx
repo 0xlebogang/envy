@@ -1,6 +1,6 @@
 "use client";
 
-import LoginLoading from "@repo/ui/blocks/LoadingScreen";
+import Loading from "@repo/ui/blocks/Loading";
 import { Button } from "@repo/ui/components/button";
 import { LogIn, MoveLeft } from "lucide-react";
 import Link from "next/link";
@@ -40,19 +40,19 @@ function SignInContent() {
 	}, []);
 
 	if (!providers) {
-		return <LoginLoading />;
+		return <Loading />;
 	}
 
 	const provider = providers?.zitadel;
 
 	return (
-		<main className="min-h-screen flex-1 grid place-items-center px-6 py-24 sm:py-32 lg:px-8">
+		<main className="min-h-[calc(100vh-88px)] flex-1 grid place-items-center px-6 py-24 sm:py-32 lg:px-8">
 			<div className="text-center max-w-md w-full">
-				<h1 className="text-5xl font-semibold tracking-tight text-balance sm:text-7xl">
+				<h1 className="text-4xl font-bold tracking-tight text-balance sm:text-7xl">
 					Sign in
 				</h1>
 				<p
-					className={`mt-6 text-lg font-medium text-pretty sm:text-xl/8 ${
+					className={`mt-2 font-medium text-pretty sm:text-xl/8 ${
 						error ? "text-red-600" : "text-gray-500"
 					}`}
 				>
@@ -103,7 +103,7 @@ function SignInContent() {
  */
 export default function CustomSignInPage() {
 	return (
-		<Suspense fallback={<LoginLoading />}>
+		<Suspense fallback={<Loading />}>
 			<SignInContent />
 		</Suspense>
 	);
