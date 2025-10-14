@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@repo/ui/globals.css";
 import Navbar from "@repo/ui/blocks/Navbar";
 import Providers from "@/components/Providers";
+import NavbarSessionChecker from "./navbarSessionChecker";
 
 const fontSans = Geist({
 	subsets: ["latin"],
@@ -25,8 +26,8 @@ export default function RootLayout({
 				className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
 			>
 				<Providers>
-					<Navbar />
-					{children}
+					<NavbarSessionChecker />
+					<div className="absolute top-[88px] px-6 w-full">{children}</div>
 				</Providers>
 			</body>
 		</html>
