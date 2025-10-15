@@ -15,7 +15,7 @@ export default function Index() {
 
 	switch (session.status) {
 		case "loading":
-			return <Loading />;
+			return <Loading className="min-h-[calc(100vh-88px)]" />;
 
 		case "authenticated":
 			return <Dashboard />;
