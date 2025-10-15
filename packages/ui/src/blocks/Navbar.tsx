@@ -13,8 +13,8 @@ export default function Navbar({ isAuthenticated }: { isAuthenticated: boolean }
 				</NavbarCenter>
 				<NavbarRight>
 					{isAuthenticated ? (
-						<Button>
-							Dashboard
+						<Button asChild>
+							<a href="/">Dashboard</a>
 						</Button>
 					) : (
 						<Button asChild>
