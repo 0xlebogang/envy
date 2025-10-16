@@ -96,6 +96,7 @@ func TestLoadEnv(t *testing.T) {
 
 		mockGetter.On("GetEnv", "PORT", "8080").Return("3000")
 		mockGetter.On("GetEnv", "DATABASE_URL", "postgresql://root:password@localhost:5433/postgres").Return("postgresql://user:pass@localhost:5432/dbname")
+		mockGetter.On("GetEnv", "CORS_ALLOWED_ORIGINS", "http://localhost:3001,http://127.0.0.1:3001").Return("http://localhost:3001,http://127.0.0.1:3001")
 
 		config.LoadEnvWithGetter(mockGetter.GetEnv)
 		mockGetter.AssertExpectations(t)
