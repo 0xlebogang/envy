@@ -1,10 +1,9 @@
 [tools]
 node = "22.19.0"
 go = '1.24.8'
-uv = "0.8.17"
 pnpm = "10.15.1"
 terraform = '0.15.5'
-ruff = "0.13.0"
+golangci-lint = "latest"
 
 [settings]
 activate_aggressive = true
