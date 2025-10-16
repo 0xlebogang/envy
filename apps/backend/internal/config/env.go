@@ -29,7 +29,7 @@ func LoadEnvWithGetter(getEnv EnvGetter) *Config {
 	_ = godotenv.Load()
 
 	return &Config{
-		Port:               getEnv("PORT", "8080"),
+		Port:               getEnv("PORT", "1323"),
 		DbURL:              getEnv("DATABASE_URL", "postgresql://root:password@localhost:5433/postgres"),
 		CORSAllowedOrigins: getEnv("CORS_ALLOWED_ORIGINS", "http://localhost:3001,http://127.0.0.1:3001"),
 	}

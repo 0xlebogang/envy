@@ -1,8 +1,7 @@
 package main
 
 import (
-	"context"
-	"time"
+	"log"
 
 	"github.com/0xlebogang/envy/internal/config"
 )
@@ -12,9 +11,8 @@ func main() {
 
 	server := config.NewServer(conf)
 	server.RegisterRoutes()
-	server.Start()
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer server.Shutdown(ctx)
-	defer cancel()
+	if err := server.Start(); err != nil {
+		log.Fatal("Failed to start server:", err)
+	}
 }
