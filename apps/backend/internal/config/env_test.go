@@ -15,12 +15,12 @@ type MockEnvGetter struct {
 
 // GetEnv is a mock implementation of the EnvGetter function type.
 func (m *MockEnvGetter) GetEnv(key, fallback string) string {
-    args := m.Called(key, fallback)
-    return args.String(0)
+	args := m.Called(key, fallback)
+	return args.String(0)
 }
 
 func TestGetEnv(t *testing.T) {
-	testCases := []struct{
+	testCases := []struct {
 		description string
 		key         string
 		value       string
@@ -33,41 +33,41 @@ func TestGetEnv(t *testing.T) {
 			key:         "TEST_KEY",
 			value:       "test_value",
 			fallback:    "fallback_value",
-			setEnv:    	 true,
+			setEnv:      true,
 			expected:    "test_value",
 		},
 		{
-            description:           "returns fallback when environment variable not set",
-            key:            "NONEXISTENT_KEY",
-            fallback:       "fallback_value",
-            value:       "",
-            setEnv:         false,
-            expected: "fallback_value",
-        },
-        {
-            description:           "returns empty string when env is empty and fallback is empty",
-            key:            "EMPTY_KEY",
-            fallback:       "",
-            value:       "",
-            setEnv:         true,
-            expected: "",
-        },
-        {
-            description:           "returns environment value when it's empty string but set",
-            key:            "EMPTY_ENV_KEY",
-            fallback:       "fallback_value",
-            value:       "",
-            setEnv:         true,
-            expected: "",
-        },
-        {
-            description:	"returns environment value with spaces",
-            key:            "SPACES_KEY",
-            fallback:       "fallback",
-            value:       	"  spaced value  ",
-            setEnv:         true,
-            expected: "  spaced value  ",
-        },
+			description: "returns fallback when environment variable not set",
+			key:         "NONEXISTENT_KEY",
+			fallback:    "fallback_value",
+			value:       "",
+			setEnv:      false,
+			expected:    "fallback_value",
+		},
+		{
+			description: "returns empty string when env is empty and fallback is empty",
+			key:         "EMPTY_KEY",
+			fallback:    "",
+			value:       "",
+			setEnv:      true,
+			expected:    "",
+		},
+		{
+			description: "returns environment value when it's empty string but set",
+			key:         "EMPTY_ENV_KEY",
+			fallback:    "fallback_value",
+			value:       "",
+			setEnv:      true,
+			expected:    "",
+		},
+		{
+			description: "returns environment value with spaces",
+			key:         "SPACES_KEY",
+			fallback:    "fallback",
+			value:       "  spaced value  ",
+			setEnv:      true,
+			expected:    "  spaced value  ",
+		},
 	}
 
 	for _, tc := range testCases {

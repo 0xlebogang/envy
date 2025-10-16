@@ -17,7 +17,7 @@ func (g GormOpener) Open(dialector gorm.Dialector, config *gorm.Config) (*gorm.D
 	return gorm.Open(dialector, config)
 }
 
-func (g GormOpener) Close(db *gorm.DB) error { // Match interface signature
+func (g GormOpener) Close(db *gorm.DB) error {
 	sqlDB, err := db.DB()
 	if err != nil {
 		return err
