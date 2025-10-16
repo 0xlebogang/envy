@@ -3,5 +3,11 @@
 		"pwa-node": "/home/lebea/.local/share/mise/shims/node"
 	},
 	"python.defaultInterpreterPath": "/home/lebea/.local/share/mise/installs/python/3.12.11/bin/python",
-	"typescript.tsdk": "node_modules/typescript/lib"
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"go.goroot": "/home/lebea/.local/share/mise/installs/go/1.24.8",
+	"go.alternateTools": {
+		"go": "/home/lebea/.local/share/mise/shims/go",
+		"dlv": "/home/lebea/.local/share/mise/shims/dlv",
+		"gopls": "/home/lebea/.local/share/mise/shims/gopls"
+	}
 }

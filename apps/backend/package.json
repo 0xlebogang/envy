@@ -2,9 +2,9 @@
 	"name": "backend",
 	"private": true,
 	"scripts": {
-		"dev": "uv run manage.py runserver",
-		"test": "uv run manage.py test",
-		"lint": "ruff check .",
-		"migrate": "uv run manage.py makemigrations && uv run manage.py migrate"
+		"dev": "$(go env GOPATH)/bin/air -c ./.air.toml",
+		"build": "go build -o ./bin/main .",
+		"test": "go test -v ./...",
+		"lint": "golangci-lint run"
 	}
 }
