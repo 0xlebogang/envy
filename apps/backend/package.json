@@ -2,9 +2,9 @@
 	"name": "backend",
 	"private": true,
 	"scripts": {
-		"dev": "uv run flask --app flaskr run --debug",
-		"test": "uv run pytest",
-		"lint": "ruff check .",
-		"migrate": "echo 'No migrations yet'"
+		"dev": "$(go env GOPATH)/bin/air -c ./.air.toml",
+		"build": "go build -o ./bin/main .",
+		"test": "go test -v ./...",
+		"lint": "golangci-lint run"
 	}
 }
