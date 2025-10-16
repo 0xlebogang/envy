@@ -23,10 +23,10 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run linters
-        run: npm run lint --affected
+        run: pnpm run lint --affected
 
   test:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Run tests
-        run: npm run test --affected
+        run: pnpm run test --affected
