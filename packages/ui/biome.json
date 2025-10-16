@@ -1,7 +1,11 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
 	"extends": "//",
-  "files": {
-    "includes": ["!src"]
-  }
+	"linter": {
+		"rules": {
+			"suspicious": {
+				"noDocumentCookie": "off"
+			}
+		}
+	}
 }
