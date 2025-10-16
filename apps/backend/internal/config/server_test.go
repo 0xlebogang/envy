@@ -71,7 +71,7 @@ func TestGetCORSOrigins(t *testing.T) {
 			}
 
 			cfg := &config.Config{
-				Port:               "8080",
+				Port:               "1323",
 				CORSAllowedOrigins: "http://localhost:3000,https://myapp.com",
 			}
 
