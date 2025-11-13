@@ -24,7 +24,7 @@
 		"@repo/biome-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
 		"@types/node": "catalog:",
-		"@vitest/coverage-istanbul": "^4.0.8",
+		"@vitest/coverage-istanbul": "catalog:",
 		"@vitest/ui": "^4.0.8",
 		"glob": "^11.0.3",
 		"jsdom": "^27.2.0",

@@ -12,11 +12,14 @@
 		"./custom/hooks/*": "./custom/hooks/*.ts"
 	},
 	"scripts": {
+		"test": "vitest run",
+		"test:watch": "vitest",
 		"lint": "biome check",
 		"lint:fix": "biome check --fix --unsafe"
 	},
 	"dependencies": {
 		"@radix-ui/react-slot": "^1.2.4",
+		"@vitest/coverage-istanbul": "catalog:",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"lucide-react": "catalog:",
@@ -34,6 +37,7 @@
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
 		"tailwindcss": "^4.1.17",
-		"typescript": "catalog:"
+		"typescript": "catalog:",
+		"vitest": "catalog:"
 	}
 }

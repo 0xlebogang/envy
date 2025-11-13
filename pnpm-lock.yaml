@@ -18,6 +18,9 @@ catalogs:
     '@types/react-dom':
       specifier: ^19.2.3
       version: 19.2.3
+    '@vitest/coverage-istanbul':
+      specifier: 4.0.8
+      version: 4.0.8
     lucide-react:
       specifier: ^0.553.0
       version: 0.553.0
@@ -30,6 +33,9 @@ catalogs:
     typescript:
       specifier: ^5.9.3
       version: 5.9.3
+    vitest:
+      specifier: 4.0.8
+      version: 4.0.8
 
 importers:
 
@@ -79,6 +85,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.2.4
         version: 1.2.4(@types/react@19.2.4)(react@19.2.0)
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 4.0.8(vitest@4.0.8)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -128,6 +137,9 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.8(@types/node@20.19.25)(@vitest/ui@4.0.8)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.30.2)(yaml@2.8.1)
 
   packages/vitest-config:
     dependencies:
@@ -145,7 +157,7 @@ importers:
         specifier: 'catalog:'
         version: 20.19.25
       '@vitest/coverage-istanbul':
-        specifier: ^4.0.8
+        specifier: 'catalog:'
         version: 4.0.8(vitest@4.0.8)
       '@vitest/ui':
         specifier: ^4.0.8
