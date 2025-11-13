@@ -12,6 +12,13 @@ export default defineConfig({
 					environment: "jsdom",
 				},
 			},
+			{
+				test: {
+					name: "web",
+					...sharedConfig.test,
+					environment: "jsdom",
+				},
+			},
 		],
 	},
 });
