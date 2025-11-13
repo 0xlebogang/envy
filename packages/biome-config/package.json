@@ -2,6 +2,7 @@
 	"name": "@repo/biome-config",
 	"private": true,
 	"exports": {
-		"./base": "./base.json"
+		"./base": "./base.json",
+		"./react": "./react-library.json"
 	}
 }
