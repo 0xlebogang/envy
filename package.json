@@ -15,10 +15,12 @@
 		"@biomejs/biome": "^2.3.5",
 		"@changesets/cli": "^2.29.7",
 		"@repo/biome-config": "workspace:*",
+		"@repo/vitest-config": "workspace:*",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.6",
 		"turbo": "^2.6.1",
-		"typescript": "catalog:"
+		"typescript": "catalog:",
+		"vitest": "catalog:"
 	},
 	"packageManager": "pnpm@10.15.1"
 }

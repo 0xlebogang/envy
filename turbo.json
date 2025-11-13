@@ -1,7 +1,13 @@
 {
 	"$schema": "https://turborepo.com/schema.json",
-	"ui": "stream",
-	"globalDependencies": ["!.husky", "!.vscode", "!lint-staged.config.cjs"],
+	"ui": "tui",
+	"globalDependencies": [
+		"!.husky",
+		"!.vscode",
+		"!lint-staged.config.cjs",
+		"!.changeset",
+		"!.github"
+	],
 	"tasks": {
 		"dev": {
 			"cache": false,
