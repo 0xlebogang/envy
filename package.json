@@ -1,0 +1,23 @@
+{
+	"name": "envy",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "turbo dev",
+		"build": "turbo build",
+		"build:docker": "turbo build:docker",
+		"test": "turbo test",
+		"lint": "turbo lint",
+		"lint:fix": "turbo lint:fix",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.5",
+		"@changesets/cli": "^2.29.7",
+		"@repo/biome-config": "workspace:*",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.6",
+		"turbo": "^2.6.1"
+	},
+	"packageManager": "pnpm@10.15.1"
+}
