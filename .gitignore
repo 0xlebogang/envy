@@ -143,4 +143,6 @@ vite.config.ts.timestamp-*
 # Turbo
 .turbo/
 
-
+# VSCode
+.vscode/*
+!.vscode/extensions.json
