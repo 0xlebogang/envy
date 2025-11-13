@@ -1,0 +1,14 @@
+{
+	"name": "@repo/typescript-config",
+	"private": true,
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"lint": "biome check",
+		"lint:fix": "biome check --fix --unsafe"
+	},
+	"devDependencies": {
+		"@repo/biome-config": "workspace:*"
+	}
+}
