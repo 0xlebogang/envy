@@ -45,7 +45,7 @@ async function collectCoverageFiles() {
 						);
 
 						await fs.copyFile(coverageFilePath, destinationFile);
-					} catch (err) {
+					} catch (_err) {
 						// File doesn't exist in this directory, skip
 					}
 				}
