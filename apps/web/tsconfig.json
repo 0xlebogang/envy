@@ -1,0 +1,12 @@
+{
+	"extends": "@repo/typescript-config/nextjs.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./*"],
+			"@repo/ui/*": ["../../packages/ui/custom/*"],
+			"@repo/shadcn/*": ["../../packages/ui/shadcn/*"]
+		}
+	},
+	"exclude": ["node_modules"]
+}
