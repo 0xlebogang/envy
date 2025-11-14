@@ -45,7 +45,7 @@ export default function Index() {
 			{/* Code Preview */}
 			<section className="container mx-auto px-6 pb-24">
 				<div className="max-w-4xl mx-auto">
-					<div className="rounded-lg border border-border bg-card p-6 font-mono text-sm">
+					<div className="rounded border border-border bg-card p-6 font-mono text-sm">
 						<div className="flex items-center gap-2 mb-6 text-muted-foreground">
 							<div className="w-3 h-3 rounded-full bg-red-500" />
 							<div className="w-3 h-3 rounded-full bg-yellow-500" />
