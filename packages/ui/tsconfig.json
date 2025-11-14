@@ -10,6 +10,6 @@
 			"@repo/shadcn/*": ["./shadcn/*"]
 		}
 	},
-	"include": ["."],
+	"include": [".", "../../apps/web/src/components/Navbar.tsx"],
 	"exclude": ["node_modules", "dist"]
 }

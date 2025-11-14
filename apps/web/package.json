@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@repo/ui": "workspace:*",
+		"babel-plugin-react-compiler": "^1.0.0",
 		"lucide-react": "catalog:",
 		"next": "catalog:",
 		"next-themes": "^0.4.6",
