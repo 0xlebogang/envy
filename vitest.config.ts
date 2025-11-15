@@ -4,21 +4,6 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
 	...sharedConfig,
 	test: {
-		projects: [
-			{
-				test: {
-					name: "@repo/ui",
-					...sharedConfig.test,
-					environment: "jsdom",
-				},
-			},
-			{
-				test: {
-					name: "web",
-					...sharedConfig.test,
-					environment: "jsdom",
-				},
-			},
-		],
+		projects: ["apps/*", "packages/*"],
 	},
 });
