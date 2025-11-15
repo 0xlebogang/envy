@@ -5,6 +5,7 @@ export default mergeConfig(
 	uiConfig,
 	defineConfig({
 		test: {
+			exclude: ["src/__mocks__"],
 			setupFiles: ["./vitest.setup.ts"],
 		},
 	}),
