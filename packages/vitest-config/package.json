@@ -23,13 +23,17 @@
 	"devDependencies": {
 		"@repo/biome-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
+		"@testing-library/dom": "catalog:",
+		"@testing-library/react": "catalog:",
 		"@types/node": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"@vitest/coverage-istanbul": "catalog:",
 		"@vitest/ui": "^4.0.8",
 		"glob": "^11.0.3",
-		"jsdom": "^27.2.0",
+		"jsdom": "catalog:",
 		"nyc": "^17.1.0",
 		"serve": "^14.2.5",
-		"typescript": "catalog:"
+		"typescript": "catalog:",
+		"vite-tsconfig-paths": "catalog:"
 	}
 }
