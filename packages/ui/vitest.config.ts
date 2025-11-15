@@ -6,7 +6,6 @@ export default mergeConfig(
 	defineConfig({
 		test: {
 			name: "@repo/ui",
-			environment: "jsdom",
 			exclude: ["shadcn/**"],
 		},
 	}),
