@@ -7,7 +7,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-
 :root {
   --background: oklch(0.9232 0.0026 48.7171);
   --foreground: oklch(0.2795 0.0368 260.0310);
@@ -167,4 +166,13 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
