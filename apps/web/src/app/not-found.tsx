@@ -4,7 +4,10 @@ import Link from "next/link";
 
 export default function NotFound() {
 	return (
-		<section className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-background px-4">
+		<section
+			data-testid="not-found"
+			className="flex min-h-[calc(100vh-64px)] items-center justify-center bg-background px-4"
+		>
 			<div className="flex flex-col items-center gap-6 text-center">
 				<div className="flex items-center justify-center">
 					<FileQuestion
