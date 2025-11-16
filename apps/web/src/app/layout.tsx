@@ -1,9 +1,9 @@
 import { DM_Sans } from "next/font/google";
 
 import "@repo/shadcn/styles/globals.css";
-import { Navbar } from "@/components/Navbar";
+import { Navbar } from "@/components/navbar";
 import { Providers } from "@/components/Providers";
-import Footer from "@/components/sections/Footer";
+import Footer from "@/components/sections/footer";
 
 const fontSans = DM_Sans({
 	subsets: ["latin"],
