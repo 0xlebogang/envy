@@ -3,7 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "@repo/shadcn/styles/globals.css";
 import Footer from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { Providers } from "@/components/providers";
+import { Providers } from "@/components/Providers";
 
 const fontSans = DM_Sans({
 	subsets: ["latin"],
