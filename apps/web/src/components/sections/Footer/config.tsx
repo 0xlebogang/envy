@@ -1,4 +1,4 @@
-import Logo from "../Logo";
+import Logo from "@/components/Logo";
 
 interface FooterConfig {
 	logo: React.ReactElement;
