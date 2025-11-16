@@ -1,4 +1,14 @@
+<div align='center'>
+
 # Envy
+
+</div>
+
+<div align='center'>
+
+[![codecov](https://codecov.io/github/0xlebogang/envy/graph/badge.svg?token=G8W1KIRQMD)](https://codecov.io/github/0xlebogang/envy)
+
+</div>
 
 A modern monorepo web application built with Next.js, TypeScript, and Turborepo.
 
