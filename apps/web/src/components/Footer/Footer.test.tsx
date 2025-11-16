@@ -37,6 +37,4 @@ describe("Footer", () => {
 		expect(externalLink).toBeInTheDocument();
 		expect(externalLink).toHaveAttribute("href", "/test-link-2");
 	});
-
-	it("");
 });
