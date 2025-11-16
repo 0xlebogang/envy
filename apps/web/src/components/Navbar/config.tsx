@@ -1,6 +1,6 @@
 import Logo from "../Logo";
 
-interface NavbarConfig {
+export interface NavbarConfig {
 	logo: React.ReactNode;
 	menuItems: {
 		label: string;

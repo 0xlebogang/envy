@@ -17,7 +17,6 @@ import {
 import { cn } from "@repo/shadcn/lib/utils";
 import { Menu } from "lucide-react";
 import Link from "next/link";
-import type React from "react";
 import { navbarConfig } from "./config";
 
 export function Navbar() {
