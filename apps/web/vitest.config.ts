@@ -5,7 +5,13 @@ export default mergeConfig(
 	uiConfig,
 	defineConfig({
 		test: {
-			exclude: ["src/__mocks__"],
+			exclude: [
+				"**/node_modules/**",
+				"node_modules",
+				"**/.turbo/**",
+				"src/__mocks__",
+			],
+			include: ["src/**/*.{test,spec}.{ts,tsx}"],
 			setupFiles: ["./vitest.setup.ts"],
 		},
 	}),
