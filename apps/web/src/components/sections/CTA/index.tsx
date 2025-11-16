@@ -4,7 +4,10 @@ import { ctaConfig } from "./config";
 
 export default function CTA() {
 	return (
-		<section className="container mx-auto px-6 py-24 border-t border-border">
+		<section
+			data-testid="cta-section"
+			className="container mx-auto px-6 py-24 border-t border-border"
+		>
 			<div className="max-w-4xl mx-auto text-center">
 				<h2 className="text-4xl font-bold mb-6">{ctaConfig.header}</h2>
 				<p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
