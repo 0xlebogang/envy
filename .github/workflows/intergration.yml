@@ -1,0 +1,54 @@
+name: Continuous Integration
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - apps/*
+      - packages/*
+  pull_request:
+    branches: [main]
+    paths:
+      - apps/*
+      - packages/*
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup Mise
+        uses: jdx/mise-action@v2
+      - name: Install Dependencies
+        run: mise x -- pnpm install
+      - name: Run Linter
+        run: mise x -- pnpm lint
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Setup Mise
+        uses: jdx/mise-action@v2
+      - name: Install Dependencies
+        run: mise x -- pnpm install
+      - name: Run Tests
+        run: mise x -- pnpm test --affected
+      - name: Merge Coverage Reports
+        run: mise x -- pnpm turbo merge-json-reports
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./packages/vitest-config/coverage/merged/merged-coverage.json
+          flags: unittests
+          name: Envy Codecov Report
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
