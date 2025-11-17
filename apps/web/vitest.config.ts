@@ -10,7 +10,6 @@ export default mergeConfig(
 				"node_modules",
 				"**/.turbo/**",
 				"src/__mocks__",
-				"src/components/admin-panel",
 			],
 			setupFiles: ["./vitest.setup.ts"],
 		},

@@ -10,10 +10,10 @@ catalogs:
       specifier: ^4.1.17
       version: 4.1.17
     '@testing-library/dom':
-      specifier: ^10.4.1
+      specifier: 10.4.1
       version: 10.4.1
     '@testing-library/jest-dom':
-      specifier: ^6.9.1
+      specifier: 6.9.1
       version: 6.9.1
     '@testing-library/react':
       specifier: ^16.3.0
@@ -203,9 +203,6 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.2.8
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.4))(@types/react@19.2.4)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@vitest/coverage-istanbul':
-        specifier: 'catalog:'
-        version: 4.0.8(vitest@4.0.8)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -249,6 +246,12 @@ importers:
       '@tailwindcss/postcss':
         specifier: 'catalog:'
         version: 4.1.17
+      '@testing-library/dom':
+        specifier: 'catalog:'
+        version: 10.4.1
+      '@testing-library/jest-dom':
+        specifier: 'catalog:'
+        version: 6.9.1
       '@types/node':
         specifier: 'catalog:'
         version: 20.19.25
@@ -258,6 +261,9 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.4)
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 4.0.8(vitest@4.0.8)
       tailwindcss:
         specifier: ^4.1.17
         version: 4.1.17
