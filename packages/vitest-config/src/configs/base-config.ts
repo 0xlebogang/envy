@@ -12,9 +12,14 @@ export const baseConfig = defineConfig({
 						file: "../coverage.json",
 					},
 				],
+				[
+					"json-summary",
+					{
+						file: "../coverage-summary.json",
+					},
+				],
 				"lcov",
 			],
-			reportsDirectory: "./coverage",
 			reportOnFailure: true,
 		},
 	},
