@@ -51,7 +51,7 @@ jobs:
       - name: Install Dependencies
         run: mise x -- pnpm install
       - name: Run Tests
-        run: mise x -- pnpm test --affected
+        run: mise x -- pnpm test
       - name: Upload Coverage Artifacts
         uses: actions/upload-artifact@v4
         with:
