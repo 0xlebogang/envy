@@ -4,14 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths:
-      - apps/*
-      - packages/*
   pull_request:
     branches: [main]
     paths:
-      - apps/*
-      - packages/*
+      - apps/**/*.{ts,tsx}
+      - packages/**/*.{ts,tsx}
 
 permissions:
   contents: read
