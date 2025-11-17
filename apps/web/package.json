@@ -14,11 +14,13 @@
 	"dependencies": {
 		"@repo/ui": "workspace:*",
 		"babel-plugin-react-compiler": "^1.0.0",
+		"immer": "^10.2.0",
 		"lucide-react": "catalog:",
 		"next": "catalog:",
 		"next-themes": "^0.4.6",
 		"react": "catalog:",
-		"react-dom": "catalog:"
+		"react-dom": "catalog:",
+		"zustand": "^5.0.8"
 	},
 	"devDependencies": {
 		"@repo/biome-config": "workspace:*",
