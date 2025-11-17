@@ -9,23 +9,23 @@ vi.mock("next/font/google", () => ({
 	}),
 }));
 
+vi.mock("@/components/ConditionalHomeRenderer", () => ({
+	default: () => (
+		<div data-testid="conditional-home-renderer">
+			ConditionalHomeRenderer Component
+		</div>
+	),
+}));
+
 describe("Home Page", () => {
 	beforeAll(() => {
 		render(<Index />);
 	});
 
-	it("should render the Hero section", () => {
-		const heroElement = screen.getByTestId("hero-section");
-		expect(heroElement).toBeInTheDocument();
-	});
-
-	it("should render the CodePreview component", () => {
-		const codePreviewElement = screen.getByTestId("code-preview");
-		expect(codePreviewElement).toBeInTheDocument();
-	});
-
-	it("should render the CTA section", () => {
-		const ctaElement = screen.getByTestId("cta-section");
-		expect(ctaElement).toBeInTheDocument();
+	it("should render the ConditionalHomeRenderer component", () => {
+		const conditionalHomeRenderer = screen.getByTestId(
+			"conditional-home-renderer",
+		);
+		expect(conditionalHomeRenderer).toBeInTheDocument();
 	});
 });
