@@ -2,22 +2,11 @@ import { render, screen } from "@testing-library/react";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import Index from "./page";
 
-vi.mock("@/components/CodePreview", () => ({
-	default: function MockCodePreview() {
-		return <div data-testid="code-preview">CodePreview Component</div>;
-	},
-}));
-
-vi.mock("@/components/sections/CTA", () => ({
-	default: function MockCTA() {
-		return <div data-testid="cta-section">CTA Component</div>;
-	},
-}));
-
-vi.mock("@/components/sections/Hero", () => ({
-	default: function MockHero() {
-		return <div data-testid="hero-section">Hero Component</div>;
-	},
+vi.mock("next/font/google", () => ({
+	Fira_Code: () => ({
+		subsets: ["latin"],
+		variable: "--font-sans",
+	}),
 }));
 
 describe("Home Page", () => {
