@@ -18,7 +18,7 @@
 			"outputs": [".next/**", "!.next/cache/**", "build/**"]
 		},
 		"test": {
-			"outputs": ["coverage.json"]
+			"outputs": ["coverage.json", "coverage/**"]
 		},
 		"lint": {},
 		"lint:fix": {}
