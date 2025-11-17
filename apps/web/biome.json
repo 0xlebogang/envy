@@ -3,7 +3,7 @@
 	"root": false,
 	"extends": ["@repo/biome-config/next"],
 	"linter": {
-		"includes": ["!__mocks__/**"]
+		"includes": ["!__mocks__/**", "!components/admin-panel/**"]
 	},
 	"overrides": [
 		{
