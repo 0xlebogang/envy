@@ -59,7 +59,7 @@ export function Menu({ isOpen }: MenuProps) {
 													<TooltipTrigger asChild>
 														<Button
 															variant={
-																(active === undefined && href &&
+																(active === undefined &&
 																	pathname.startsWith(href)) ||
 																active
 																	? "secondary"
