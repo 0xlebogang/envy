@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   # Only run if lint passed or if manually triggered
@@ -86,8 +87,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: coverage-reports
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.run_id }}
       - name: Report Coverage
         uses: davelosert/vitest-coverage-report-action@v2
         with:
@@ -105,8 +104,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: coverage-reports
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.run_id }}
       - name: Upload Reports
         uses: codecov/codecov-action@v5
         with:
