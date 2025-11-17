@@ -7,6 +7,7 @@ export default mergeConfig(
 		test: {
 			name: "@repo/ui",
 			exclude: ["shadcn/**"],
+			setupFiles: ["./vitest.setup.ts"],
 		},
 	}),
 );

@@ -28,7 +28,7 @@ const useAuthStore = create<AuthStore>()(
 	persist(
 		(set, get) => ({
 			// Initial state
-			isAuthenticated: false,
+			isAuthenticated: true,
 			user: null,
 			isLoading: false,
 
