@@ -28,7 +28,7 @@ export function Navbar() {
 
 	return (
 		<header
-			className={`${!shouldShow(isAuthenticated, showPublicSite) ? "hidden" : ""} sticky top-0 z-50 w-full border-b border-border bg-background`}
+			className={`${shouldShow(isAuthenticated, showPublicSite) ? "" : "hidden"} sticky top-0 z-50 w-full border-b border-border bg-background`}
 		>
 			<div className="container mx-auto flex h-16 items-center justify-between">
 				{navbarConfig.logo}
