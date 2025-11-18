@@ -55,7 +55,7 @@ describe("Footer Component", () => {
 
 			render(<Footer />);
 			const footerElement = screen.getByRole("contentinfo");
-			expect(footerElement).toHaveClass("hidden");
+			expect(footerElement).not.toHaveClass("hidden");
 		});
 
 		it("should hide footer when authenticated and showPublicSite is false", () => {
@@ -66,7 +66,7 @@ describe("Footer Component", () => {
 
 			render(<Footer />);
 			const footerElement = screen.getByRole("contentinfo");
-			expect(footerElement).not.toHaveClass("hidden");
+			expect(footerElement).toHaveClass("hidden");
 		});
 	});
 });

@@ -12,7 +12,7 @@ export default function Footer() {
 
 	return (
 		<footer
-			className={`${shouldShow(isAuthenticated, showPublicSite) ? "hidden" : ""} border-t border-border py-12`}
+			className={`${shouldShow(isAuthenticated, showPublicSite) ? "" : "hidden"} border-t border-border py-12`}
 		>
 			<div className="container mx-auto px-6">
 				<div className="flex flex-col md:flex-row items-center justify-between gap-4">
