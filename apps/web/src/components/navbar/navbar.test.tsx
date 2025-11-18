@@ -1,5 +1,5 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import useAuthStore from "@/stores/auth-store";
 import useHomeRendererStore from "@/stores/home-renderer-store";
 import { Navbar } from ".";
@@ -27,14 +27,6 @@ vi.mock("./config", () => ({
 			{ label: "Sign Up", href: "/sign-up" },
 		],
 	},
-}));
-
-vi.mock("@/stores/auth-store", () => ({
-	default: vi.fn().mockReturnValue(false),
-}));
-
-vi.mock("@/stores/home-renderer-store", () => ({
-	default: vi.fn().mockReturnValue(false),
 }));
 
 describe("Navbar Component", () => {
