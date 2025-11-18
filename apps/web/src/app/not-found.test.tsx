@@ -1,18 +1,31 @@
-import { render, screen } from "@testing-library/react";
-import { beforeAll, describe, expect, it } from "vitest";
+import { Button } from "@repo/shadcn/components/button";
+import { cleanup, render, screen } from "@testing-library/react";
+import React from "react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import NotFound from "./not-found";
 
+vi.mock("@repo/shadcn/components/button", () => ({
+	Button: ({ children, asChild, ...props }: any) => {
+		if (asChild) {
+			return children;
+		}
+		return <button {...props}>{children}</button>;
+	},
+}));
+
 describe("NotFound Component", () => {
-	beforeAll(() => {
-		render(<NotFound />);
+	afterEach(() => {
+		cleanup();
 	});
 
 	it("should render the 404 Not Found page", () => {
+		render(<NotFound />);
 		const notFoundElement = screen.getByTestId("not-found");
 		expect(notFoundElement).toBeInTheDocument();
 	});
 
 	it("should display the correct heading and message", () => {
+		render(<NotFound />);
 		const headingElement = screen.getByText("404");
 		const subheadingElement = screen.getByText("Page Not Found");
 		const messageElement = screen.getByText(
@@ -25,8 +38,12 @@ describe("NotFound Component", () => {
 	});
 
 	it("should have a return home button with correct link", () => {
-		const returnHomeButton = screen.getByRole("link", { name: "Return Home" });
+		render(<NotFound />);
+		// Try to find any button or link with "Return Home" text
+		const returnHomeButton = screen.getByText("Return Home");
 		expect(returnHomeButton).toBeInTheDocument();
-		expect(returnHomeButton).toHaveAttribute("href", "/");
+		// Check if it's wrapped in a link
+		const linkElement = returnHomeButton.closest("a");
+		expect(linkElement).toHaveAttribute("href", "/");
 	});
 });
