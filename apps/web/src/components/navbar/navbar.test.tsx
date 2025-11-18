@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it, vi } from "vitest";
 import { Navbar } from ".";
 import { navbarConfig } from "./config";
 
-// Mock the config with test data
+// Mock navbar config with test data
 vi.mock("./config", () => ({
 	navbarConfig: {
 		logo: <div data-testid="logo">Logo</div>,
@@ -42,6 +42,7 @@ describe("Navbar Component", () => {
 		expect(logoElement).toBeInTheDocument();
 	});
 
+	// Skipped due to required user interaction for dropdowns
 	it.skip("should render menu items with correct links", () => {
 		navbarConfig.menuItems.forEach((item) => {
 			if (item.href) {
