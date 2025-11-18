@@ -44,8 +44,6 @@
 		"@repo/typescript-config": "workspace:*",
 		"@repo/vitest-config": "workspace:*",
 		"@tailwindcss/postcss": "catalog:",
-		"@testing-library/dom": "catalog:",
-		"@testing-library/jest-dom": "catalog:",
 		"@types/node": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",

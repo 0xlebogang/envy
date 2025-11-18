@@ -2,11 +2,11 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import Logo from "./Logo";
 
-afterEach(() => {
-	cleanup();
-});
-
 describe("Logo", () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	it("should render logo with lock icon and text", () => {
 		render(<Logo />);
 

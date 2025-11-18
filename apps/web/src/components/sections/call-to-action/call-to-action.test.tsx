@@ -1,19 +1,33 @@
-import { render, screen } from "@testing-library/react";
-import { beforeAll, describe, expect, it } from "vitest";
+import { Button } from "@repo/shadcn/components/button";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import CTA from ".";
 import { ctaConfig } from "./config";
 
+vi.mock("@repo/shadcn/components/button", () => ({
+	Button: ({ children, asChild, ...props }: any) => {
+		if (asChild) {
+			return children;
+		}
+		return <button {...props}>{children}</button>;
+	},
+}));
+
 describe("CTA Component", () => {
-	beforeAll(() => {
-		render(<CTA />);
+	afterEach(() => {
+		cleanup();
 	});
 
 	it("should render the CTA section", () => {
+		render(<CTA />);
+
 		const ctaElement = screen.getByTestId("cta-section");
 		expect(ctaElement).toBeInTheDocument();
 	});
 
 	it("should render the header and subheader", () => {
+		render(<CTA />);
+
 		const headerElement = screen.getByText(ctaConfig.header);
 		const subheaderElement = screen.getByText(ctaConfig.subheader);
 
@@ -22,6 +36,8 @@ describe("CTA Component", () => {
 	});
 
 	it("should render the buttons with correct links and labels", () => {
+		render(<CTA />);
+
 		ctaConfig.buttons.forEach((button) => {
 			const buttonElement = screen.getByRole("link", { name: button.label });
 			expect(buttonElement).toBeInTheDocument();
