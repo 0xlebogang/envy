@@ -1,9 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { shouldShow } from "@/lib/utils";
+import useAuthStore from "@/stores/auth-store";
+import useHomeRendererStore from "@/stores/home-renderer-store";
 import { footerConfig } from "./config";
 
 export default function Footer() {
+	const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+	const showPublicSite = useHomeRendererStore((state) => state.showPublicSite);
+
 	return (
-		<footer className="border-t border-border py-12">
+		<footer
+			className={`${shouldShow(isAuthenticated, showPublicSite) ? "hidden" : ""} border-t border-border py-12`}
+		>
 			<div className="container mx-auto px-6">
 				<div className="flex flex-col md:flex-row items-center justify-between gap-4">
 					{footerConfig.logo}
