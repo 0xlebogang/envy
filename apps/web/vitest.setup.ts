@@ -14,6 +14,11 @@ vi.mock("@repo/shadcn/components/button");
 vi.mock("@repo/shadcn/components/dropdown-menu");
 vi.mock("@repo/shadcn/components/avatar");
 
+// Custom components
+vi.mock("@/components/code-preview");
+vi.mock("@/components/sections/hero");
+vi.mock("@/components/sections/call-to-action");
+
 // Zustand stores
 vi.mock("@/stores/auth-store");
 vi.mock("@/stores/home-renderer-store");
