@@ -17,11 +17,24 @@ import {
 import { cn } from "@repo/shadcn/lib/utils";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+import useAuthStore from "@/stores/auth-store";
+import useHomeRendererStore from "@/stores/home-renderer-store";
 import { navbarConfig } from "./config";
 
 export function Navbar() {
+	const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+	const showPublicSite = useHomeRendererStore((state) => state.showPublicSite);
+
+	// Shows header when:
+	// 1. User is not authenticated (landing page)
+	// 2. User is authenticated AND has enabled showPublicSite flag
+	const shouldShowHeader =
+		!isAuthenticated || (isAuthenticated && showPublicSite);
+
 	return (
-		<header className="sticky top-0 z-50 w-full border-b border-border bg-background">
+		<header
+			className={`${!shouldShowHeader ? "hidden" : ""} sticky top-0 z-50 w-full border-b border-border bg-background`}
+		>
 			<div className="container mx-auto flex h-16 items-center justify-between">
 				{navbarConfig.logo}
 
