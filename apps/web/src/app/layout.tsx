@@ -2,7 +2,7 @@ import { DM_Sans } from "next/font/google";
 
 import "@repo/shadcn/styles/globals.css";
 import { Navbar } from "@/components/navbar";
-import { Providers } from "@/components/Providers";
+import { Providers } from "@/components/providers";
 import Footer from "@/components/sections/footer";
 
 const fontSans = DM_Sans({

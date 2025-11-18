@@ -3,7 +3,7 @@ import React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import useAuthStore from "@/stores/auth-store";
 import useHomeRendererStore from "@/stores/home-renderer-store";
-import ConditionalHomeRenderer from "./ConditionalHomeRenderer";
+import ConditionalHomeRenderer from "./conditional-home-renderer";
 
 // Mock Next.js modules
 vi.mock("next/font/google", () => ({

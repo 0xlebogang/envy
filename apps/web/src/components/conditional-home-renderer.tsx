@@ -4,7 +4,7 @@ import useAuthStore from "@/stores/auth-store";
 import useHomeRendererStore from "@/stores/home-renderer-store";
 import AdminPanelLayout from "./admin-panel/admin-panel-layout";
 import { ContentLayout } from "./admin-panel/content-layout";
-import CodePreview from "./CodePreview";
+import CodePreview from "./code-preview";
 import CTA from "./sections/call-to-action";
 import Hero from "./sections/hero";
 
