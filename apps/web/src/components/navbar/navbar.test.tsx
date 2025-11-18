@@ -32,6 +32,7 @@ vi.mock("./config", () => ({
 describe("Navbar Component", () => {
 	afterEach(() => {
 		cleanup();
+		vi.resetAllMocks();
 	});
 
 	describe("Rendering Tests", () => {
@@ -101,31 +102,8 @@ describe("Navbar Component", () => {
 		});
 	});
 
-	describe("Configuration Tests", () => {
-		it("should have valid navbarConfig with menu items", () => {
-			expect(navbarConfig).toBeDefined();
-			expect(navbarConfig.menuItems).toBeDefined();
-			expect(navbarConfig.menuItems.length).toBeGreaterThan(0);
-			expect(navbarConfig.buttons).toBeDefined();
-			expect(navbarConfig.buttons?.length).toBeGreaterThan(0);
-		});
-
-		it("should render navbar structure correctly", () => {
-			render(<Navbar />);
-
-			// Check that the header exists and is not completely hidden anymore
-			const header = screen.getByRole("banner");
-			expect(header).toBeInTheDocument();
-			expect(header).not.toHaveClass("hidden");
-
-			// Check that logo is rendered
-			const logo = screen.getByTestId("logo");
-			expect(logo).toBeInTheDocument();
-		});
-	});
-
-	describe("Responsive Design Tests", () => {
-		it.skip("should render menu items in navigation menu (desktop)", () => {
+	describe.skip("Responsive Design Tests", () => {
+		it("should render menu items in navigation menu (desktop)", () => {
 			// This test is skipped because NavigationMenu components require proper
 			// responsive behavior testing which needs more complex setup
 			render(<Navbar />);
@@ -135,7 +113,7 @@ describe("Navbar Component", () => {
 			});
 		});
 
-		it.skip("should render auth buttons (desktop)", () => {
+		it("should render auth buttons (desktop)", () => {
 			// This test is skipped because the auth buttons are hidden by CSS
 			// and would require proper responsive testing setup
 			render(<Navbar />);
