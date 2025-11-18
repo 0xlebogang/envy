@@ -9,7 +9,7 @@ vi.mock("next/font/google", () => ({
 	}),
 }));
 
-vi.mock("@/components/ConditionalHomeRenderer", () => ({
+vi.mock("@/components/conditional-home-renderer", () => ({
 	default: () => (
 		<div data-testid="conditional-home-renderer">
 			ConditionalHomeRenderer Component

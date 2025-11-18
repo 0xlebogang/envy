@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { Providers } from "./Providers";
+import { Providers } from "./providers";
 
 // Mock window.matchMedia for NextThemesProvider
 Object.defineProperty(window, "matchMedia", {
