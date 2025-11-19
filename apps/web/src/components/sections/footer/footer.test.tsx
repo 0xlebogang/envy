@@ -1,8 +1,11 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import useAuthStore from "@/stores/auth-store";
 import useHomeRendererStore from "@/stores/home-renderer-store";
 import Footer from ".";
+
+vi.mock("@/stores/auth-store");
+vi.mock("@/stores/home-renderer-store");
 
 vi.mock("./config", () => ({
 	footerConfig: {

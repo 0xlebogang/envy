@@ -5,6 +5,9 @@ import useHomeRendererStore from "@/stores/home-renderer-store";
 import { Navbar } from ".";
 import { navbarConfig } from "./config";
 
+vi.mock("@/stores/auth-store");
+vi.mock("@/stores/home-renderer-store");
+
 // Mock navbar config with test data
 vi.mock("./config", () => ({
 	navbarConfig: {
