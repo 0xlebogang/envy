@@ -18,6 +18,7 @@ vi.mock("@repo/shadcn/components/avatar");
 vi.mock("@/components/code-preview");
 vi.mock("@/components/sections/hero");
 vi.mock("@/components/sections/call-to-action");
+vi.mock("@/components/admin-panel/admin-panel-layout");
 
 // Zustand stores
 vi.mock("@/stores/auth-store");
