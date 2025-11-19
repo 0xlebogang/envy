@@ -2,12 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import RootLayout from "./layout";
 
-// Mock next-themes to avoid theme provider issues
-vi.mock("next-themes", () => ({
-	ThemeProvider: ({ children }: { children: React.ReactNode }) => children,
-	useTheme: () => ({ theme: "light", setTheme: vi.fn() }),
-}));
-
 describe("RootLayout", () => {
 	it("should render children content", () => {
 		// Since RootLayout returns <html><body>, we can't test it directly

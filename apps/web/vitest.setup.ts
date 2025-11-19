@@ -23,3 +23,6 @@ vi.mock("@/stores/home-renderer-store");
 
 // Lucide React icons
 vi.mock("lucide-react");
+
+// Next-themes
+vi.mock("next-themes");
