@@ -1,24 +1,7 @@
-import { Button } from "@repo/shadcn/components/button";
 import { cleanup, render, screen } from "@testing-library/react";
-import Link from "next/link";
-import * as React from "react";
-import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import Hero from ".";
 import { heroConfig } from "./config";
-
-vi.mock("@repo/shadcn/components/button", () => ({
-	Button: ({ children, asChild, ...props }: any) => {
-		if (asChild) {
-			// When asChild is true, we need to clone the child and pass props to it
-			if (React.isValidElement(children)) {
-				const childProps = children.props || {};
-				return React.cloneElement(children, { ...props, ...childProps });
-			}
-			return children;
-		}
-		return <button {...props}>{children}</button>;
-	},
-}));
 
 vi.mock("./config", () => ({
 	heroConfig: {

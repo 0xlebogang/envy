@@ -1,17 +1,7 @@
-import { Button } from "@repo/shadcn/components/button";
 import { cleanup, render, screen } from "@testing-library/react";
 import React from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import NotFound from "./not-found";
-
-vi.mock("@repo/shadcn/components/button", () => ({
-	Button: ({ children, asChild, ...props }: any) => {
-		if (asChild) {
-			return children;
-		}
-		return <button {...props}>{children}</button>;
-	},
-}));
 
 describe("NotFound Component", () => {
 	afterEach(() => {

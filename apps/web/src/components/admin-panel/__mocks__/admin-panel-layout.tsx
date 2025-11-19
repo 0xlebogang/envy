@@ -1,4 +1,4 @@
-export default function MockAdminPanelLayout({
+export default function AdminPanelLayoutMock({
 	children,
 }: {
 	children: React.ReactNode;

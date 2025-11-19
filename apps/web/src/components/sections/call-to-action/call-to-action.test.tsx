@@ -1,17 +1,7 @@
-import { Button } from "@repo/shadcn/components/button";
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import CTA from ".";
 import { ctaConfig } from "./config";
-
-vi.mock("@repo/shadcn/components/button", () => ({
-	Button: ({ children, asChild, ...props }: any) => {
-		if (asChild) {
-			return children;
-		}
-		return <button {...props}>{children}</button>;
-	},
-}));
 
 describe("CTA Component", () => {
 	afterEach(() => {

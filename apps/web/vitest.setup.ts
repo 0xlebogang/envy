@@ -14,9 +14,11 @@ vi.mock("@repo/shadcn/components/button");
 vi.mock("@repo/shadcn/components/dropdown-menu");
 vi.mock("@repo/shadcn/components/avatar");
 
-// Zustand stores
-vi.mock("@/stores/auth-store");
-vi.mock("@/stores/home-renderer-store");
+// Custom components
+vi.mock("@/components/admin-panel/admin-panel-layout");
 
 // Lucide React icons
 vi.mock("lucide-react");
+
+// Next-themes
+vi.mock("next-themes");

@@ -1,5 +1,13 @@
-import ConditionalHomeRenderer from "@/components/conditional-home-renderer";
+import CodePreview from "@/components/code-preview";
+import CTA from "@/components/sections/call-to-action";
+import Hero from "@/components/sections/hero";
 
 export default function Index() {
-	return <ConditionalHomeRenderer />;
+	return (
+		<>
+			<Hero />
+			<CodePreview />
+			<CTA />
+		</>
+	);
 }

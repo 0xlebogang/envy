@@ -1,31 +1,28 @@
-import { render, screen } from "@testing-library/react";
-import { beforeAll, describe, expect, it, vi } from "vitest";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import Index from "./page";
 
-vi.mock("next/font/google", () => ({
-	Fira_Code: () => ({
-		subsets: ["latin"],
-		variable: "--font-sans",
-	}),
-}));
-
-vi.mock("@/components/conditional-home-renderer", () => ({
-	default: () => (
-		<div data-testid="conditional-home-renderer">
-			ConditionalHomeRenderer Component
-		</div>
-	),
-}));
+vi.mock("@/components/sections/hero");
+vi.mock("@/components/code-preview");
+vi.mock("@/components/sections/call-to-action");
 
 describe("Home Page", () => {
-	beforeAll(() => {
-		render(<Index />);
+	afterEach(() => {
+		cleanup();
 	});
 
-	it("should render the ConditionalHomeRenderer component", () => {
-		const conditionalHomeRenderer = screen.getByTestId(
-			"conditional-home-renderer",
-		);
-		expect(conditionalHomeRenderer).toBeInTheDocument();
+	it("should render Hero component", () => {
+		render(<Index />);
+		expect(screen.getByTestId("hero-section")).toBeInTheDocument();
+	});
+
+	it("should render CodePreview component", () => {
+		render(<Index />);
+		expect(screen.getByTestId("code-preview")).toBeInTheDocument();
+	});
+
+	it("should render CTA component", () => {
+		render(<Index />);
+		expect(screen.getByTestId("call-to-action")).toBeInTheDocument();
 	});
 });

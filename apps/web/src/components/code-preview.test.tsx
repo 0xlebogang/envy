@@ -2,8 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { expect, test, vi } from "vitest";
 import CodePreview from "./code-preview";
 
-vi.mock("next/font/google");
-
 test("CodePreview component renders", () => {
 	render(<CodePreview />);
 
