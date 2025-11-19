@@ -1,3 +1,5 @@
+import * as React from "react";
+
 export const NavigationMenu = ({ children, ...props }: any) => (
 	<nav data-testid="navigation-menu" {...props}>
 		{children}
@@ -31,7 +33,7 @@ export const NavigationMenuContent = ({ children, ...props }: any) => (
 export const NavigationMenuLink = ({ children, asChild, ...props }: any) => {
 	if (asChild) {
 		// When asChild is true, render the children directly (usually a Link)
-		return children;
+		return React.cloneElement(children, { ...props });
 	}
 	return (
 		<a data-testid="navigation-menu-link" {...props}>
