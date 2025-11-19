@@ -87,7 +87,7 @@ jobs:
       - name: Report Coverage
         uses: davelosert/vitest-coverage-report-action@v2
         with:
-          name: ${{ matrix.app.name }} Test Coverage
+          name: ${{ matrix.app.name }} package
           json-summary-path: ./${{ matrix.app.directory }}/coverage-summary.json
           json-final-path: ./${{ matrix.app.directory }}/coverage.json
 
@@ -105,5 +105,4 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           files: ./apps/web/coverage/lcov.info,./packages/ui/coverage/lcov.info
-          verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
