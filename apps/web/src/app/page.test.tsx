@@ -2,19 +2,9 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import Index from "./page";
 
-vi.mock("@/components/sections/hero", () => ({
-	default: () => <div data-testid="hero-section">Hero Component</div>,
-}));
-
-vi.mock("@/components/code-preview", () => ({
-	default: () => <div data-testid="code-preview">Code Preview Component</div>,
-}));
-
-vi.mock("@/components/sections/call-to-action", () => ({
-	default: () => (
-		<div data-testid="call-to-action">Call To Action Component</div>
-	),
-}));
+vi.mock("@/components/sections/hero");
+vi.mock("@/components/code-preview");
+vi.mock("@/components/sections/call-to-action");
 
 describe("Home Page", () => {
 	afterEach(() => {
