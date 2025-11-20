@@ -14,3 +14,15 @@ export function shouldShow(
 	// 2. User is authenticated AND has enabled showPublicSite flag
 	return !isAuthenticated || (isAuthenticated && showPublicSite);
 }
+
+/**
+ * Capitalizes the first letter of a given string.
+ *
+ * @param str word to whose first letter needs to be capitalized
+ * @returns word with first letter in uppercase
+ */
+export function capitalize(str: string): string {
+	// Handle empty string case
+	if (str.length === 0) return str;
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
