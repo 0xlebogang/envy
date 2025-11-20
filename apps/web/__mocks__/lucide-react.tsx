@@ -65,3 +65,14 @@ export const FolderGit2 = React.forwardRef<
 ));
 
 FolderGit2.displayName = "FolderGit2";
+
+export const Variable = React.forwardRef<
+	SVGSVGElement,
+	React.SVGProps<SVGSVGElement>
+>((props, ref) => (
+	<svg ref={ref} data-testid="variable-icon" {...props}>
+		<title>Variable</title>
+	</svg>
+));
+
+Variable.displayName = "Variable";

@@ -17,6 +17,7 @@ vi.mock("@repo/shadcn/components/card");
 
 // Custom components
 vi.mock("@/components/admin-panel/admin-panel-layout");
+vi.mock("@/components/admin-panel/content-layout");
 
 // Lucide React icons
 vi.mock("lucide-react");
