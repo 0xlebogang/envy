@@ -1,19 +1,15 @@
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@repo/shadcn/components/card";
-import { Building2, FolderGit2, Key, Users, Variable } from "lucide-react";
+import { Building2, FolderGit2, Users, Variable } from "lucide-react";
 import { ContentLayout } from "@/components/admin-panel/content-layout";
 import { capitalize } from "@/lib/utils";
+import OrganizationsCard from "./organizations-card";
+import ProjectsCard from "./projects-card";
 import StatsCard from "./stats-card";
+import TeamsCard from "./teams-card";
 
 export default function Dashboard() {
 	// Mock dashboard data
 	const stats = {
-		organizations: 3,
+		organizations: 4,
 		teams: 8,
 		projects: 12,
 		variables: 247,
@@ -59,108 +55,30 @@ export default function Dashboard() {
 								key={key}
 								title={capitalize(key)}
 								value={value}
-								icon={getIconStatIcon(key)}
+								icon={getIcon(key)}
 							/>
 						))}
 					</div>
 
 					{/* Content Grid */}
 					<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-						{/* Organizations */}
-						<Card>
-							<CardHeader>
-								<CardTitle className="text-foreground">Organizations</CardTitle>
-								<CardDescription>Your organization overview</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<div className="space-y-3">
-									{recentOrganizations.map((org) => (
-										<div
-											key={org.id}
-											className="flex items-center justify-between p-3 rounded-lg border border-border bg-card hover:bg-accent/50 transition-colors"
-										>
-											<div className="flex items-center gap-3">
-												<div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center">
-													<Building2 className="h-4 w-4 text-muted-foreground" />
-												</div>
-												<div>
-													<p className="text-sm font-medium text-foreground">
-														{org.name}
-													</p>
-													<p className="text-xs text-muted-foreground">
-														{org.teams} teams | {org.projects} projects
-													</p>
-												</div>
-											</div>
-										</div>
-									))}
-								</div>
-							</CardContent>
-						</Card>
+						<OrganizationsCard
+							title="Organizations"
+							description="Your organization overview"
+							organizations={recentOrganizations}
+						/>
 
-						{/* Teams */}
-						<Card>
-							<CardHeader>
-								<CardTitle className="text-foreground">Teams</CardTitle>
-								<CardDescription>Recent teams</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<div className="space-y-3">
-									{recentTeams.map((team) => (
-										<div
-											key={team.id}
-											className="flex items-center justify-between p-3 rounded-lg border border-border bg-card hover:bg-accent/50 transition-colors"
-										>
-											<div className="flex items-center gap-3">
-												<div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center">
-													<Users className="h-4 w-4 text-muted-foreground" />
-												</div>
-												<div>
-													<p className="text-sm font-medium text-foreground">
-														{team.name}
-													</p>
-													<p className="text-xs text-muted-foreground">
-														{team.org} | {team.members} members
-													</p>
-												</div>
-											</div>
-										</div>
-									))}
-								</div>
-							</CardContent>
-						</Card>
+						<TeamsCard
+							title="Teams"
+							description="Recent teams"
+							teams={recentTeams}
+						/>
 
-						{/* Projects */}
-						<Card className="lg:col-span-2">
-							<CardHeader>
-								<CardTitle className="text-foreground">Projects</CardTitle>
-								<CardDescription>Recent projects</CardDescription>
-							</CardHeader>
-							<CardContent>
-								<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-									{recentProjects.map((project) => (
-										<div
-											key={project.id}
-											className="flex items-center justify-between p-3 rounded-lg border border-border bg-card hover:bg-accent/50 transition-colors"
-										>
-											<div className="flex items-center gap-3">
-												<div className="h-8 w-8 rounded-lg bg-muted flex items-center justify-center">
-													<FolderGit2 className="h-4 w-4 text-muted-foreground" />
-												</div>
-												<div>
-													<p className="text-sm font-medium text-foreground font-mono">
-														{project.name}
-													</p>
-													<p className="text-xs text-muted-foreground">
-														{project.team} · {project.variables} vars
-													</p>
-												</div>
-											</div>
-										</div>
-									))}
-								</div>
-							</CardContent>
-						</Card>
+						<ProjectsCard
+							title="Projects"
+							description="Recent projects"
+							projects={recentProjects}
+						/>
 					</div>
 				</div>
 			</div>
@@ -174,7 +92,7 @@ export default function Dashboard() {
  * @param title title of the stat
  * @returns corresponding icon component
  */
-export function getIconStatIcon(title: string) {
+export function getIcon(title: string) {
 	switch (title) {
 		case "organizations":
 			return <Building2 className="h-4 w-4 text-muted-foreground" />;

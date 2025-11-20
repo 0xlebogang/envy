@@ -32,3 +32,36 @@ export const Lock = React.forwardRef<
 ));
 
 Lock.displayName = "Lock";
+
+export const Building2 = React.forwardRef<
+	SVGSVGElement,
+	React.SVGProps<SVGSVGElement>
+>((props, ref) => (
+	<svg ref={ref} data-testid="building-icon" {...props}>
+		<title>Building2</title>
+	</svg>
+));
+
+Building2.displayName = "Building2";
+
+export const Users = React.forwardRef<
+	SVGSVGElement,
+	React.SVGProps<SVGSVGElement>
+>((props, ref) => (
+	<svg ref={ref} data-testid="users-icon" {...props}>
+		<title>Users</title>
+	</svg>
+));
+
+Users.displayName = "Users";
+
+export const FolderGit2 = React.forwardRef<
+	SVGSVGElement,
+	React.SVGProps<SVGSVGElement>
+>((props, ref) => (
+	<svg ref={ref} data-testid="git-folder-icon" {...props}>
+		<title>FolderGit2</title>
+	</svg>
+));
+
+FolderGit2.displayName = "FolderGit2";

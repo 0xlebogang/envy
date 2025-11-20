@@ -14,6 +14,12 @@ export const CardTitle = ({ children, ...props }: { children: React.ReactNode; c
 	</h3>
 );
 
+export const CardDescription = ({ children, ...props }: { children: React.ReactNode; className?: string }) => (
+	<p data-testid="card-description" {...props}>
+		{children}
+	</p>
+);
+
 export const CardContent = ({ children, ...props }: { children: React.ReactNode; className?: string }) => (
 	<div data-testid="card-content" {...props}>
 		{children}
