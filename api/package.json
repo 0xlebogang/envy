@@ -9,8 +9,8 @@
     "test": "go test -v ./...",
     "lint": "golangci-lint run ./...",
     "lint:fix": "golangci-lint run ./... --fix",
-    "services:up": "dotenv -c -- docker compose -f ./dev-services.yml up -d",
-    "services:down": "dotenv -c -- docker compose -f ./dev-services.yml down",
+    "services:up": "dotenv -c -- docker compose up -d",
+    "services:down": "dotenv -c -- docker compose down",
     "db:migrate": "go run ./cmd/migrations",
     "install": "go mod tidy"
   }

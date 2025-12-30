@@ -8,6 +8,7 @@ import (
 
 	"github.com/0xlebogang/sekrets/internal/auth"
 	"github.com/0xlebogang/sekrets/internal/config"
+	"github.com/0xlebogang/sekrets/internal/handlers"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -39,7 +40,13 @@ func (s *Server) Start(ctx context.Context) error {
 	if err != nil {
 		return fmt.Errorf("Failed to create auth client: %w", err)
 	}
-	_ = authClient // to avoid unused variable error for now
+
+	authHandlers := handlers.New(authClient)
+
+	r.GET("/api/auth/login", authHandlers.LoginHandler())
+	r.GET("/api/auth/callback", authHandlers.CallbackHandler())
+	// r.POST("/api/auth/logout", authHandlers.LogoutHandler())
+	// r.GET("/api/me", authHandlers.MeHandler())
 
 	// Health check endpoint
 	r.GET("/ping", func(ctx *gin.Context) {

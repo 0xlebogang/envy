@@ -10,8 +10,6 @@ type IAuthClaims interface {
 	ExtractUserInfo(idToken *oidc.IDToken, accessToken, refreshToken string) (*UserInfo, error)
 }
 
-type AuthClaims struct{}
-
 type OIDCClaims struct {
 	Subject           string   `json:"sub"`
 	Email             string   `json:"email"`
@@ -34,7 +32,7 @@ type UserInfo struct {
 	RefreshToken string
 }
 
-func (a *AuthClaims) ExtractUserInfo(idToken *oidc.IDToken, accessToken, refreshToken string) (*UserInfo, error) {
+func (a *AuthClient) ExtractUserInfo(idToken *oidc.IDToken, accessToken, refreshToken string) (*UserInfo, error) {
 	var claims OIDCClaims
 	if err := idToken.Claims(&claims); err != nil {
 		return nil, fmt.Errorf("Failed to parse claims: %w", err)

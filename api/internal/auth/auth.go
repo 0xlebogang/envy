@@ -3,6 +3,7 @@ package auth
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/coreos/go-oidc/v3/oidc"
 	"golang.org/x/oauth2"
@@ -12,6 +13,7 @@ type IAuthClient interface {
 	AuthUrl(state string) string
 	Exchange(ctx context.Context, code string) (*oauth2.Token, error)
 	VerifyIdToken(ctx context.Context, rawIdToken string) (*oidc.IDToken, error)
+	IAuthClaims
 }
 
 type AuthClient struct {
@@ -25,7 +27,7 @@ type AuthClientConfig struct {
 	ClientId     string
 	ClientSecret string
 	RedirectURL  string
-	Scopes       []string
+	Scopes       string
 }
 
 func New(ctx context.Context, cfg *AuthClientConfig) (*AuthClient, error) {
@@ -39,7 +41,7 @@ func New(ctx context.Context, cfg *AuthClientConfig) (*AuthClient, error) {
 		ClientSecret: cfg.ClientSecret,
 		RedirectURL:  cfg.RedirectURL,
 		Endpoint:     provider.Endpoint(),
-		Scopes:       cfg.Scopes,
+		Scopes:       strings.Split(cfg.Scopes, " "),
 	}
 
 	verifier := provider.Verifier(&oidc.Config{

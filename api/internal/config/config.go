@@ -18,7 +18,7 @@ type Config struct {
 	OIDCClientId     string
 	OIDCClientSecret string
 	OIDCRedirectUrl  string
-	OIDCScopes       []string
+	OIDCScopes       string
 }
 
 func LoadEnv() *Config {
@@ -26,12 +26,12 @@ func LoadEnv() *Config {
 
 	return &Config{
 		Port:             GetEnv("PORT", "8000"),
-		DatabaseUrl:      GetEnv("DATABASE_URL", "postgresql://root:password@localhost:5432/postgres"),
+		DatabaseUrl:      GetEnv("DATABASE_URL", "postgresql://root:password@localhost:5433/postgres"),
 		OIDCIssuer:       GetEnv("OIDC_ISSUER", "https://localhost:8080"),
 		OIDCClientId:     GetEnv("OIDC_CLIENT_ID", ""),
 		OIDCClientSecret: GetEnv("OIDC_CLIENT_SECRET", ""),
 		OIDCRedirectUrl:  GetEnv("OIDC_REDIRECT_URL", "http://localhost:/auth/callback"),
-		OIDCScopes:       []string{"openid", "profile", "email"},
+		OIDCScopes:       GetEnv("OIDC_SCOPES", "openid profile email"),
 	}
 }
 
