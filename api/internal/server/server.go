@@ -1,12 +1,16 @@
 package server
 
 import (
+	"context"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
+	"github.com/0xlebogang/sekrets/internal/auth"
+	"github.com/0xlebogang/sekrets/internal/config"
+	"github.com/0xlebogang/sekrets/internal/database"
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
 type IServer interface {
@@ -15,16 +19,33 @@ type IServer interface {
 }
 
 type Server struct {
-	Port string
-	DB   *gorm.DB
+	Config config.Config
 }
 
-func New(db *gorm.DB, port string) *Server {
-	return &Server{Port: port, DB: db}
+func New(cfg *config.Config) *Server {
+	return &Server{Config: *cfg}
 }
 
-func (s *Server) Start() error {
+func (s *Server) Start(ctx context.Context) error {
 	r := gin.Default()
+
+	db, err := database.Connection(s.Config.DatabaseUrl)
+	if err != nil {
+		log.Fatalf("Failed to connect to database: %v", err)
+	}
+	defer database.Close(db)
+
+	authClient, err := auth.New(ctx, &auth.AuthClientConfig{
+		Issuer:       s.Config.OIDCIssuer,
+		ClientId:     s.Config.OIDCClientId,
+		ClientSecret: s.Config.OIDCClientSecret,
+		RedirectURL:  s.Config.OIDCRedirectUrl,
+		Scopes:       s.Config.OIDCScopes,
+	})
+	if err != nil {
+		return fmt.Errorf("Failed to create auth client: %w", err)
+	}
+	_ = authClient // to avoid unused variable error for now
 
 	// Health check endpoint
 	r.GET("/ping", func(ctx *gin.Context) {
@@ -36,7 +57,7 @@ func (s *Server) Start() error {
 	})
 
 	svr := &http.Server{
-		Addr:    fmt.Sprintf(":%s", s.Port),
+		Addr:    fmt.Sprintf(":%s", s.Config.Port),
 		Handler: r.Handler(),
 	}
 
