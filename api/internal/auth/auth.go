@@ -36,12 +36,14 @@ func New(ctx context.Context, cfg *AuthClientConfig) (*AuthClient, error) {
 		return nil, fmt.Errorf("Failed to get OIDC provider: %w", err)
 	}
 
+	scopes := fmt.Sprintf("%s %s", oidc.ScopeOpenID, oidc.ScopeOfflineAccess)
+
 	oauth2Config := oauth2.Config{
 		ClientID:     cfg.ClientId,
 		ClientSecret: cfg.ClientSecret,
 		RedirectURL:  cfg.RedirectURL,
 		Endpoint:     provider.Endpoint(),
-		Scopes:       strings.Split(cfg.Scopes, " "),
+		Scopes:       append(strings.Split(scopes, " "), strings.Split(cfg.Scopes, " ")...),
 	}
 
 	verifier := provider.Verifier(&oidc.Config{

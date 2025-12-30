@@ -23,7 +23,6 @@ type Config struct {
 
 func LoadEnv() *Config {
 	_ = godotenv.Load()
-
 	return &Config{
 		Port:             GetEnv("PORT", "8000"),
 		DatabaseUrl:      GetEnv("DATABASE_URL", "postgresql://root:password@localhost:5433/postgres"),
@@ -31,7 +30,7 @@ func LoadEnv() *Config {
 		OIDCClientId:     GetEnv("OIDC_CLIENT_ID", ""),
 		OIDCClientSecret: GetEnv("OIDC_CLIENT_SECRET", ""),
 		OIDCRedirectUrl:  GetEnv("OIDC_REDIRECT_URL", "http://localhost:/auth/callback"),
-		OIDCScopes:       GetEnv("OIDC_SCOPES", "openid profile email"),
+		OIDCScopes:       GetEnv("OIDC_SCOPES", "openid offline_access profile email"),
 	}
 }
 
