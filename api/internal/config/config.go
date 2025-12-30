@@ -12,14 +12,16 @@ type IConfig interface {
 }
 
 type Config struct {
-	Port string
+	Port        string
+	DatabaseUrl string
 }
 
 func LoadEnv() *Config {
 	_ = godotenv.Load()
 
 	return &Config{
-		Port: GetEnv("PORT", "8080"),
+		Port:        GetEnv("PORT", "8080"),
+		DatabaseUrl: GetEnv("DATABASE_URL", "postgresql://root:password@localhost:5432/postgres"),
 	}
 }
 

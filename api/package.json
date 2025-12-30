@@ -11,6 +11,7 @@
     "lint:fix": "golangci-lint run ./... --fix",
     "services:up": "dotenv -c -- docker compose -f ./dev-services.yml up -d",
     "services:down": "dotenv -c -- docker compose -f ./dev-services.yml down",
+    "db:migrate": "go run ./cmd/migrations",
     "install": "go mod tidy"
   }
 }

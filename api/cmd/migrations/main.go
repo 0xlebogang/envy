@@ -1,24 +1,20 @@
 package main
 
 import (
-	"log"
-
 	"github.com/0xlebogang/sekrets/internal/config"
 	"github.com/0xlebogang/sekrets/internal/database"
-	"github.com/0xlebogang/sekrets/internal/server"
 )
 
 func main() {
 	cfg := config.LoadEnv()
-
 	db, err := database.Connection(cfg.DatabaseUrl)
 	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
+		panic(err)
 	}
 	defer database.Close(db)
 
-	s := server.New(db, cfg.Port)
-	if err := s.Start(); err != nil {
-		log.Fatalf("Failed to start server: %v", err)
-	}
+	// err = database.RunMigrations(db /* models go here */)
+	// if err != nil {
+	// 	panic(err)
+	// }
 }
