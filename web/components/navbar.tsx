@@ -90,13 +90,8 @@ export function Navbar() {
 							</div>
 							<div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
 								<Button asChild variant="outline" size="sm">
-									<Link href="#">
+									<Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/login`}>
 										<span>Login</span>
-									</Link>
-								</Button>
-								<Button asChild size="sm">
-									<Link href="#">
-										<span>Sign Up</span>
 									</Link>
 								</Button>
 							</div>
