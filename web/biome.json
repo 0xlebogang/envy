@@ -6,7 +6,8 @@
     "includes": [
       "**",
       "!node_modules",
-      "!.next"
+      "!.next",
+      "!components/ui"
     ]
   },
   "linter": {

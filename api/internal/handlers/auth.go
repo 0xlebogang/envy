@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/0xlebogang/sekrets/internal/auth"
+	"github.com/0xlebogang/sekrets/internal/config"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,12 +18,12 @@ type IAuthHandlers interface {
 }
 
 type AuthHandlers struct {
-	auth      *auth.AuthClient
-	issuerUrl string
+	auth *auth.AuthClient
+	Cfg  *config.Config
 }
 
-func New(authClient *auth.AuthClient, issuerUrl string) *AuthHandlers {
-	return &AuthHandlers{auth: authClient, issuerUrl: issuerUrl}
+func New(authClient *auth.AuthClient, cfg *config.Config) *AuthHandlers {
+	return &AuthHandlers{auth: authClient, Cfg: cfg}
 }
 
 func (h *AuthHandlers) LoginHandler() gin.HandlerFunc {
@@ -68,14 +69,15 @@ func (h *AuthHandlers) CallbackHandler() gin.HandlerFunc {
 			return
 		}
 
-		ctx.JSON(http.StatusOK, gin.H{"data": userInfo})
+		ctx.SetCookie(h.Cfg.AuthCookieName, userInfo.AccessToken, 3600, "/", "localhost", false, true)
+		ctx.Redirect(http.StatusFound, h.Cfg.PostLoginRedirectUrl)
 	}
 }
 
 func (h *AuthHandlers) LogoutHandler() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
-			"provider_endpoint": fmt.Sprintf("%s%s", h.issuerUrl, "/oidc/v1/end_session"),
+			"provider_endpoint": fmt.Sprintf("%s%s", h.Cfg.OIDCIssuer, "/oidc/v1/end_session"),
 		})
 	}
 }

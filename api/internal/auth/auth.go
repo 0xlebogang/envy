@@ -17,17 +17,18 @@ type IAuthClient interface {
 }
 
 type AuthClient struct {
-	Provider *oidc.Provider
+	provider *oidc.Provider
 	config   *oauth2.Config
 	verifier *oidc.IDTokenVerifier
 }
 
 type AuthClientConfig struct {
-	Issuer       string
-	ClientId     string
-	ClientSecret string
-	RedirectURL  string
-	Scopes       string
+	Issuer         string
+	ClientId       string
+	ClientSecret   string
+	RedirectURL    string
+	Scopes         string
+	AuthCookieName string
 }
 
 func New(ctx context.Context, cfg *AuthClientConfig) (*AuthClient, error) {
@@ -51,7 +52,7 @@ func New(ctx context.Context, cfg *AuthClientConfig) (*AuthClient, error) {
 	})
 
 	return &AuthClient{
-		Provider: provider,
+		provider: provider,
 		verifier: verifier,
 		config:   &oauth2Config,
 	}, nil

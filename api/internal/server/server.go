@@ -31,17 +31,18 @@ func (s *Server) Start(ctx context.Context) error {
 	r := gin.Default()
 
 	authClient, err := auth.New(ctx, &auth.AuthClientConfig{
-		Issuer:       s.Config.OIDCIssuer,
-		ClientId:     s.Config.OIDCClientId,
-		ClientSecret: s.Config.OIDCClientSecret,
-		RedirectURL:  s.Config.OIDCRedirectUrl,
-		Scopes:       s.Config.OIDCScopes,
+		Issuer:         s.Config.OIDCIssuer,
+		ClientId:       s.Config.OIDCClientId,
+		ClientSecret:   s.Config.OIDCClientSecret,
+		RedirectURL:    s.Config.OIDCRedirectUrl,
+		Scopes:         s.Config.OIDCScopes,
+		AuthCookieName: s.Config.AuthCookieName,
 	})
 	if err != nil {
 		return fmt.Errorf("Failed to create auth client: %w", err)
 	}
 
-	authHandlers := handlers.New(authClient, s.Config.OIDCIssuer)
+	authHandlers := handlers.New(authClient, &s.Config)
 
 	r.GET("/api/auth/login", authHandlers.LoginHandler())
 	r.GET("/api/auth/callback", authHandlers.CallbackHandler())
