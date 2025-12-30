@@ -41,11 +41,11 @@ func (s *Server) Start(ctx context.Context) error {
 		return fmt.Errorf("Failed to create auth client: %w", err)
 	}
 
-	authHandlers := handlers.New(authClient)
+	authHandlers := handlers.New(authClient, s.Config.OIDCIssuer)
 
 	r.GET("/api/auth/login", authHandlers.LoginHandler())
 	r.GET("/api/auth/callback", authHandlers.CallbackHandler())
-	// r.POST("/api/auth/logout", authHandlers.LogoutHandler())
+	r.POST("/api/auth/logout", authHandlers.LogoutHandler())
 	// r.GET("/api/me", authHandlers.MeHandler())
 
 	// Health check endpoint

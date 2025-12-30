@@ -17,7 +17,7 @@ type IAuthClient interface {
 }
 
 type AuthClient struct {
-	provider *oidc.Provider
+	Provider *oidc.Provider
 	config   *oauth2.Config
 	verifier *oidc.IDTokenVerifier
 }
@@ -51,7 +51,7 @@ func New(ctx context.Context, cfg *AuthClientConfig) (*AuthClient, error) {
 	})
 
 	return &AuthClient{
-		provider: provider,
+		Provider: provider,
 		verifier: verifier,
 		config:   &oauth2Config,
 	}, nil

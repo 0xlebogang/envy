@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/0xlebogang/sekrets/internal/auth"
@@ -16,11 +17,12 @@ type IAuthHandlers interface {
 }
 
 type AuthHandlers struct {
-	auth *auth.AuthClient
+	auth      *auth.AuthClient
+	issuerUrl string
 }
 
-func New(authClient *auth.AuthClient) *AuthHandlers {
-	return &AuthHandlers{auth: authClient}
+func New(authClient *auth.AuthClient, issuerUrl string) *AuthHandlers {
+	return &AuthHandlers{auth: authClient, issuerUrl: issuerUrl}
 }
 
 func (h *AuthHandlers) LoginHandler() gin.HandlerFunc {
@@ -67,5 +69,13 @@ func (h *AuthHandlers) CallbackHandler() gin.HandlerFunc {
 		}
 
 		ctx.JSON(http.StatusOK, gin.H{"data": userInfo})
+	}
+}
+
+func (h *AuthHandlers) LogoutHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{
+			"provider_endpoint": fmt.Sprintf("%s%s", h.issuerUrl, "/oidc/v1/end_session"),
+		})
 	}
 }
