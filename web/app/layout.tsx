@@ -24,7 +24,7 @@ export default function RootLayout({
 			<body className={`${geistSans.variable} font-sans antialiased`}>
 				<Providers>
 					<Navbar />
-					{children}
+					<main className="absolute top-12.5">{children}</main>
 				</Providers>
 			</body>
 		</html>
