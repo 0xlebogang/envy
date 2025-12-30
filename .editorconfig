@@ -8,3 +8,7 @@ insert_final_newline = true
 
 [*.{toml,yml,yaml,json}]
 indent_style = space
+
+[*.go]
+indent_size = 4
+tab_width = 4

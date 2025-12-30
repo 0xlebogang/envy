@@ -1,0 +1,19 @@
+{
+  "name": "sekrets",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter=* dev",
+    "build": "pnpm --filter=* build",
+    "test": "pnpm --filter=* test",
+    "lint": "biome check && pnpm --filter=* lint",
+    "lint:fix": "biome check --fix && pnpm --filter=* lint:fix"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.10",
+    "@changesets/cli": "^2.29.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7"
+  },
+  "packageManager": "pnpm@10.15.1"
+}
