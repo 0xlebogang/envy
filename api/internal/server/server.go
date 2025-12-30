@@ -3,14 +3,13 @@ package server
 import (
 	"context"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
 
 	"github.com/0xlebogang/sekrets/internal/auth"
 	"github.com/0xlebogang/sekrets/internal/config"
-	"github.com/0xlebogang/sekrets/internal/database"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type IServer interface {
@@ -20,20 +19,15 @@ type IServer interface {
 
 type Server struct {
 	Config config.Config
+	DB     *gorm.DB
 }
 
-func New(cfg *config.Config) *Server {
-	return &Server{Config: *cfg}
+func New(db *gorm.DB, cfg *config.Config) *Server {
+	return &Server{Config: *cfg, DB: db}
 }
 
 func (s *Server) Start(ctx context.Context) error {
 	r := gin.Default()
-
-	db, err := database.Connection(s.Config.DatabaseUrl)
-	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
-	}
-	defer database.Close(db)
 
 	authClient, err := auth.New(ctx, &auth.AuthClientConfig{
 		Issuer:       s.Config.OIDCIssuer,
