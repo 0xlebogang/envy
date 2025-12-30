@@ -1,6 +1,0 @@
-[tools]
-node = '22.21.1'
-pnpm = "10.15.1"
-
-[settings]
-activate_aggressive = true

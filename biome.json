@@ -1,9 +1,0 @@
-{
-	"$schema": "https://biomejs.dev/schemas/2.3.5/schema.json",
-	"extends": ["@repo/biome-config/base"],
-	"linter": {
-		"domains": {
-			"project": "recommended"
-		}
-	}
-}

@@ -6,5 +6,5 @@ indent_style = tab
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{yml,yaml}]
+[*.{toml,yml,yaml,json}]
 indent_style = space
