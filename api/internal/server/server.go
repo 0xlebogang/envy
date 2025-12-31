@@ -9,6 +9,7 @@ import (
 	"github.com/0xlebogang/sekrets/internal/auth"
 	"github.com/0xlebogang/sekrets/internal/config"
 	"github.com/0xlebogang/sekrets/internal/handlers"
+	"github.com/0xlebogang/sekrets/internal/routes"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -19,16 +20,17 @@ type IServer interface {
 }
 
 type Server struct {
-	Config config.Config
+	Config *config.Config
 	DB     *gorm.DB
 }
 
 func New(db *gorm.DB, cfg *config.Config) *Server {
-	return &Server{Config: *cfg, DB: db}
+	return &Server{Config: cfg, DB: db}
 }
 
 func (s *Server) Start(ctx context.Context) error {
-	r := gin.Default()
+	gin := gin.Default()
+	r := gin.Group("/api")
 
 	authClient, err := auth.New(ctx, &auth.AuthClientConfig{
 		Issuer:         s.Config.OIDCIssuer,
@@ -42,26 +44,26 @@ func (s *Server) Start(ctx context.Context) error {
 		return fmt.Errorf("Failed to create auth client: %w", err)
 	}
 
-	authHandlers := handlers.New(authClient, &s.Config)
-
-	r.GET("/api/auth/login", authHandlers.LoginHandler())
-	r.GET("/api/auth/callback", authHandlers.CallbackHandler())
-	r.POST("/api/auth/logout", authHandlers.LogoutHandler())
-	// r.GET("/api/me", authHandlers.MeHandler())
+	authHandlers := handlers.New(authClient, s.Config)
+	routes.New(authHandlers).Register(r)
 
 	// Health check endpoint
-	r.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"message":   "pong",
-			"success":   true,
-			"timestamp": fmt.Sprintf("%s", time.Now().Format(time.RFC1123)),
-		})
-	})
+	gin.GET("/health", HealthCheckHandler())
 
 	svr := &http.Server{
 		Addr:    fmt.Sprintf(":%s", s.Config.Port),
-		Handler: r.Handler(),
+		Handler: gin.Handler(),
 	}
 
 	return svr.ListenAndServe()
+}
+
+func HealthCheckHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{
+			"message":   "API is healthy",
+			"success":   true,
+			"timestamp": fmt.Sprintf("%s", time.Now().Format(time.RFC1123)),
+		})
+	}
 }
