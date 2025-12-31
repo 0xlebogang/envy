@@ -5,13 +5,13 @@ export const config = {
 };
 
 export async function proxy(request: NextRequest) {
-	if (isAuthenticated(request.cookies)) {
-		return NextResponse.next();
+	if (!isAuthenticated(request.cookies)) {
+		return NextResponse.redirect(
+			`${process.env.NEXT_PUBLIC_API_URL || ""}/auth/login`,
+		);
 	}
 
-	return NextResponse.redirect(
-		`${process.env.NEXT_PUBLIC_API_URL || ""}/auth/login`,
-	);
+	return NextResponse.next();
 }
 
 export function isAuthenticated(cookies: NextRequest["cookies"]) {

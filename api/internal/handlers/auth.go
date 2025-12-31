@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/0xlebogang/sekrets/internal/auth"
 	"github.com/0xlebogang/sekrets/internal/config"
@@ -31,6 +32,33 @@ func (h *AuthHandlers) LoginHandler() gin.HandlerFunc {
 		state := generateRandomState()
 		ctx.SetCookie("oauth_state", state, 3600, "/", "", false, true)
 		ctx.Redirect(http.StatusFound, h.auth.AuthUrl(state))
+	}
+}
+
+func (h *AuthHandlers) RefreshTokenHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		refreshToken, err := ctx.Cookie(h.Cfg.RefreshTokenCookieName)
+		if err != nil {
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": "missing refresh token"})
+			return
+		}
+
+		newTokens, err := h.auth.RefreshToken(ctx.Request.Context(), refreshToken)
+		if err != nil {
+			ctx.JSON(http.StatusUnauthorized, gin.H{"error": "failed to refresh token"})
+			return
+		}
+
+		ctx.SetCookie(h.Cfg.AuthCookieName, newTokens.AccessToken, int(time.Hour.Seconds()), "/", "localhost", false, true)
+
+		if newTokens.RefreshToken != "" && newTokens.RefreshToken != refreshToken {
+			ctx.SetCookie(h.Cfg.RefreshTokenCookieName, newTokens.RefreshToken, int(7*24*time.Hour.Seconds()), "/", "localhost", false, true)
+		}
+
+		ctx.JSON(http.StatusOK, gin.H{
+			"access_token": newTokens.AccessToken,
+			"success":      true,
+		})
 	}
 }
 
@@ -70,6 +98,7 @@ func (h *AuthHandlers) CallbackHandler() gin.HandlerFunc {
 		}
 
 		ctx.SetCookie(h.Cfg.AuthCookieName, userInfo.AccessToken, 3600, "/", "localhost", false, true)
+		ctx.SetCookie(h.Cfg.RefreshTokenCookieName, userInfo.RefreshToken, int(7*24*time.Hour.Seconds()), "/", "localhost", false, true)
 		ctx.Redirect(http.StatusFound, h.Cfg.PostLoginRedirectUrl)
 	}
 }

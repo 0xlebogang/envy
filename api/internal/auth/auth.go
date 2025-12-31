@@ -69,3 +69,13 @@ func (a *AuthClient) Exchange(ctx context.Context, code string) (*oauth2.Token, 
 func (a *AuthClient) VerifyIdToken(ctx context.Context, rawIdToken string) (*oidc.IDToken, error) {
 	return a.verifier.Verify(ctx, rawIdToken)
 }
+
+func (a *AuthClient) RefreshToken(ctx context.Context, refreshToken string) (*oauth2.Token, error) {
+	token, err := a.config.TokenSource(ctx, &oauth2.Token{
+		RefreshToken: refreshToken,
+	}).Token()
+	if err != nil {
+		return nil, fmt.Errorf("failed to refresh token: %w", err)
+	}
+	return token, nil
+}
