@@ -1,7 +1,2 @@
 packages:
-  - api
-  - web
-
-ignoredBuiltDependencies:
-  - sharp
-  - unrs-resolver
+  - packages/*

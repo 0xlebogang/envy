@@ -10,11 +10,16 @@
         "^build"
       ],
       "outputs": [
-        ".next",
+        "bin/**",
+        ".next/**",
         "!.next/cache/**"
       ]
     },
-    "test": {},
+    "test": {
+      "dependsOn": [
+        "^test"
+      ]
+    },
     "lint": {},
     "lint:fix": {}
   }

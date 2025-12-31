@@ -1,0 +1,12 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "air -c .air.toml",
+    "build": "go build -o ./bin/api ./cmd/api",
+    "start": "./bin/api",
+    "lint": "golangci-lint run ./...",
+    "lint:fix": "golangci-lint run ./... --fix"
+  }
+}

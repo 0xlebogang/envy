@@ -1,18 +1,17 @@
 {
   "name": "sekrets",
   "version": "0.0.0",
+  "license": "AGPL-3.0",
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "biome check && turbo run lint",
-    "lint:fix": "biome check --fix && turbo run lint:fix"
+    "lint:fix": "biome check --fix --unsafe && turbo run lint:fix"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.10",
-    "@changesets/cli": "^2.29.8",
-    "dotenv-cli": "^11.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "turbo": "^2.7.2"
