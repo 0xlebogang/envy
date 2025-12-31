@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/0xlebogang/sekrets/internal/api/handlers"
+	"github.com/0xlebogang/sekrets/internal/api/routes"
 	"github.com/0xlebogang/sekrets/internal/config"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -25,6 +27,10 @@ func New(cfg *config.Config, db *gorm.DB) *Server {
 
 func (s *Server) Start() error {
 	svr := s.createHTTPServer()
+
+	handlers := handlers.New()
+	routes.New(handlers).Register(s.router)
+
 	return svr.ListenAndServe()
 }
 

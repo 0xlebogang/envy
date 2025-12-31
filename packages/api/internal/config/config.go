@@ -14,7 +14,7 @@ type Config struct {
 func Load() *Config {
 	_ = godotenv.Load()
 	return &Config{
-		Port:        getEnv("PORT", ":8080"),
+		Port:        getEnv("PORT", "8080"),
 		DatabaseUrl: getEnv("DATABASE_URL", "postgresql://root:password@localhost/postgres"),
 	}
 }
