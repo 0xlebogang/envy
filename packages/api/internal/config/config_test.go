@@ -1,6 +1,10 @@
 package config
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestGetEnv(t *testing.T) {
 	tests := []struct {
@@ -35,8 +39,5 @@ func TestGetEnv(t *testing.T) {
 func TestLoadConfig(t *testing.T) {
 	t.Setenv("PORT", ":9090")
 	config := Load()
-
-	if config.Port != ":9090" {
-		t.Errorf("Expected port to be :9090 but got %s", config.Port)
-	}
+	assert.Equal(t, ":9090", config.Port)
 }
