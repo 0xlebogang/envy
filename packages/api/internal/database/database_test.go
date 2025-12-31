@@ -65,6 +65,10 @@ func TestConnect(t *testing.T) {
 }
 
 func TestClose(t *testing.T) {
+	if os.Getenv("ENVIRONMENT") != "CI" {
+		t.Skip()
+	}
+
 	// Creating a database connection for testing
 	db, err := gorm.Open(postgres.Open("postgres://root:password@localhost:5432/postgres"), &gorm.Config{})
 	assert.NoError(t, err)
@@ -77,10 +81,6 @@ func TestClose(t *testing.T) {
 			name: "should close the database connection successfully",
 			db:   db,
 		},
-	}
-
-	if os.Getenv("TEST_MODE") != "CI" {
-		t.Skip()
 	}
 
 	for _, tt := range tests {
