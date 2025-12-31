@@ -97,9 +97,9 @@ export function Navbar() {
 								</ul>
 							</div>
 							<div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-								<Button asChild variant="outline" size="sm">
+								<Button asChild size="sm">
 									<Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/login`}>
-										<span>Login</span>
+										<span>Sign In</span>
 									</Link>
 								</Button>
 							</div>
