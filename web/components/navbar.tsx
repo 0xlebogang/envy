@@ -11,10 +11,9 @@ import { useVisibilityStore } from "@/stores/visibility-store";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
-	{ name: "Features", href: "#link" },
-	{ name: "Solution", href: "#link" },
-	{ name: "Pricing", href: "#link" },
-	{ name: "About", href: "#link" },
+	{ name: "Features", href: "/features" },
+	{ name: "Documentation", href: "/docs" },
+	{ name: "Pricing", href: "/pricing" },
 ];
 
 export function Navbar() {
