@@ -14,7 +14,11 @@ func main() {
 		panic(err)
 	}
 
-	err = db.AutoMigrate(&models.User{})
+	models := []interface{}{
+		&models.User{},
+	}
+
+	err = db.AutoMigrate(models...)
 	if err != nil {
 		panic(err)
 	}
