@@ -8,6 +8,8 @@
     "test": "go test ./...",
     "start": "./bin/api",
     "db:migrate": "go run ./cmd/migrate",
+    "services:up": "docker compose -f ./docker-compose.dev.yml up -d",
+    "services:down": "docker compose -f ./docker-compose.dev.yml down",
     "lint": "golangci-lint run ./...",
     "lint:fix": "golangci-lint run ./... --fix"
   }
