@@ -1,21 +1,20 @@
 {
-  "$schema": "https://turborepo.com/schema.json",
-  "extends": [
-    "//"
-  ],
-  "tasks": {
-    "build": {
-      "outputs": [
-        "bin/**"
-      ]
-    },
-    "start": {
-      "dependsOn": [
-        "build"
-      ],
-      "cache": false,
-      "persistent": true
-    },
-    "db:migrate": {}
-  }
+	"$schema": "https://turborepo.com/schema.json",
+	"extends": ["//"],
+	"tasks": {
+		"build": {
+			"outputs": ["bin/**"]
+		},
+		"start": {
+			"dependsOn": ["build"],
+			"cache": false,
+			"persistent": true
+		},
+		"services:up": {
+			"cache": false
+		},
+		"db:migrate": {
+			"dependsOn": ["services:up"]
+		}
+	}
 }

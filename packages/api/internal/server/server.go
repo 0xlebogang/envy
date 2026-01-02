@@ -28,8 +28,8 @@ func New(cfg *config.Config, db *gorm.DB) *Server {
 func (s *Server) Start() error {
 	svr := s.createHTTPServer()
 
-	handlers := handlers.New()
-	routes.New(handlers).Register(s.router)
+	systemHandlers := handlers.NewSystemHandlers()
+	routes.New(systemHandlers).Register(s.router)
 
 	return svr.ListenAndServe()
 }
