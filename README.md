@@ -97,7 +97,7 @@ To get Sekrets up and running locally for development, follow these steps:
 
 ## Contributing
 
-We welcome contributions from the community! If you're interested in contributing to Sekrets, please refer to our [CONTRIBUTING.md](./.github/contributing.md) guide for more information on how to get started.
+We welcome contributions from the community! If you're interested in contributing to Sekrets, please refer to our [CONTRIBUTING.md](./.github/CONTRIBUTING.md) guide for more information on how to get started.
 
 ## License
 
