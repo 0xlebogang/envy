@@ -26,13 +26,11 @@ func New(cfg *config.Config, db *gorm.DB) *Server {
 
 func (s *Server) Start() error {
 	healthCheck(s.router)
-
-	svr := s.createHTTPServer()
-
+	svr := s.createServer()
 	return svr.ListenAndServe()
 }
 
-func (s *Server) createHTTPServer() *http.Server {
+func (s *Server) createServer() *http.Server {
 	return &http.Server{
 		Addr:    fmt.Sprintf(":%s", s.cfg.Port),
 		Handler: s.router.Handler(),

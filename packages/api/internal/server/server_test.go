@@ -29,7 +29,7 @@ func TestCreateHTTPServer(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			server := New(tt.cfg, tt.db)
-			httpServer := server.createHTTPServer()
+			httpServer := server.createServer()
 
 			assert.Equal(t, fmt.Sprintf(":%s", tt.expectedPort), httpServer.Addr)
 			assert.NotNil(t, httpServer.Handler)
