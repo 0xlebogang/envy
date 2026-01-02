@@ -11,7 +11,7 @@ on:
 
 jobs:
   lint:
-    name: Code Linting
+    name: Main CI/CD
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
