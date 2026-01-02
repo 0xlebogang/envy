@@ -1,7 +1,9 @@
-package models
+package user
+
+import "github.com/0xlebogang/sekrets/internal/common"
 
 type User struct {
-	BaseModel
+	common.BaseModel
 	Email    string  `json:"email" gorm:"uniqueIndex;not null;type:varchar(255)" validate:"required,email,min=5,max=255"`
 	Name     string  `json:"name" gorm:"type:varchar(150);not null" validate:"required,min=1,max=150"`
 	Avatar   *string `json:"avatar" gorm:"type:text" validate:"omitempty,url"`

@@ -1,9 +1,10 @@
 package main
 
 import (
+	"os/user"
+
 	"github.com/0xlebogang/sekrets/internal/config"
 	"github.com/0xlebogang/sekrets/internal/database"
-	"github.com/0xlebogang/sekrets/internal/models"
 	"gorm.io/driver/postgres"
 )
 
@@ -15,7 +16,7 @@ func main() {
 	}
 
 	models := []interface{}{
-		&models.User{},
+		&user.User{},
 	}
 
 	err = db.AutoMigrate(models...)

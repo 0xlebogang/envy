@@ -3,9 +3,8 @@ package server
 import (
 	"fmt"
 	"net/http"
+	"time"
 
-	"github.com/0xlebogang/sekrets/internal/api/handlers"
-	"github.com/0xlebogang/sekrets/internal/api/routes"
 	"github.com/0xlebogang/sekrets/internal/config"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -26,10 +25,9 @@ func New(cfg *config.Config, db *gorm.DB) *Server {
 }
 
 func (s *Server) Start() error {
-	svr := s.createHTTPServer()
+	healthCheck(s.router)
 
-	systemHandlers := handlers.NewSystemHandlers()
-	routes.New(systemHandlers).Register(s.router)
+	svr := s.createHTTPServer()
 
 	return svr.ListenAndServe()
 }
@@ -39,4 +37,13 @@ func (s *Server) createHTTPServer() *http.Server {
 		Addr:    fmt.Sprintf(":%s", s.cfg.Port),
 		Handler: s.router.Handler(),
 	}
+}
+
+func healthCheck(ctx *gin.Engine) {
+	ctx.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"status": "ok",
+			"time":   time.Now().Format(time.RFC1123),
+		})
+	})
 }
