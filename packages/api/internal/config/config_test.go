@@ -15,11 +15,18 @@ func TestGetEnv(t *testing.T) {
 		expected string
 	}{
 		{
-			name:     "Should get correct value from environment variable",
+			name:     "should get correct value from environment variable",
 			key:      "TEST_ENV_VAR",
 			fallback: "default_value",
 			envValue: "actual_value",
 			expected: "actual_value",
+		},
+		{
+			name:     "should return fallback when environment variable is not set",
+			key:      "NON_EXISTENT_ENV_VAR",
+			fallback: "default_value",
+			envValue: "",
+			expected: "default_value",
 		},
 	}
 
