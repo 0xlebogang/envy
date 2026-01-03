@@ -26,6 +26,7 @@ func TestGenerateID(t *testing.T) {
 func TestBeforeCreate_Idempotency(t *testing.T) {
 	firstBaseModel := &BaseModel{}
 	err := firstBaseModel.BeforeCreate(&gorm.DB{})
+	assert.NoError(t, err)
 	firstID := firstBaseModel.ID
 
 	// Simulate another call

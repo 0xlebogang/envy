@@ -12,15 +12,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type mockDbDriver struct {
-	mock.Mock
-}
-
-func (m *mockDbDriver) Open(dsn string) gorm.Dialector {
-	args := m.Called(dsn)
-	return args.Get(0).(gorm.Dialector)
-}
-
 type MockDatabase struct {
 	mock.Mock
 }
