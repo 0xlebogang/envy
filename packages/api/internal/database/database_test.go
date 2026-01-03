@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -30,6 +31,10 @@ func (m *MockDatabase) DB() (*sql.DB, error) {
 }
 
 func TestConnect(t *testing.T) {
+	if strings.ToLower(os.Getenv("ENVIRONMENT")) != "test" {
+		t.Skip()
+	}
+
 	tests := []struct {
 		name        string
 		dbUrl       string
@@ -47,10 +52,6 @@ func TestConnect(t *testing.T) {
 		},
 	}
 
-	if os.Getenv("TEST_MODE") != "CI" {
-		t.Skip()
-	}
-
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			db, err := Connect(postgres.Open(tt.dbUrl))
@@ -65,7 +66,7 @@ func TestConnect(t *testing.T) {
 }
 
 func TestClose(t *testing.T) {
-	if os.Getenv("ENVIRONMENT") != "CI" {
+	if strings.ToLower(os.Getenv("ENVIRONMENT")) != "test" {
 		t.Skip()
 	}
 
