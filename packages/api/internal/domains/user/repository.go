@@ -46,5 +46,9 @@ func (r *Repository) Update(id string, updates *UserUpdate) (*UserModel, error) 
 }
 
 func (r *Repository) Delete(id string) error {
-	return r.db.Delete(&UserModel{}, id).Error
+	user, err := r.GetByID(id)
+	if err != nil {
+		return err
+	}
+	return r.db.Delete(user).Error
 }
