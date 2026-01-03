@@ -41,10 +41,8 @@ func (r *Repository) Update(id string, updates *UserUpdate) (*UserModel, error) 
 	if err != nil {
 		return nil, err
 	}
-	if err := r.db.Model(user).Updates(updates).Error; err != nil {
-		return nil, err
-	}
-	return user, nil
+	err = r.db.Model(user).Updates(updates).Error
+	return user, err
 }
 
 func (r *Repository) Delete(id string) error {
