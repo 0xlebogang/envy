@@ -25,12 +25,14 @@ runs:
       uses: actions/setup-go@v6
       with:
         go-version: ${{ inputs.go-version }}
+        go-version-file:
 
     - name: Setup Golangci-Lint
       if: ${{ inputs.golangci-lint-version != 'none' || inputs.golangci-lint-version != '' }}
       uses: golangci/golangci-lint-action@v9
       with:
         version: ${{ inputs.golangci-lint-version }}
+        install-only: true
 
     - name: Setup PNPM
       uses: pnpm/action-setup@v4
