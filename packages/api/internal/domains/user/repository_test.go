@@ -149,7 +149,7 @@ func TestGetByID(t *testing.T) {
 	}
 }
 
-func TestUpdateUser(t *testing.T) {
+func TestUpdate(t *testing.T) {
 	t.Skip("Constant invalid memory error")
 
 	tests := []struct {
