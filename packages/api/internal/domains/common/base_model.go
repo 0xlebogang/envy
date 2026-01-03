@@ -14,9 +14,7 @@ type BaseModel struct {
 }
 
 func (b *BaseModel) BeforeCreate(tx *gorm.DB) (err error) {
-	if b.ID == "" {
-		b.ID = b.generateID()
-	}
+	b.ID = b.generateID()
 	return
 }
 
