@@ -15,12 +15,12 @@ type BaseModel struct {
 
 func (b *BaseModel) BeforeCreate(tx *gorm.DB) (err error) {
 	if b.ID == "" {
-		b.ID = generateID()
+		b.ID = b.generateID()
 	}
 	return
 }
 
-func generateID() string {
+func (b *BaseModel) generateID() string {
 	id, _ := gonanoid.New(21)
 	return id
 }
