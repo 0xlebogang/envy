@@ -28,7 +28,7 @@ runs:
         go-version-file:
 
     - name: Setup Golangci-Lint
-      if: ${{ inputs.golangci-lint-version != 'none' || inputs.golangci-lint-version != '' }}
+      if: ${{ inputs.golangci-lint-version != 'none' && inputs.golangci-lint-version != '' }}
       uses: golangci/golangci-lint-action@v9
       with:
         version: ${{ inputs.golangci-lint-version }}
