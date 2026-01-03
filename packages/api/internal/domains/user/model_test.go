@@ -13,12 +13,12 @@ func TestUserValidation(t *testing.T) {
 
 	tests := []struct {
 		name    string
-		model   *User
+		model   *UserModel
 		wantErr bool
 	}{
 		{
 			name: "should not have any error",
-			model: &User{
+			model: &UserModel{
 				Name:     "test user",
 				Email:    "testuser@email.com",
 				Password: &[]string{"securepassword"}[0],
@@ -27,7 +27,7 @@ func TestUserValidation(t *testing.T) {
 		},
 		{
 			name: "should return error for invalid email",
-			model: &User{
+			model: &UserModel{
 				Name:     "test user",
 				Email:    "invalid-email",
 				Password: &[]string{"securepassword"}[0],
@@ -86,7 +86,7 @@ func TestUserUpdateValidation(t *testing.T) {
 }
 
 func TestUserResult(t *testing.T) {
-	testUser := &User{
+	testUser := &UserModel{
 		Email:    "testuser@email.com",
 		Name:     "Test User",
 		Avatar:   &[]string{"http://example.com/avatar.png"}[0],
