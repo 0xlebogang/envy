@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/0xlebogang/sekrets/internal/config"
+	"github.com/0xlebogang/sekrets/internal/validation"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -26,6 +27,8 @@ func New(cfg *config.Config, db *gorm.DB) *Server {
 
 func (s *Server) Start() error {
 	healthCheck(s.router)
+	s.router.Use(validation.Middleware())
+
 	svr := s.createServer()
 	return svr.ListenAndServe()
 }
