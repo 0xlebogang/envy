@@ -43,7 +43,9 @@ func TestErrorHandler(t *testing.T) {
 			ctx, _ := gin.CreateTestContext(w)
 
 			if tt.err != nil {
-				ctx.Error(tt.err)
+				if err := ctx.Error(tt.err); err != nil {
+					panic("Malformed request context")
+				}
 			}
 
 			middleware := ErrorHandler()
@@ -54,7 +56,6 @@ func TestErrorHandler(t *testing.T) {
 
 				var resp ErrorResponse
 				_ = json.Unmarshal(w.Body.Bytes(), &resp)
-				t.Logf("[ERROR response]: %v", resp)
 
 				assert.Equal(t, tt.expectedCode, resp.Code)
 			}
