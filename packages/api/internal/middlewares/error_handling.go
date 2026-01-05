@@ -72,7 +72,11 @@ func ErrorHandler() gin.HandlerFunc {
 		if len(ctx.Errors) > 0 {
 			err := ctx.Errors.Last().Err
 			if appErr, ok := err.(*AppError); ok {
-				log.Printf("Apllication Error [%s]: %s - %v", appErr.Code, appErr.Message, appErr.Err)
+				log.Printf("Apllication Error [%s]: %s - %v",
+					appErr.Code,
+					appErr.Message,
+					appErr.Err,
+				)
 				ctx.JSON(appErr.Status, ErrorResponse{
 					Error:   appErr.Code,
 					Message: appErr.Message,
@@ -87,7 +91,6 @@ func ErrorHandler() gin.HandlerFunc {
 				ctx.JSON(http.StatusNotFound, ErrorResponse{
 					Error:   "NOT_FOUND",
 					Message: "The requested resource was not found",
-					Code:    "NOT_FOUND",
 				})
 				return
 			}
