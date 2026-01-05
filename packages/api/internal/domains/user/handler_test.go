@@ -5,7 +5,9 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
+	"github.com/0xlebogang/sekrets/internal/domains/common"
 	"github.com/0xlebogang/sekrets/internal/validation"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
@@ -18,34 +20,42 @@ type MockService struct {
 
 func (m *MockService) CreateUser(user *UserModel) (*UserModel, error) {
 	args := m.Called(user)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
 	return args.Get(0).(*UserModel), args.Error(1)
 }
 
 func TestCreateUserHandler_Success(t *testing.T) {
-	t.Skip("Requires debugging unregistered validator")
+	t.Skip("Debug validator attachment")
 
 	tests := []struct {
-		name                  string
-		body                  string
-		expectedInputError    error
-		expectedServiceError  error
-		expectedValidationErr error
-		expectedStatus        int
+		name             string
+		body             string
+		expectedStatus   int
+		expectedResponse UserModel
 	}{
 		{
-			name:                  "should create user successfully",
-			body:                  `{"email":"testuser@email.com","password":"securepassword","name":"test user"}`,
-			expectedInputError:    nil,
-			expectedServiceError:  nil,
-			expectedValidationErr: nil,
-			expectedStatus:        http.StatusCreated,
+			name:           "should create user successfully",
+			body:           `{"email":"testuser@email.com","password":"securepassword","name":"test user"}`,
+			expectedStatus: http.StatusCreated,
+			expectedResponse: UserModel{
+				BaseModel: common.BaseModel{
+					ID:        "1",
+					CreatedAt: time.Time{},
+					UpdatedAt: time.Time{},
+				},
+				Email:    "testuser@email.com",
+				Name:     "test user",
+				Password: &[]string{"securepassword"}[0],
+			},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockService := new(MockService)
-			mockService.On("CreateUser", mock.Anything).Return(&UserModel{}, tt.expectedServiceError)
+			mockService.On("CreateUser", mock.Anything).Return(&tt.expectedResponse, mock.Anything)
 			handler := &Handler{service: mockService}
 			validation.Init()
 
@@ -57,6 +67,7 @@ func TestCreateUserHandler_Success(t *testing.T) {
 			handler.CreateUserHandler()(ctx)
 
 			assert.Equal(t, http.StatusCreated, tt.expectedStatus)
+			assert.Contains(t, w.Body.String(), tt.expectedResponse.Email)
 			mockService.AssertExpectations(t)
 		})
 	}

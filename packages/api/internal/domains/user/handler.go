@@ -3,9 +3,10 @@ package user
 import (
 	"net/http"
 
+	"github.com/0xlebogang/sekrets/internal/middlewares"
 	"github.com/0xlebogang/sekrets/internal/validation"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
+	validator "github.com/go-playground/validator/v10"
 )
 
 type IService interface {
@@ -16,7 +17,7 @@ type Handler struct {
 	service IService
 }
 
-func NewHandler(service *Service) *Handler {
+func NewHandler(service IService) *Handler {
 	return &Handler{
 		service: service,
 	}
@@ -26,28 +27,22 @@ func (h *Handler) CreateUserHandler() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var newUserInput *UserModel
 		if err := ctx.ShouldBindJSON(&newUserInput); err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{
-				"error":   "Invalid input",
-				"message": err.Error(),
-			})
+			appErr := middlewares.BadRequestError("Invalid input", map[string]interface{}{"details": err.Error()})
+			ctx.Error(appErr)
 			return
 		}
 
 		validate := ctx.MustGet(validation.ValidatorKey).(*validator.Validate)
 		if err := validate.Struct(&newUserInput); err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{
-				"error":  "Validation failed",
-				"errors": validation.FormatValidationError(err),
-			})
+			appErr := middlewares.BadRequestError("Validation failed", map[string]interface{}{"details": validation.FormatValidationError(err)})
+			ctx.Error(appErr)
 			return
 		}
 
 		createdUser, err := h.service.CreateUser(newUserInput)
 		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, gin.H{
-				"error":   "An unexpected error occurred",
-				"message": "User creation failed",
-			})
+			appErr := middlewares.InternalServerError("Failed to create user", map[string]interface{}{"details": err.Error()})
+			ctx.Error(appErr)
 			return
 		}
 
