@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/0xlebogang/sekrets/internal/config"
-	"github.com/0xlebogang/sekrets/internal/domains/user"
 	"github.com/0xlebogang/sekrets/internal/middlewares"
 	"github.com/0xlebogang/sekrets/internal/validation"
 	"github.com/gin-gonic/gin"
@@ -33,11 +32,6 @@ func (s *Server) Start() error {
 
 	s.router.Use(middlewares.ErrorHandler())
 	s.router.Use(validation.Middleware())
-
-	userRepo := user.NewRepository(s.db)
-	userService := user.NewService(userRepo)
-	userHandler := user.NewHandler(userService)
-	user.RegisterRoutes(s.router.RouterGroup, userHandler)
 
 	svr := s.createServer()
 	return svr.ListenAndServe()
