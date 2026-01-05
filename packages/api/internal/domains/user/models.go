@@ -1,6 +1,8 @@
 package user
 
-import "github.com/0xlebogang/sekrets/internal/domains/common"
+import (
+	"github.com/0xlebogang/sekrets/internal/domains/common"
+)
 
 type UserModel struct {
 	common.BaseModel

@@ -3,9 +3,9 @@ package user
 import "gorm.io/gorm"
 
 type IUserRepository interface {
-	CreateUser(user *UserModel) error
+	CreateUser(user *UserModel) (*UserModel, error)
 	GetUser(id string) (*UserModel, error)
-	UpdateUser(user *UserModel) error
+	UpdateUser(id string, updateData *UserUpdateInput) (*UserModel, error)
 	DeleteUser(id string) error
 }
 
@@ -17,8 +17,11 @@ func NewRepository(db *gorm.DB) *Repository {
 	return &Repository{db: db}
 }
 
-func (r *Repository) CreateUser(user *UserModel) error {
-	return r.db.Create(user).Error
+func (r *Repository) CreateUser(user *UserModel) (*UserModel, error) {
+	if err := r.db.Create(user).Error; err != nil {
+		return nil, err
+	}
+	return user, nil
 }
 
 func (r *Repository) GetUser(id string) (*UserModel, error) {
