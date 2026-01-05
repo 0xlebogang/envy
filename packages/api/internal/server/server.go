@@ -6,6 +6,8 @@ import (
 	"time"
 
 	"github.com/0xlebogang/sekrets/internal/config"
+	"github.com/0xlebogang/sekrets/internal/domains/user"
+	"github.com/0xlebogang/sekrets/internal/middlewares"
 	"github.com/0xlebogang/sekrets/internal/validation"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -26,8 +28,16 @@ func New(cfg *config.Config, db *gorm.DB) *Server {
 }
 
 func (s *Server) Start() error {
-	healthCheck(s.router)
+	validation.Init()
+	attachHealthCheck(s.router)
+
+	s.router.Use(middlewares.ErrorHandler())
 	s.router.Use(validation.Middleware())
+
+	userRepo := user.NewRepository(s.db)
+	userService := user.NewService(userRepo)
+	userHandler := user.NewHandler(userService)
+	user.RegisterRoutes(s.router.RouterGroup, userHandler)
 
 	svr := s.createServer()
 	return svr.ListenAndServe()
@@ -40,7 +50,7 @@ func (s *Server) createServer() *http.Server {
 	}
 }
 
-func healthCheck(ctx *gin.Engine) {
+func attachHealthCheck(ctx *gin.Engine) {
 	ctx.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"status": "ok",

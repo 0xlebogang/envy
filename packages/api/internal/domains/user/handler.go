@@ -1,6 +1,7 @@
 package user
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/0xlebogang/sekrets/internal/middlewares"
@@ -33,7 +34,8 @@ func (h *Handler) CreateUserHandler() gin.HandlerFunc {
 		}
 
 		validate := ctx.MustGet(validation.ValidatorKey).(*validator.Validate)
-		if err := validate.Struct(&newUserInput); err != nil {
+		if err := validate.Struct(newUserInput); err != nil {
+			log.Printf("[APPLICATION ERROR]: %v", err)
 			appErr := middlewares.BadRequestError("Validation failed", map[string]interface{}{"details": validation.FormatValidationError(err)})
 			ctx.Error(appErr)
 			return
