@@ -11,9 +11,9 @@ import (
 )
 
 type ErrorResponse struct {
-	Error   string                 `json:"error"`
+	Error   string                 `json:"error,omitempty"`
 	Message string                 `json:"message"`
-	Code    string                 `json:"code"`
+	Code    string                 `json:"code,omitempty"`
 	Details map[string]interface{} `json:"details,omitempty"`
 }
 
@@ -92,10 +92,5 @@ func ErrorHandler() gin.HandlerFunc {
 				return
 			}
 		}
-
-		ctx.JSON(http.StatusInternalServerError, ErrorResponse{
-			Error:   "INTERNAL_SERVER_ERROR",
-			Message: "An unexpected error occurred",
-		})
 	}
 }
