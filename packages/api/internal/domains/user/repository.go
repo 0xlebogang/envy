@@ -2,7 +2,7 @@ package user
 
 import "gorm.io/gorm"
 
-type IUserRepository interface {
+type UserRepository interface {
 	CreateUser(user *UserModel) (*UserModel, error)
 	GetUser(id string) (*UserModel, error)
 	UpdateUser(id string, updateData *UserUpdateInput) (*UserModel, error)
