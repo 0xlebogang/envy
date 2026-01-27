@@ -8,10 +8,14 @@
 		"build": "turbo build",
 		"test": "turbo test",
 		"lint": "biome check && turbo lint --filter=api",
-		"lint:fix": "biome check --fix --unsafe && turbo lint:fix --filter=api"
+		"lint:fix": "biome check --fix --unsafe && turbo lint:fix --filter=api",
+		"prepare": "husky"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.13",
+		"@types/node": "25.0.10",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
 		"turbo": "^2.7.6"
 	},
 	"packageManager": "pnpm@10.28.0"
