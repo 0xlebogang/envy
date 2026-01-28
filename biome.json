@@ -8,7 +8,7 @@
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"includes": ["**", "!node_modules", "!packages/api", "!.husky", "!.github"]
+		"includes": ["**", "!node_modules", "!.husky", "!.github"]
 	},
 	"formatter": {
 		"enabled": true,
