@@ -3,4 +3,5 @@ packages:
   - tools/*
 
 onlyBuiltDependencies:
+  - esbuild
   - sharp

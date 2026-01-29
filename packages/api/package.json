@@ -3,9 +3,19 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "echo 'Add dev script here'",
+		"dev": "dotenv -c -- tsx src/index.ts",
 		"build": "echo 'Add build script here'",
 		"test": "echo 'Add test script here'",
-		"lint": "echo 'Add lint script here'"
+		"start": "dotenv -c -- node dist/index.js",
+		"lint": "biome check",
+		"lint:fix": "biome check --fix --unsafe"
+	},
+	"devDependencies": {
+		"@repo/tsconfig": "workspace:*",
+		"tsx": "^4.21.0"
+	},
+	"dependencies": {
+		"@hono/node-server": "^1.19.9",
+		"hono": "^4.11.7"
 	}
 }
