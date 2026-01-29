@@ -1,0 +1,10 @@
+{
+	"extends": "@repo/tsconfig/next.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@": ["src/"]
+		}
+	},
+	"exclude": ["node_modules"]
+}

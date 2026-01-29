@@ -3,9 +3,21 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"dev": "echo 'Add dev script here'",
-		"build": "echo 'Add build script here'",
-		"test": "echo 'Add test script here'",
-		"lint": "echo 'Add lint script here'"
+		"dev": "dotenv -c -- next dev",
+		"build": "next build",
+		"start": "dotenv-c -- next start",
+		"lint": "eslint",
+		"lint:fix": "eslint --fix"
+	},
+	"dependencies": {
+		"next": "^16.1.6",
+		"react": "^19.2.4",
+		"react-dom": "^19.2.4"
+	},
+	"devDependencies": {
+		"@repo/tsconfig": "workspace:*",
+		"@types/react": "^19.2.10",
+		"@types/react-dom": "^19.2.3",
+		"dotenv-cli": "^11.0.0"
 	}
 }
