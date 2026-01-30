@@ -13,7 +13,7 @@ hono.get("/health", (c) => {
 	});
 });
 
-const server = serve({
+const _server = serve({
 	fetch: hono.fetch,
 	port: Number.parseInt(process.env.PORT || "5000", 10),
 });

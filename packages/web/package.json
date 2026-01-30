@@ -16,6 +16,7 @@
 	},
 	"devDependencies": {
 		"@repo/tsconfig": "workspace:*",
+		"@repo/vitest": "workspace:*",
 		"@types/react": "^19.2.10",
 		"@types/react-dom": "^19.2.3"
 	}

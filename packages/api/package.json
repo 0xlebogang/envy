@@ -8,14 +8,24 @@
 		"test": "echo 'Add test script here'",
 		"start": "dotenv -c -- node dist/index.js",
 		"lint": "biome check",
-		"lint:fix": "biome check --fix --unsafe"
-	},
-	"devDependencies": {
-		"@repo/tsconfig": "workspace:*",
-		"tsx": "^4.21.0"
+		"lint:fix": "biome check --fix --unsafe",
+		"db:push": "prisma db push",
+		"db:generate": "prisma generate"
 	},
 	"dependencies": {
 		"@hono/node-server": "^1.19.9",
-		"hono": "^4.11.7"
+		"@prisma/adapter-pg": "^7.3.0",
+		"@prisma/client": "^7.3.0",
+		"better-auth": "^1.4.18",
+		"dotenv": "^17.2.3",
+		"hono": "^4.11.7",
+		"pg": "^8.17.2"
+	},
+	"devDependencies": {
+		"@repo/tsconfig": "workspace:*",
+		"@repo/vitest": "workspace:*",
+		"@types/pg": "^8.16.0",
+		"prisma": "^7.3.0",
+		"tsx": "^4.21.0"
 	}
 }

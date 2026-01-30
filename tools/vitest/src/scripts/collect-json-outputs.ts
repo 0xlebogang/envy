@@ -1,6 +1,6 @@
-import fs from "fs/promises";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { glob } from "glob";
-import path from "path";
 
 async function collectCoverageFiles() {
 	try {
@@ -45,7 +45,7 @@ async function collectCoverageFiles() {
 						);
 
 						await fs.copyFile(coverageFilePath, destinationFile);
-					} catch (err) {
+					} catch (_err) {
 						// File doesn't exist in this directory, skip
 					}
 				}

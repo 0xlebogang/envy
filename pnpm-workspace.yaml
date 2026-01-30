@@ -3,5 +3,7 @@ packages:
   - tools/*
 
 onlyBuiltDependencies:
+  - '@prisma/engines'
   - esbuild
+  - prisma
   - sharp
