@@ -17,6 +17,9 @@ importers:
       '@types/node':
         specifier: ^25.1.0
         version: 25.1.0
+      dotenv-cli:
+        specifier: ^11.0.0
+        version: 11.0.0
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -67,9 +70,6 @@ importers:
       '@types/react-dom':
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.10)
-      dotenv-cli:
-        specifier: ^11.0.0
-        version: 11.0.0
 
   tools/typescript: {}
 
