@@ -16,7 +16,7 @@ hono.get("/health", (c) => {
 
 hono.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
 
-const _server = serve({
+serve({
 	fetch: hono.fetch,
 	port: Number.parseInt(process.env.PORT || "5000", 10),
 });
