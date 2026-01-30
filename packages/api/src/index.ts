@@ -1,6 +1,7 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
+import { auth } from "@/lib/auth";
 
 const hono = new Hono();
 
@@ -12,6 +13,8 @@ hono.get("/health", (c) => {
 		timestamp: Date.now(),
 	});
 });
+
+hono.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
 
 const _server = serve({
 	fetch: hono.fetch,

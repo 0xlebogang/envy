@@ -10,7 +10,8 @@
 		"lint": "biome check",
 		"lint:fix": "biome check --fix --unsafe",
 		"db:push": "prisma db push",
-		"db:generate": "prisma generate"
+		"db:generate": "prisma generate",
+		"db:migrate": "prisma migrate deploy"
 	},
 	"dependencies": {
 		"@hono/node-server": "^1.19.9",
