@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
+  "root": false,
+  "extends": "//",
+  "overrides": [
+    {
+      "includes": ["src/components/ui/*", "src/lib/utils.ts"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": true
+      }
+    }
+  ]
+}

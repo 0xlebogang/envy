@@ -1,0 +1,35 @@
+{
+  "name": "envy",
+  "version": "0.0.0",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "start": "turbo start",
+    "build": "turbo build",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint:fix"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.8",
+    "@types/bun": "^1.3.11",
+    "@types/node": "^25.5.0",
+    "dotenv-cli": "^11.0.0",
+    "fast-glob": "^3.3.3",
+    "ignore": "^7.0.5",
+    "turbo": "^2.8.20"
+  },
+  "ignoreScripts": [
+    "sharp",
+    "unrs-resolver"
+  ],
+  "trustedDependencies": [
+    "sharp",
+    "unrs-resolver"
+  ],
+  "packageManager": "bun@1.3.11"
+}
