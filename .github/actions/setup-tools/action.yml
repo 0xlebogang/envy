@@ -41,6 +41,7 @@ runs:
       uses: golangci/golangci-lint-action@v9
       with:
         version: ${{ inputs.golangci-lint-version }}
+        install-only: true
 
     - name: Install Global Turborepo
       shell: bash
