@@ -4,8 +4,11 @@
 	"tasks": {
 		"db:migrate": {},
 		"test:unit": {},
-		"test:integration": {},
-		"test:e2e": {}
-	},
-	"globalPassThroughEnv": ["PORT", "DATABASE_URL"]
+		"test:integration": {
+			"passThroughEnv": ["DATABASE_URL"]
+		},
+		"test:e2e": {
+			"passThroughEnv": ["PORT", "DATABASE_URL"]
+		}
+	}
 }

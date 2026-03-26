@@ -48,10 +48,10 @@
 				"enabled": false
 			},
 			"formatter": {
-				"enabled": false
+				"enabled": true
 			},
 			"assist": {
-				"enabled": false
+				"enabled": true
 			}
 		}
 	]
