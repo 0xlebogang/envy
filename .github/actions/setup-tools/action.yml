@@ -1,0 +1,46 @@
+name: Setup dependencies
+
+inputs:
+  node-version:
+    description: The version of Node that is used in this project
+    default:  24.x
+  bun-version:
+    description: The version of Bun that is used in this project
+    default: 1.3.11
+  turbo-version:
+    description: The version of Turborepo that is used in this project
+    default: ^2
+  golangci-lint-version:
+    description: The version of Golangci-Lint that is used in this project
+    default: v2.11
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{  inputs.node-version }}
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: ${{ inputs.bun-version }}
+
+    - name: Prepare Go Workspace Configuration
+      shell: bash
+      run: cp go.work.example go.work
+
+    - name: Setup Go
+      uses: actions/setup-go@v6
+      with:
+        go-version-file: 'go.work'
+
+    - name: Setup Golangci-Lint
+      uses: golangci/golangci-lint-action@v9
+      with:
+        version: ${{ inputs.golangci-lint-version }}
+
+    - name: Install Global Turborepo
+      shell: bash
+      run: npm install --global turbo@${{ inputs.turbo-version }}

@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="update ignored files">
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="chore: add tests&#10;&#10;Implement unit and integration tests in backend package">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/database/postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/database/postgres.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,6 +203,7 @@
     </ignored-roots>
     <MESSAGE value="initial commit&#10;&#10;Initial commit with skeleton:&#10;- Nextjs frontend&#10;- Gin backend&#10;- Turborepo monorepo" />
     <MESSAGE value="update ignored files" />
-    <option name="LAST_COMMIT_MESSAGE" value="update ignored files" />
+    <MESSAGE value="chore: add tests&#10;&#10;Implement unit and integration tests in backend package" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: add tests&#10;&#10;Implement unit and integration tests in backend package" />
   </component>
 </project>
