@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(backend): add secret model">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/turbo.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/turbo.json" afterDir="false" />
-    </list>
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +91,7 @@
       <recent name="$PROJECT_DIR$/apps/backend/internal" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestConnect in github.com/0xlebogang/envy/backend/test/integration">
+  <component name="RunManager" selected="Docker.Docker Compose: Dev Services">
     <configuration name="TestConnect in github.com/0xlebogang/envy/backend/test/integration" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="envy" />
       <working_directory value="$PROJECT_DIR$/apps/backend/test/integration" />
@@ -214,6 +209,7 @@
     <MESSAGE value="chore: update precommit config" />
     <MESSAGE value="chore: update project workspace" />
     <MESSAGE value="feat(backend): add secret model" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(backend): add secret model" />
+    <MESSAGE value="feat(ci): add test runner" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(ci): add test runner" />
   </component>
 </project>
