@@ -13,9 +13,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: golangci-lint
-        name: golangci-lint run
-        entry: golangci-lint run --new-from-rev HEAD --fix
+      - id: golangci-lint-full
+        name: golangci-lint-full
+        entry: golangci-lint run --fix
         types: [ go ]
         language: golang
       - id: golangci-lint-fmt
