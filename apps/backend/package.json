@@ -1,17 +1,18 @@
 {
-  "name": "backend",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "air",
-    "start": "./build/main",
-    "build": "go build -o build/main ./cmd/main",
-    "test": "go test -v ./...",
-    "test:unit": "go test $(go list ./... | grep -v test/)",
-    "test:integration": "go test ./test/integration/...",
-    "lint": "golangci-lint run && go vet ./...",
-    "lint:fix": "golangci-lint run --fix",
-    "db:migrate": "go run ./cmd/migrations",
-    "install":  "go mod tidy"
-  }
+	"name": "backend",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "air",
+		"start": "./build/main",
+		"build": "go build -o build/main ./cmd/main",
+		"test": "go test -v ./...",
+		"test:unit": "go test -v $(go list ./... | grep -v test/)",
+		"test:integration": "go test -v ./test/integration/...",
+		"test:e2e": "go test -v ./test/e2e/...",
+		"lint": "golangci-lint run && go vet ./...",
+		"lint:fix": "golangci-lint run --fix",
+		"db:migrate": "go run ./cmd/migrations",
+		"install": "go mod tidy"
+	}
 }

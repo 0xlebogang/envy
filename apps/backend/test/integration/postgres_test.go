@@ -1,6 +1,7 @@
 package integration
 
 import (
+	"os"
 	"testing"
 
 	"github.com/0xlebogang/envy/backend/internal/database"
@@ -14,7 +15,8 @@ func createDBConnection(cs string) (*gorm.DB, error) {
 }
 
 func TestConnect(t *testing.T) {
-	conn, err := createDBConnection("postgresql://postgres:postgres@localhost:5432/postgres")
+	dbUrl := os.Getenv("DATABASE_URL")
+	conn, err := createDBConnection(dbUrl)
 	assert.NoError(t, err)
 	assert.NotNil(t, conn)
 }

@@ -1,8 +1,14 @@
 {
-  "$schema": "../../node_modules/turbo/schema.json",
-  "extends": ["//"],
-  "tasks": {
-    "db:migrate": {},
-    "test:integration": {}
-  }
+	"$schema": "../../node_modules/turbo/schema.json",
+	"extends": ["//"],
+	"tasks": {
+		"db:migrate": {},
+		"test:unit": {},
+		"test:integration": {
+			"passThroughEnv": ["DATABASE_URL"]
+		},
+		"test:e2e": {
+			"passThroughEnv": ["PORT", "DATABASE_URL"]
+		}
+	}
 }

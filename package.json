@@ -12,7 +12,8 @@
 		"build": "turbo build",
 		"test": "turbo test",
 		"lint": "turbo lint",
-		"lint:fix": "turbo lint:fix"
+		"lint:fix": "turbo lint:fix",
+		"prepare": "husky"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.8",
@@ -20,7 +21,9 @@
 		"@types/node": "^25.5.0",
 		"dotenv-cli": "^11.0.0",
 		"fast-glob": "^3.3.3",
+		"husky": "^9.1.7",
 		"ignore": "^7.0.5",
+		"lint-staged": "^16.4.0",
 		"turbo": "^2.8.20"
 	},
 	"ignoreScripts": [
