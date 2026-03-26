@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(backend): add project model">
-      <change afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/project.go" afterDir="false" />
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="chore: update project workspace">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.pre-commit-config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.pre-commit-config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/project.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/project.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,6 +209,8 @@
     <MESSAGE value="fix(ci): disable automatic lint runner" />
     <MESSAGE value="chore: fix all lint errors" />
     <MESSAGE value="feat(backend): add project model" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(backend): add project model" />
+    <MESSAGE value="chore: update precommit config" />
+    <MESSAGE value="chore: update project workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update project workspace" />
   </component>
 </project>
