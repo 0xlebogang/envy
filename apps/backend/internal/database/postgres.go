@@ -1,9 +1,7 @@
 package database
 
 import (
-	"fmt"
 	"log"
-	"strings"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -22,25 +20,13 @@ func New(connectionString string) *Database {
 }
 
 func (d *Database) Connect() (*gorm.DB, error) {
-	dbProvider := strings.Split(d.connectionString, ":")
-	switch dbProvider[0] {
-	case "postgres":
-	case "postgresql":
-		dialector := d.getPostgresDialector()
-		conn, err := gorm.Open(dialector, &gorm.Config{})
-		if err != nil {
-			return nil, err
-		}
+	dialector := postgres.Open(d.connectionString)
+	if conn, err := gorm.Open(dialector); err != nil {
+		return nil, err
+	} else {
 		d.activeConnection = conn
 		return conn, nil
-
-	//	Add case for other supported databases
-
-	default:
-		return nil, fmt.Errorf("unsupported database driver: %s", dbProvider[0])
 	}
-
-	return nil, nil
 }
 
 func (d *Database) Close() {
@@ -62,9 +48,3 @@ func (d *Database) Close() {
 
 	d.activeConnection = nil
 }
-
-func (d *Database) getPostgresDialector() gorm.Dialector {
-	return postgres.Open(d.connectionString)
-}
-
-// Implmement dialector getters for other possibly supported databases
