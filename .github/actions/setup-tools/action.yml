@@ -35,6 +35,7 @@ runs:
       uses: actions/setup-go@v6
       with:
         go-version-file: 'go.work'
+        cache-dependency-path: 'apps/backend/go.mod'
 
     - name: Setup Golangci-Lint
       uses: golangci/golangci-lint-action@v9
