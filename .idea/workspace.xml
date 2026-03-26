@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="" />
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(backend): add secret model">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/turbo.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/turbo.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -208,6 +213,7 @@
     <MESSAGE value="feat(backend): add project model" />
     <MESSAGE value="chore: update precommit config" />
     <MESSAGE value="chore: update project workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: update project workspace" />
+    <MESSAGE value="feat(backend): add secret model" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(backend): add secret model" />
   </component>
 </project>
