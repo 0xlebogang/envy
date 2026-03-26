@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="chore: add tests&#10;&#10;Implement unit and integration tests in backend package">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="fix(ci): disable automatic lint runner" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -204,6 +202,8 @@
     <MESSAGE value="initial commit&#10;&#10;Initial commit with skeleton:&#10;- Nextjs frontend&#10;- Gin backend&#10;- Turborepo monorepo" />
     <MESSAGE value="update ignored files" />
     <MESSAGE value="chore: add tests&#10;&#10;Implement unit and integration tests in backend package" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: add tests&#10;&#10;Implement unit and integration tests in backend package" />
+    <MESSAGE value="fix(ci): update go cache dependency path" />
+    <MESSAGE value="fix(ci): disable automatic lint runner" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(ci): disable automatic lint runner" />
   </component>
 </project>

@@ -1,7 +1,7 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "root": true,
-  "vcs": {
+	"root": true,
+	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
 		"useIgnoreFile": true
@@ -32,27 +32,27 @@
 			}
 		}
 	},
-  "overrides": [
-    {
-      "includes": ["**/*.test.ts", "**/*.test.tsx"],
-      "linter": {
-        "enabled": false
-      },
-      "formatter": {
-        "enabled": true
-      }
-    },
-    {
-      "includes": ["apps/backend/**/*"],
-      "linter": {
-        "enabled": false
-      },
-      "formatter": {
-        "enabled": false
-      },
-      "assist": {
-        "enabled": false
-      }
-    }
-  ]
+	"overrides": [
+		{
+			"includes": ["**/*.test.ts", "**/*.test.tsx"],
+			"linter": {
+				"enabled": false
+			},
+			"formatter": {
+				"enabled": true
+			}
+		},
+		{
+			"includes": ["apps/backend/**/*"],
+			"linter": {
+				"enabled": false
+			},
+			"formatter": {
+				"enabled": false
+			},
+			"assist": {
+				"enabled": false
+			}
+		}
+	]
 }
