@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner" />
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/user.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,109 +58,57 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;Docker.Docker Compose: Dev Services.executor&quot;: &quot;Run&quot;,
-    &quot;Go Test.TestConnect in github.com/0xlebogang/envy/backend/test/integration.executor&quot;: &quot;Run&quot;,
-    &quot;Go Test.TestCreateHTTPServer in github.com/0xlebogang/envy/backend/internal/server.executor&quot;: &quot;Run&quot;,
-    &quot;Go Test.TestGetEnv in github.com/0xlebogang/envy/backend/internal/config.executor&quot;: &quot;Run&quot;,
-    &quot;Go Test.go test github.com/0xlebogang/envy/backend/internal/server.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginOnboardingV2&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.analysis.ui.options.defaults&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/backend-db-models&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/lebeaphoshoko/.bun/bin/bun&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;bun&quot;,
-    &quot;npm.Envy: Run Backend.executor&quot;: &quot;Run&quot;,
-    &quot;npm.Envy: Run Frontend.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/lebeaphoshoko/code/github/envy/apps/frontend/node_modules/typescript/lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "Docker.Docker Compose: Dev Services.executor": "Run",
+    "Go Test.Envy Backend: Run Integration Tests.executor": "Debug",
+    "Go Test.Envy Backend: Run Unit Tests.executor": "Run",
+    "Go Test.TestConnect in github.com/0xlebogang/envy/backend/test/integration.executor": "Run",
+    "Go Test.TestCreate in github.com/0xlebogang/envy/backend/test/integration.executor": "Run",
+    "Go Test.TestCreateHTTPServer in github.com/0xlebogang/envy/backend/internal/server.executor": "Run",
+    "Go Test.TestGetEnv in github.com/0xlebogang/envy/backend/internal/config.executor": "Run",
+    "Go Test.go test backend.executor": "Run",
+    "Go Test.go test github.com/0xlebogang/envy/backend/internal/server.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
+    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.analysis.ui.options.defaults": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "feat/implement-data-layer",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/lebeaphoshoko/.bun/bin/bun",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "bun",
+    "npm.Envy: Run Backend.executor": "Run",
+    "npm.Envy: Run Frontend.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/lebeaphoshoko/code/github/envy/apps/frontend/node_modules/typescript/lib"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/apps/backend/test/integration" />
       <recent name="$PROJECT_DIR$/apps/backend/internal" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.Docker Compose: Dev Services">
-    <configuration name="TestConnect in github.com/0xlebogang/envy/backend/test/integration" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="envy" />
-      <working_directory value="$PROJECT_DIR$/apps/backend/test/integration" />
-      <root_directory value="$PROJECT_DIR$/apps/backend" />
-      <kind value="PACKAGE" />
-      <package value="github.com/0xlebogang/envy/backend/test/integration" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestConnect\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestCreateHTTPServer in github.com/0xlebogang/envy/backend/internal/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="envy" />
-      <working_directory value="$PROJECT_DIR$/apps/backend/internal/server" />
-      <root_directory value="$PROJECT_DIR$/apps/backend" />
-      <kind value="PACKAGE" />
-      <package value="github.com/0xlebogang/envy/backend/internal/server" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestCreateHTTPServer\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestGetEnv in github.com/0xlebogang/envy/backend/internal/config" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="envy" />
-      <working_directory value="$PROJECT_DIR$/apps/backend/internal/config" />
-      <root_directory value="$PROJECT_DIR$/apps/backend" />
-      <kind value="PACKAGE" />
-      <package value="github.com/0xlebogang/envy/backend/internal/config" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestGetEnv\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go test github.com/0xlebogang/envy/backend/internal/server" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="envy" />
-      <working_directory value="$PROJECT_DIR$/apps/backend/internal/server" />
-      <root_directory value="$PROJECT_DIR$/apps/backend" />
-      <kind value="PACKAGE" />
-      <package value="github.com/0xlebogang/envy/backend/internal/server" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Go Test.Envy Backend: Run Integration Tests">
     <list>
       <item itemvalue="Docker.Docker Compose: Dev Services" />
-      <item itemvalue="Go Test.TestConnect in github.com/0xlebogang/envy/backend/test/integration" />
-      <item itemvalue="Go Test.TestCreateHTTPServer in github.com/0xlebogang/envy/backend/internal/server" />
-      <item itemvalue="Go Test.TestGetEnv in github.com/0xlebogang/envy/backend/internal/config" />
-      <item itemvalue="Go Test.go test github.com/0xlebogang/envy/backend/internal/server" />
+      <item itemvalue="Go Test.Envy Backend: Run all tests" />
+      <item itemvalue="Go Test.Envy Backend: Run Integration Tests" />
+      <item itemvalue="Go Test.go test e2e" />
       <item itemvalue="npm.Envy: Run Full Stack" />
       <item itemvalue="npm.Envy: Run Frontend" />
       <item itemvalue="npm.Envy: Run Backend" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Go Test.TestConnect in github.com/0xlebogang/envy/backend/test/integration" />
-        <item itemvalue="Go Test.go test github.com/0xlebogang/envy/backend/internal/server" />
-        <item itemvalue="Go Test.TestCreateHTTPServer in github.com/0xlebogang/envy/backend/internal/server" />
-        <item itemvalue="Go Test.TestGetEnv in github.com/0xlebogang/envy/backend/internal/config" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>

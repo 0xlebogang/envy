@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="go test e2e" type="GoTestRunConfiguration" factoryName="Go Test" nameIsGenerated="true">
+    <module name="envy" />
+    <working_directory value="$PROJECT_DIR$/apps/backend/test/e2e" />
+    <envs>
+      <env name="DATABASE_URL" value="postgresql://postgres:postgres@localhost:5432/postgres" />
+      <env name="PORT" value="8080" />
+    </envs>
+    <kind value="DIRECTORY" />
+    <directory value="$PROJECT_DIR$/apps/backend/test/e2e" />
+    <filePath value="$PROJECT_DIR$" />
+    <framework value="gotest" />
+    <method v="2" />
+  </configuration>
+</component>
