@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Envy Backend: Run Integration Tests" type="GoTestRunConfiguration" factoryName="Go Test">
+    <module name="envy" />
+    <working_directory value="$PROJECT_DIR$/apps/backend/test/integration" />
+    <go_parameters value="-v" />
+    <envs>
+      <env name="DATABASE_URL" value="postgresql://postgres:postgres@localhost:5432/postgres" />
+    </envs>
+    <kind value="DIRECTORY" />
+    <package value="$PROJECT_DIR$/apps/backend/test/integration" />
+    <directory value="$PROJECT_DIR$/apps/backend/test/integration" />
+    <filePath value="$PROJECT_DIR$" />
+    <framework value="gotest" />
+    <method v="2" />
+  </configuration>
+</component>

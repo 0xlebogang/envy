@@ -12,6 +12,7 @@
 		"build": "turbo build",
 		"test": "turbo test",
 		"lint": "turbo lint",
+		"ci": "dotenv -c -- turbo lint test",
 		"lint:fix": "turbo lint:fix",
 		"prepare": "husky"
 	},
