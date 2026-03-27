@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/0xlebogang/envy/backend/internal/domain/models"
+	"github.com/gin-gonic/gin"
 )
 
 type Repository interface {
@@ -22,4 +23,13 @@ type Service interface {
 	GetAllUsers(ctx context.Context) (*[]models.User, error)
 	UpdateUserProfile(ctx context.Context, id string, u *models.User) (*models.User, error)
 	RemoveAccount(ctx context.Context, id string) error
+}
+
+type Handler interface {
+	CreateUser() gin.HandlerFunc
+	GetUserByID() gin.HandlerFunc
+	GetUserByEmail() gin.HandlerFunc
+	GetAllUsers() gin.HandlerFunc
+	UpdateUser() gin.HandlerFunc
+	DeleteUser() gin.HandlerFunc
 }
