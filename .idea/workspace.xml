@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/user/contracts.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/user/contracts.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +17,7 @@
       <list>
         <option value="Go Application" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
         <option value="Go File" />
       </list>
     </option>
@@ -81,7 +80,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "feat/implement-data-layer",
+    "git-widget-placeholder": "feat/implement-user-service",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "/home/lebeaphoshoko/.bun/bin/bun",
     "node.js.detected.package.eslint": "true",

@@ -6,6 +6,7 @@ import (
 
 	"github.com/0xlebogang/envy/backend/internal/domain/models"
 	"github.com/0xlebogang/envy/backend/internal/domain/user"
+	"github.com/0xlebogang/envy/backend/internal/utils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"gorm.io/gorm"
@@ -112,7 +113,7 @@ func TestUpdate(t *testing.T) {
 	}
 
 	updateData := &models.User{
-		Name: strPtr("Test User"),
+		Name: utils.StrToPtr("Test User"),
 	}
 
 	_ = db.WithContext(ctx).Create(testUser)
