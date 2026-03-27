@@ -22,5 +22,6 @@
 		},
 		"lint": {},
 		"lint:fix": {}
-	}
+	},
+	"globalPassThroughEnv": ["PORT", "DATABASE_URL"]
 }
