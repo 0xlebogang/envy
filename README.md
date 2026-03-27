@@ -13,6 +13,7 @@ A secrets management tool that works right in your favourite IDE.
 ### Prerequisites
 
 - Golang (v1.25.8)
+- Golangci-Lint (latest stable version)
 - Node.js (v20.9+)
 - Bun (v1.3.11)
 - Git (latest stable version)
