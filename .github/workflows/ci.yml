@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   lint:
-    if: ${{ github.event_name != 'push' && github.ref_name != 'main' }}
+    if: ${{ github.event_name != 'push' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -31,7 +31,7 @@ jobs:
         run: turbo run lint
 
   unit-test:
-    if: ${{ github.event_name != 'push' && github.ref_name != 'main' }}
+    if: ${{ github.event_name != 'push' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -44,7 +44,7 @@ jobs:
         run: turbo run test:unit
 
   integration-test:
-    if: ${{ github.event_name != 'push' && github.ref_name != 'main' }}
+    if: ${{ github.event_name != 'push' }}
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -73,7 +73,7 @@ jobs:
         run: turbo run test:integration
 
   test:
-    if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     env:
       PORT: 8080
