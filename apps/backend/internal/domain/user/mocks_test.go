@@ -363,7 +363,7 @@ func (_c *MockRepository_List_Call) RunAndReturn(run func(ctx context.Context) (
 }
 
 // Update provides a mock function for the type MockRepository
-func (_mock *MockRepository) Update(ctx context.Context, id string, u *models.User) (*models.User, error) {
+func (_mock *MockRepository) Update(ctx context.Context, id string, u *models.UserUpdate) (*models.User, error) {
 	ret := _mock.Called(ctx, id, u)
 
 	if len(ret) == 0 {
@@ -372,17 +372,17 @@ func (_mock *MockRepository) Update(ctx context.Context, id string, u *models.Us
 
 	var r0 *models.User
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, string, *models.User) (*models.User, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, string, *models.UserUpdate) (*models.User, error)); ok {
 		return returnFunc(ctx, id, u)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, string, *models.User) *models.User); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, string, *models.UserUpdate) *models.User); ok {
 		r0 = returnFunc(ctx, id, u)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*models.User)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, string, *models.User) error); ok {
+	if returnFunc, ok := ret.Get(1).(func(context.Context, string, *models.UserUpdate) error); ok {
 		r1 = returnFunc(ctx, id, u)
 	} else {
 		r1 = ret.Error(1)
@@ -398,12 +398,12 @@ type MockRepository_Update_Call struct {
 // Update is a helper method to define mock.On call
 //   - ctx context.Context
 //   - id string
-//   - u *models.User
+//   - u *models.UserUpdate
 func (_e *MockRepository_Expecter) Update(ctx interface{}, id interface{}, u interface{}) *MockRepository_Update_Call {
 	return &MockRepository_Update_Call{Call: _e.mock.On("Update", ctx, id, u)}
 }
 
-func (_c *MockRepository_Update_Call) Run(run func(ctx context.Context, id string, u *models.User)) *MockRepository_Update_Call {
+func (_c *MockRepository_Update_Call) Run(run func(ctx context.Context, id string, u *models.UserUpdate)) *MockRepository_Update_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
@@ -413,9 +413,9 @@ func (_c *MockRepository_Update_Call) Run(run func(ctx context.Context, id strin
 		if args[1] != nil {
 			arg1 = args[1].(string)
 		}
-		var arg2 *models.User
+		var arg2 *models.UserUpdate
 		if args[2] != nil {
-			arg2 = args[2].(*models.User)
+			arg2 = args[2].(*models.UserUpdate)
 		}
 		run(
 			arg0,
@@ -431,7 +431,7 @@ func (_c *MockRepository_Update_Call) Return(user *models.User, err error) *Mock
 	return _c
 }
 
-func (_c *MockRepository_Update_Call) RunAndReturn(run func(ctx context.Context, id string, u *models.User) (*models.User, error)) *MockRepository_Update_Call {
+func (_c *MockRepository_Update_Call) RunAndReturn(run func(ctx context.Context, id string, u *models.UserUpdate) (*models.User, error)) *MockRepository_Update_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -787,7 +787,7 @@ func (_c *MockService_RemoveAccount_Call) RunAndReturn(run func(ctx context.Cont
 }
 
 // UpdateUserProfile provides a mock function for the type MockService
-func (_mock *MockService) UpdateUserProfile(ctx context.Context, id string, u *models.User) (*models.User, error) {
+func (_mock *MockService) UpdateUserProfile(ctx context.Context, id string, u *models.UserUpdate) (*models.User, error) {
 	ret := _mock.Called(ctx, id, u)
 
 	if len(ret) == 0 {
@@ -796,17 +796,17 @@ func (_mock *MockService) UpdateUserProfile(ctx context.Context, id string, u *m
 
 	var r0 *models.User
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(context.Context, string, *models.User) (*models.User, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, string, *models.UserUpdate) (*models.User, error)); ok {
 		return returnFunc(ctx, id, u)
 	}
-	if returnFunc, ok := ret.Get(0).(func(context.Context, string, *models.User) *models.User); ok {
+	if returnFunc, ok := ret.Get(0).(func(context.Context, string, *models.UserUpdate) *models.User); ok {
 		r0 = returnFunc(ctx, id, u)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*models.User)
 		}
 	}
-	if returnFunc, ok := ret.Get(1).(func(context.Context, string, *models.User) error); ok {
+	if returnFunc, ok := ret.Get(1).(func(context.Context, string, *models.UserUpdate) error); ok {
 		r1 = returnFunc(ctx, id, u)
 	} else {
 		r1 = ret.Error(1)
@@ -822,12 +822,12 @@ type MockService_UpdateUserProfile_Call struct {
 // UpdateUserProfile is a helper method to define mock.On call
 //   - ctx context.Context
 //   - id string
-//   - u *models.User
+//   - u *models.UserUpdate
 func (_e *MockService_Expecter) UpdateUserProfile(ctx interface{}, id interface{}, u interface{}) *MockService_UpdateUserProfile_Call {
 	return &MockService_UpdateUserProfile_Call{Call: _e.mock.On("UpdateUserProfile", ctx, id, u)}
 }
 
-func (_c *MockService_UpdateUserProfile_Call) Run(run func(ctx context.Context, id string, u *models.User)) *MockService_UpdateUserProfile_Call {
+func (_c *MockService_UpdateUserProfile_Call) Run(run func(ctx context.Context, id string, u *models.UserUpdate)) *MockService_UpdateUserProfile_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		var arg0 context.Context
 		if args[0] != nil {
@@ -837,9 +837,9 @@ func (_c *MockService_UpdateUserProfile_Call) Run(run func(ctx context.Context, 
 		if args[1] != nil {
 			arg1 = args[1].(string)
 		}
-		var arg2 *models.User
+		var arg2 *models.UserUpdate
 		if args[2] != nil {
-			arg2 = args[2].(*models.User)
+			arg2 = args[2].(*models.UserUpdate)
 		}
 		run(
 			arg0,
@@ -855,7 +855,7 @@ func (_c *MockService_UpdateUserProfile_Call) Return(user *models.User, err erro
 	return _c
 }
 
-func (_c *MockService_UpdateUserProfile_Call) RunAndReturn(run func(ctx context.Context, id string, u *models.User) (*models.User, error)) *MockService_UpdateUserProfile_Call {
+func (_c *MockService_UpdateUserProfile_Call) RunAndReturn(run func(ctx context.Context, id string, u *models.UserUpdate) (*models.User, error)) *MockService_UpdateUserProfile_Call {
 	_c.Call.Return(run)
 	return _c
 }

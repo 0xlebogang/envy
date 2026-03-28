@@ -13,6 +13,13 @@ type User struct {
 	Projects  []Project
 }
 
+type UserUpdate struct {
+	Email    *string `json:"email,omitempty" binding:"omitempty,email,min=2,max=255"`
+	Password *string `json:"password,omitempty" binding:"omitempty,min=6,max=20"`
+	Name     *string `json:"name,omitempty" binding:"omitempty,min=2,max=255"`
+	Provider *string `json:"provider,omitempty" binding:"omitempty,min=2,max=50"`
+}
+
 type UserResponse struct {
 	ID        string     `json:"id"`
 	Email     string     `json:"email"`
