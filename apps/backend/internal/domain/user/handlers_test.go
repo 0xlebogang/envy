@@ -37,12 +37,12 @@ func TestCreateUser(t *testing.T) {
 			expectedBody:   `"email":"test@email.com"`,
 		},
 		{
-			name: "should return 400 on fail to create user on invalid input",
+			name: "should return 422 on fail to create user on invalid input",
 			body: `{invalid json}`,
 			setupMock: func(m *MockService) {
 				// No expected register calls
 			},
-			expectedStatus: http.StatusBadRequest,
+			expectedStatus: http.StatusUnprocessableEntity,
 			expectedBody:   `"error"`,
 		},
 		{
@@ -252,13 +252,13 @@ func TestUpdateUser(t *testing.T) {
 			expectedBody:   `"name":"Test User"`,
 		},
 		{
-			name:       "should return 400 on fail to update user profile with invalid input",
+			name:       "should return 422 on fail to update user profile with invalid input",
 			id:         "user-1",
 			updateData: `{invalid json}`,
 			setupMock: func(m *MockService) {
 				// UpdateUserProfile service is never called.
 			},
-			expectedStatus: http.StatusBadRequest,
+			expectedStatus: http.StatusUnprocessableEntity,
 			expectedBody:   `"error"`,
 		},
 		{

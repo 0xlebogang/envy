@@ -9,11 +9,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type Server interface {
-	createHttpServer() *http.Server
-	Run() error
-}
-
 type server struct {
 	config *config.Config
 	db     *gorm.DB
@@ -29,6 +24,17 @@ func New(c *config.Config, db *gorm.DB) Server {
 }
 
 func (s *server) Run() error {
+	r := s.router
+
+	// non-versioned endpoints
+	r.GET("/healthz", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status": "ok", // temporary health check endpoint
+		})
+	})
+
+	s.setupRoutes()
+
 	svr := s.createHttpServer()
 	return svr.ListenAndServe()
 }
