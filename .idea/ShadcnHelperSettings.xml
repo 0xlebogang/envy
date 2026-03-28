@@ -1998,6 +1998,18 @@
         <option name="homepage" value="https://rescript-shadcn.miriad.studio" />
         <option name="urlTemplate" value="https://rescript-shadcn.miriad.studio/r/{name}.json" />
       </RegistryConfigState>
+      <RegistryConfigState>
+        <option name="id" value="central-openpolicy" />
+        <option name="name" value="Openpolicy" />
+        <option name="namespace" value="@openpolicy" />
+        <option name="baseUrl" value="https://www.openpolicy.sh/r" />
+        <option name="stylePath" value="/{name}.json" />
+        <option name="type" value="community" />
+        <option name="enabled" value="false" />
+        <option name="description" value="Open-source components for building terms, privacy policies and cookie banners." />
+        <option name="homepage" value="https://www.openpolicy.sh" />
+        <option name="urlTemplate" value="https://www.openpolicy.sh/r/{name}.json" />
+      </RegistryConfigState>
     </registryConfigs>
   </component>
 </project>
