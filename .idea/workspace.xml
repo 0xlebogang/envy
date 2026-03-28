@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner">
-      <change beforePath="$PROJECT_DIR$/.idea/ShadcnHelperSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ShadcnHelperSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Envy_Backend__Run_all_tests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Envy_Backend__Run_all_tests.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/user/handlers_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/user/handlers_test.go" afterDir="false" />
-    </list>
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,6 +69,7 @@
     "Go Test.TestCreateHTTPServer in github.com/0xlebogang/envy/backend/internal/server.executor": "Run",
     "Go Test.TestGetEnv in github.com/0xlebogang/envy/backend/internal/config.executor": "Run",
     "Go Test.go test backend.executor": "Run",
+    "Go Test.go test github.com/0xlebogang/envy/backend/internal/domain/user.executor": "Run",
     "Go Test.go test github.com/0xlebogang/envy/backend/internal/server.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
@@ -103,11 +99,12 @@
       <recent name="$PROJECT_DIR$/apps/backend/test/integration" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.Envy Backend: Unit Tests">
+  <component name="RunManager" selected="Docker.Docker Compose: Dev Services">
     <configuration name="Envy Backend: Unit Tests" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="envy" />
       <working_directory value="$PROJECT_DIR$/apps/backend/internal" />
       <kind value="DIRECTORY" />
+      <package value="github.com/0xlebogang/envy/backend/internal" />
       <directory value="$PROJECT_DIR$/apps/backend/internal" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
