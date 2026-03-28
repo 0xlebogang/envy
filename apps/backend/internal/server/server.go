@@ -5,14 +5,10 @@ import (
 	"net/http"
 
 	"github.com/0xlebogang/envy/backend/internal/config"
+	"github.com/0xlebogang/envy/backend/internal/domain/user"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
-
-type Server interface {
-	createHttpServer() *http.Server
-	Run() error
-}
 
 type server struct {
 	config *config.Config
@@ -29,6 +25,21 @@ func New(c *config.Config, db *gorm.DB) Server {
 }
 
 func (s *server) Run() error {
+	r := s.router
+
+	// non-versioned endpoints
+	r.GET("/healthz", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"status": "ok", // temporary health check endpoint
+		})
+	})
+
+	api := r.Group("/api")
+	v1 := api.Group("/v1")
+
+	userModule := user.BuildModule(s.db)
+	userModule.RegisterRoutes(v1)
+
 	svr := s.createHttpServer()
 	return svr.ListenAndServe()
 }
