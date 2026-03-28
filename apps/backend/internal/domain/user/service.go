@@ -30,7 +30,7 @@ func (s svc) GetAllUsers(ctx context.Context) (*[]models.User, error) {
 	return s.repo.List(ctx)
 }
 
-func (s svc) UpdateUserProfile(ctx context.Context, id string, u *models.User) (*models.User, error) {
+func (s svc) UpdateUserProfile(ctx context.Context, id string, u *models.UserUpdate) (*models.User, error) {
 	return s.repo.Update(ctx, id, u)
 }
 

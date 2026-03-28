@@ -112,14 +112,14 @@ func TestUpdate(t *testing.T) {
 		Email: "user1@email.com",
 	}
 
-	updateData := &models.User{
+	updateData := &models.UserUpdate{
 		Name: utils.StrToPtr("Test User"),
 	}
 
 	_ = db.WithContext(ctx).Create(testUser)
 	updated, err := repo.Update(ctx, testUser.BaseModel.ID, updateData)
 	assert.NoError(t, err)
-	assert.Equal(t, testUser.Name, updated.Name)
+	assert.Equal(t, *updated.Name, *updateData.Name)
 }
 
 func TestDelete(t *testing.T) {

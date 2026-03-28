@@ -50,11 +50,21 @@ func (r repo) List(ctx context.Context) (*[]models.User, error) {
 	return &users, nil
 }
 
-func (r repo) Update(ctx context.Context, id string, u *models.User) (*models.User, error) {
+func (r repo) Update(ctx context.Context, id string, u *models.UserUpdate) (*models.User, error) {
 	user, err := r.GetByID(ctx, id)
 	if err != nil {
 		return nil, err
 	}
+
+	err = r.db.WithContext(ctx).Model(user).Where("id = ?", id).Updates(u).Error
+	if err != nil {
+		return nil, err
+	}
+
+	if err := r.db.WithContext(ctx).First(user, "id = ?", id).Error; err != nil {
+		return nil, err
+	}
+
 	return user, nil
 }
 

@@ -226,12 +226,12 @@ func TestGetAllUsers(t *testing.T) {
 }
 
 func TestUpdateUserProfile(t *testing.T) {
-	updateData := &models.User{Name: utils.StrToPtr("updated user")}
+	updateData := &models.UserUpdate{Name: utils.StrToPtr("updated user")}
 
 	tests := []struct {
 		name      string
 		id        string
-		input     *models.User
+		input     *models.UserUpdate
 		setupMock func(repo *MockRepository)
 		expectErr bool
 	}{
@@ -242,7 +242,7 @@ func TestUpdateUserProfile(t *testing.T) {
 			setupMock: func(repo *MockRepository) {
 				repo.EXPECT().
 					Update(mock.Anything, "user-1", updateData).
-					Return(updateData, nil)
+					Return(&models.User{Name: utils.StrToPtr("updated user")}, nil)
 			},
 			expectErr: false,
 		},
