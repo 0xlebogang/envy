@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/0xlebogang/envy/backend/internal/domain/models"
+	"github.com/0xlebogang/envy/backend/internal/utils"
 	"gorm.io/gorm"
 )
 
@@ -18,6 +19,9 @@ func NewRepo(db *gorm.DB) Repository {
 func (r repo) Create(ctx context.Context, u *models.User) (*models.User, error) {
 	err := r.db.WithContext(ctx).Create(u).Error
 	if err != nil {
+		if utils.IsUniqueViolation(err) {
+			return nil, gorm.ErrDuplicatedKey
+		}
 		return nil, err
 	}
 	return u, nil
@@ -58,6 +62,9 @@ func (r repo) Update(ctx context.Context, id string, u *models.UserUpdate) (*mod
 
 	err = r.db.WithContext(ctx).Model(user).Where("id = ?", id).Updates(u).Error
 	if err != nil {
+		if utils.IsUniqueViolation(err) {
+			return nil, gorm.ErrDuplicatedKey
+		}
 		return nil, err
 	}
 

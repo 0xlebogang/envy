@@ -2,7 +2,9 @@
 	"$schema": "../../node_modules/turbo/schema.json",
 	"extends": ["//"],
 	"tasks": {
-		"db:migrate": {},
+		"db:migrate": {
+			"cache": false
+		},
 		"test:unit": {},
 		"test:integration": {
 			"passThroughEnv": ["DATABASE_URL"]

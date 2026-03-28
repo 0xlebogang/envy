@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/0xlebogang/envy/backend/internal/config"
-	"github.com/0xlebogang/envy/backend/internal/domain/user"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -34,11 +33,7 @@ func (s *server) Run() error {
 		})
 	})
 
-	api := r.Group("/api")
-	v1 := api.Group("/v1")
-
-	userModule := user.BuildModule(s.db)
-	userModule.RegisterRoutes(v1)
+	s.setupRoutes()
 
 	svr := s.createHttpServer()
 	return svr.ListenAndServe()

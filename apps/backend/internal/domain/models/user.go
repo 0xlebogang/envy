@@ -5,12 +5,12 @@ import (
 )
 
 type User struct {
-	BaseModel BaseModel `gorm:"embedded"`
-	Email     string    `json:"email" gorm:"uniqueIndex;type:varchar(255);not null" binding:"required,email,min=2,max=255"`
-	Password  *string   `json:"password,omitempty" gorm:"type:text;default:null" binding:"omitempty,min=6,max=20"`
-	Name      *string   `json:"name,omitempty" gorm:"type:varchar(50);default:null" binding:"omitempty,min=2,max=255"`
-	Provider  string    `json:"provider" gorm:"type:varchar(50);default:internal" binding:"omitempty,min=2,max=50"`
-	Projects  []Project
+	BaseModel
+	Email    string  `json:"email" gorm:"uniqueIndex;type:varchar(255);not null" binding:"required,email,min=2,max=255"`
+	Password *string `json:"password,omitempty" gorm:"type:text;default:null" binding:"omitempty,min=6,max=20"`
+	Name     *string `json:"name,omitempty" gorm:"type:varchar(50);default:null" binding:"omitempty,min=2,max=255"`
+	Provider string  `json:"provider" gorm:"type:varchar(50);default:internal" binding:"omitempty,min=2,max=50"`
+	Projects []Project
 }
 
 type UserUpdate struct {
@@ -31,11 +31,11 @@ type UserResponse struct {
 
 func (u *User) Response() *UserResponse {
 	return &UserResponse{
-		ID:        u.BaseModel.ID,
+		ID:        u.ID,
 		Email:     u.Email,
 		Name:      u.Name,
 		Provider:  u.Provider,
-		CreatedAt: u.BaseModel.CreatedAt,
-		UpdatedAt: u.BaseModel.UpdatedAt,
+		CreatedAt: u.CreatedAt,
+		UpdatedAt: u.UpdatedAt,
 	}
 }

@@ -2,39 +2,66 @@ package integration
 
 import (
 	"context"
+	"errors"
 	"testing"
 
 	"github.com/0xlebogang/envy/backend/internal/domain/models"
 	"github.com/0xlebogang/envy/backend/internal/domain/user"
 	"github.com/0xlebogang/envy/backend/internal/utils"
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"gorm.io/gorm"
 )
 
 func setupUserRepo(t *testing.T) (*gorm.DB, user.Repository) {
 	db := setupTestDB(t)
-	require.NoError(t, db.Exec("DELETE FROM users;").Error)
+	assert.NoError(t, db.Exec("DELETE FROM users;").Error)
 	repo := user.NewRepo(db)
 	return db, repo
 }
 
 func TestCreate(t *testing.T) {
 	db, repo := setupUserRepo(t)
-	ctx := context.Background()
-	testUser := &models.User{
-		BaseModel: models.BaseModel{
-			ID: "user-1",
+
+	tests := []struct {
+		name        string
+		input       *models.User
+		expectError bool
+	}{
+		{
+			name: "should create user successfully",
+			input: &models.User{
+				Email: "test@email.com",
+			},
+			expectError: false,
 		},
-		Email: "create@email.com",
+		{
+			name: "should return error on duplicate email",
+			input: &models.User{
+				Email: "test@email.com",
+			},
+			expectError: true,
+		},
 	}
 
-	created, err := repo.Create(ctx, testUser)
-	assert.NoError(t, err)
-	assert.Equal(t, created.BaseModel.ID, testUser.BaseModel.ID)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ctx := context.Background()
 
-	var dbUser models.User
-	assert.NoError(t, db.First(&dbUser, "id = ?", testUser.BaseModel.ID).Error)
+			created, err := repo.Create(ctx, tt.input)
+
+			if tt.expectError {
+				assert.Error(t, err)
+				assert.True(t, errors.Is(err, gorm.ErrDuplicatedKey))
+			} else {
+				assert.NoError(t, err)
+				assert.NotEqual(t, created.ID, "")
+				assert.Equal(t, created.Email, tt.input.Email)
+
+				var dbUser models.User
+				assert.NoError(t, db.First(&dbUser, "id = ?", created.BaseModel.ID).Error)
+			}
+		})
+	}
 }
 
 func TestGetByID(t *testing.T) {
@@ -103,23 +130,53 @@ func TestList(t *testing.T) {
 }
 
 func TestUpdate(t *testing.T) {
-	db, repo := setupUserRepo(t)
-	ctx := context.Background()
-	testUser := &models.User{
-		BaseModel: models.BaseModel{
-			ID: "user-1",
+	_, repo := setupUserRepo(t)
+
+	tests := []struct {
+		name        string
+		record      *models.User
+		input       *models.UserUpdate
+		expectError bool
+	}{
+		{
+			name: "should update user successfully",
+			record: &models.User{
+				Email: "test@email.com",
+			},
+			input: &models.UserUpdate{
+				Name: utils.StrToPtr("updated user"),
+			},
+			expectError: false,
 		},
-		Email: "user1@email.com",
+		{
+			name: "should return error on duplicate email",
+			record: &models.User{
+				Email: "test2@email.com",
+			},
+			input: &models.UserUpdate{
+				Email: utils.StrToPtr("test@email.com"),
+			},
+			expectError: true,
+		},
 	}
 
-	updateData := &models.UserUpdate{
-		Name: utils.StrToPtr("Test User"),
-	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ctx := context.Background()
 
-	_ = db.WithContext(ctx).Create(testUser)
-	updated, err := repo.Update(ctx, testUser.BaseModel.ID, updateData)
-	assert.NoError(t, err)
-	assert.Equal(t, *updated.Name, *updateData.Name)
+			record, _ := repo.Create(ctx, tt.record)
+			updated, err := repo.Update(ctx, record.ID, tt.input)
+
+			if tt.expectError {
+				assert.Error(t, err)
+				assert.True(t, errors.Is(err, gorm.ErrDuplicatedKey))
+			} else {
+				assert.NoError(t, err)
+				assert.Equal(t, tt.input.Name, updated.Name)
+				assert.NotNil(t, updated.UpdatedAt)
+			}
+		})
+	}
 }
 
 func TestDelete(t *testing.T) {

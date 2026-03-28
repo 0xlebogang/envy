@@ -26,5 +26,7 @@ func (b *BaseModel) BeforeCreate(tx *gorm.DB) error {
 
 func (b *BaseModel) BeforeUpdate(tx *gorm.DB) error {
 	tx.Statement.Omit("id", "created_at")
+	updateTime := time.Now()
+	b.UpdatedAt = &updateTime
 	return nil
 }

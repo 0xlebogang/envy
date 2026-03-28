@@ -24,7 +24,7 @@ func (h handler) CreateUser() gin.HandlerFunc {
 
 		var req models.User
 		if err := c.ShouldBindJSON(&req); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusUnprocessableEntity, gin.H{"error": err.Error()})
 			return
 		}
 
@@ -91,7 +91,7 @@ func (h handler) UpdateUser() gin.HandlerFunc {
 
 		var req models.UserUpdate
 		if err := c.ShouldBindJSON(&req); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			c.JSON(http.StatusUnprocessableEntity, gin.H{"error": err.Error()})
 			return
 		}
 

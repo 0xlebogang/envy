@@ -113,7 +113,7 @@ func TestFindByID(t *testing.T) {
 			} else {
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
-				assert.Equal(t, testUser.BaseModel.ID, result.BaseModel.ID)
+				assert.Equal(t, testUser.ID, result.ID)
 			}
 		})
 	}
