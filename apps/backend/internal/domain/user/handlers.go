@@ -40,7 +40,7 @@ func (h handler) CreateUser() gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusCreated, gin.H{"user": user})
+		c.JSON(http.StatusCreated, gin.H{"user": user.Response()})
 	}
 }
 
@@ -89,7 +89,7 @@ func (h handler) UpdateUser() gin.HandlerFunc {
 		ctx := c.Request.Context()
 		id := c.Param("id")
 
-		var req models.User
+		var req models.UserUpdate
 		if err := c.ShouldBindJSON(&req); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
