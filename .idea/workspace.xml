@@ -80,7 +80,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "feat/implement-user-handlers",
+    "git-widget-placeholder": "main",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "/home/lebeaphoshoko/.bun/bin/bun",
     "node.js.detected.package.eslint": "true",
@@ -112,8 +112,8 @@
     </configuration>
     <list>
       <item itemvalue="Docker.Docker Compose: Dev Services" />
-      <item itemvalue="Go Test.Envy Backend: Run all tests" />
       <item itemvalue="Go Test.Envy Backend: Unit Tests" />
+      <item itemvalue="Go Test.Envy Backend: Run all tests" />
       <item itemvalue="Go Test.Envy Backend: Run Integration Tests" />
       <item itemvalue="Go Test.go test e2e" />
       <item itemvalue="npm.Envy: Run Full CI" />

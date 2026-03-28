@@ -75,9 +75,6 @@ jobs:
   test:
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
-    env:
-      PORT: 8080
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
     services:
       postgres:
         image: docker.io/library/postgres:17-alpine
@@ -100,4 +97,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Run all tests
+        env:
+          PORT: 8080
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
         run: turbo run test
