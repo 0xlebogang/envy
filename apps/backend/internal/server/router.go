@@ -7,10 +7,11 @@ func (s *server) setupRoutes() {
 
 	// Version groups
 	v1 := api.Group("/v1")
+	{
+		// Build modules
+		userModule := user.BuildModule(s.db)
 
-	// Build modules
-	userModule := user.BuildModule(s.db)
-
-	// Register module routes
-	userModule.RegisterRoutes(v1)
+		// Register module routes
+		userModule.RegisterRoutes(v1)
+	}
 }
