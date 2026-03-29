@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/cmd/migrations/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/cmd/migrations/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/base.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/environment.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/environment.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/project.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/project.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/secret.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/secret.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/models/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/user/handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/user/handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/user/handlers_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/user/handlers_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/user/repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/user/repo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/server/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/server/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/internal/utils/helpers.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/utils/helpers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/test/integration/user_repo_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/test/integration/user_repo_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/backend/turbo.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/turbo.json" afterDir="false" />
-    </list>
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +83,7 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "feat/implement-user-routes",
+    "git-widget-placeholder": "feat/password-hashing",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "/home/lebeaphoshoko/.bun/bin/bun",
     "node.js.detected.package.eslint": "true",
