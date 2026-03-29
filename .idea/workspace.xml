@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner" />
+    <list default="true" id="b10cd722-3cce-4695-91c9-66131ddaee43" name="Changes" comment="feat(ci): add test runner">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/user/module.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/user/module.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/user/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/user/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/backend/internal/domain/user/service_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/apps/backend/internal/domain/user/service_test.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +107,7 @@
       <recent name="$PROJECT_DIR$/apps/backend/test/integration" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.Envy: Run Full CI">
+  <component name="RunManager" selected="Go Test.Envy Backend: Unit Tests">
     <configuration name="Envy Backend: Unit Tests" type="GoTestRunConfiguration" factoryName="Go Test">
       <module name="envy" />
       <working_directory value="$PROJECT_DIR$/apps/backend/internal" />

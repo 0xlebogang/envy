@@ -7,6 +7,7 @@ import (
 
 	"github.com/0xlebogang/envy/backend/internal/domain/models"
 	"github.com/0xlebogang/envy/backend/internal/utils"
+	"github.com/0xlebogang/envy/backend/internal/utils/utils_mocks"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"gorm.io/gorm"
@@ -15,39 +16,71 @@ import (
 func TestRegister(t *testing.T) {
 	testUser := &models.User{Email: "test@email.com"}
 	tests := []struct {
-		name      string
-		input     *models.User
-		setupMock func(repo *MockRepository)
-		expectErr bool
+		name              string
+		input             *models.User
+		setupMockRepo     func(m *MockRepository)
+		setupMockPwdUtils func(m *utils_mocks.MockPasswordUtils)
+		expectErr         bool
 	}{
 		{
 			name:  "should register new user successfully",
 			input: testUser,
-			setupMock: func(repo *MockRepository) {
-				repo.EXPECT().
+			setupMockRepo: func(m *MockRepository) {
+				m.EXPECT().
 					Create(mock.Anything, testUser).
 					Return(testUser, nil)
+			},
+			setupMockPwdUtils: nil,
+			expectErr:         false,
+		},
+		{
+			name: "should register new user with hashed password",
+			input: &models.User{
+				Email:    testUser.Email,
+				Password: utils.StrToPtr("raw-password"),
+			},
+			setupMockRepo: func(m *MockRepository) {
+				m.EXPECT().
+					Create(mock.Anything, &models.User{
+						Email:    testUser.Email,
+						Password: utils.StrToPtr("hashed-password"),
+					}).
+					Return(&models.User{
+						Email:    testUser.Email,
+						Password: utils.StrToPtr("hashed-password"),
+					}, nil)
+			},
+			setupMockPwdUtils: func(m *utils_mocks.MockPasswordUtils) {
+				m.EXPECT().
+					Hash("raw-password").
+					Return("hashed-password", nil)
 			},
 			expectErr: false,
 		},
 		{
 			name:  "should fail to register new user",
 			input: testUser,
-			setupMock: func(repo *MockRepository) {
-				repo.EXPECT().
+			setupMockRepo: func(m *MockRepository) {
+				m.EXPECT().
 					Create(mock.Anything, testUser).
 					Return(nil, errors.New("creation failed"))
 			},
-			expectErr: true,
+			setupMockPwdUtils: nil,
+			expectErr:         true,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockRepo := NewMockRepository(t)
-			tt.setupMock(mockRepo)
+			mockPwdUtils := utils_mocks.NewMockPasswordUtils(t)
+			tt.setupMockRepo(mockRepo)
 
-			svc := NewSvc(mockRepo)
+			if tt.setupMockPwdUtils != nil {
+				tt.setupMockPwdUtils(mockPwdUtils)
+			}
+
+			svc := NewSvc(mockRepo, mockPwdUtils)
 			ctx := context.Background()
 
 			result, err := svc.Register(ctx, tt.input)
@@ -70,15 +103,15 @@ func TestFindByID(t *testing.T) {
 		Email:     "user1@email.com",
 	}
 	tests := []struct {
-		name      string
-		input     string
-		setupMock func(repo *MockRepository)
-		expectErr bool
+		name          string
+		input         string
+		setupMockRepo func(repo *MockRepository)
+		expectErr     bool
 	}{
 		{
 			name:  "should find and return user successfully",
 			input: "user-1",
-			setupMock: func(repo *MockRepository) {
+			setupMockRepo: func(repo *MockRepository) {
 				repo.EXPECT().
 					GetByID(mock.Anything, "user-1").
 					Return(testUser, nil)
@@ -88,7 +121,7 @@ func TestFindByID(t *testing.T) {
 		{
 			name:  "should fail to find user",
 			input: "non-existent-id",
-			setupMock: func(repo *MockRepository) {
+			setupMockRepo: func(repo *MockRepository) {
 				repo.EXPECT().
 					GetByID(mock.Anything, "non-existent-id").
 					Return(nil, gorm.ErrRecordNotFound)
@@ -100,9 +133,10 @@ func TestFindByID(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockRepo := NewMockRepository(t)
-			tt.setupMock(mockRepo)
+			mockPwdUtils := utils_mocks.NewMockPasswordUtils(t)
+			tt.setupMockRepo(mockRepo)
 
-			svc := NewSvc(mockRepo)
+			svc := NewSvc(mockRepo, mockPwdUtils)
 			ctx := context.Background()
 
 			result, err := svc.FindByID(ctx, tt.input)
@@ -152,9 +186,10 @@ func TestFindByEmail(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockRepo := NewMockRepository(t)
+			mockPwdUtils := utils_mocks.NewMockPasswordUtils(t)
 			tt.setupMock(mockRepo)
 
-			svc := NewSvc(mockRepo)
+			svc := NewSvc(mockRepo, mockPwdUtils)
 			ctx := context.Background()
 
 			result, err := svc.FindByEmail(ctx, tt.input)
@@ -206,9 +241,10 @@ func TestGetAllUsers(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockRepo := NewMockRepository(t)
+			mockPwdUtils := utils_mocks.NewMockPasswordUtils(t)
 			tt.setupMock(mockRepo)
 
-			svc := NewSvc(mockRepo)
+			svc := NewSvc(mockRepo, mockPwdUtils)
 			ctx := context.Background()
 
 			result, err := svc.GetAllUsers(ctx)
@@ -229,20 +265,44 @@ func TestUpdateUserProfile(t *testing.T) {
 	updateData := &models.UserUpdate{Name: utils.StrToPtr("updated user")}
 
 	tests := []struct {
-		name      string
-		id        string
-		input     *models.UserUpdate
-		setupMock func(repo *MockRepository)
-		expectErr bool
+		name          string
+		id            string
+		input         *models.UserUpdate
+		setupMock     func(m *MockRepository)
+		setupPwdUtils func(m *utils_mocks.MockPasswordUtils)
+		expectErr     bool
 	}{
 		{
 			name:  "should update user profile successfully",
 			id:    "user-1",
 			input: updateData,
-			setupMock: func(repo *MockRepository) {
-				repo.EXPECT().
+			setupMock: func(m *MockRepository) {
+				m.EXPECT().
 					Update(mock.Anything, "user-1", updateData).
 					Return(&models.User{Name: utils.StrToPtr("updated user")}, nil)
+			},
+			setupPwdUtils: nil,
+			expectErr:     false,
+		},
+		{
+			name: "should update user password & hash password successfully",
+			id:   "user-1",
+			input: &models.UserUpdate{
+				Password: utils.StrToPtr("raw-password"),
+			},
+			setupMock: func(m *MockRepository) {
+				m.EXPECT().
+					Update(mock.Anything, "user-1", &models.UserUpdate{
+						Password: utils.StrToPtr("hashed-password"),
+					}).
+					Return(&models.User{
+						Password: utils.StrToPtr("hashed-password"),
+					}, nil)
+			},
+			setupPwdUtils: func(m *utils_mocks.MockPasswordUtils) {
+				m.EXPECT().
+					Hash("raw-password").
+					Return("hashed-password", nil)
 			},
 			expectErr: false,
 		},
@@ -250,21 +310,27 @@ func TestUpdateUserProfile(t *testing.T) {
 			name:  "should faild to update user profile",
 			id:    "user-1",
 			input: updateData,
-			setupMock: func(repo *MockRepository) {
-				repo.EXPECT().
+			setupMock: func(m *MockRepository) {
+				m.EXPECT().
 					Update(mock.Anything, "user-1", updateData).
 					Return(nil, gorm.ErrRecordNotFound)
 			},
-			expectErr: true,
+			setupPwdUtils: nil,
+			expectErr:     true,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockRepo := NewMockRepository(t)
+			mockPwdUtils := utils_mocks.NewMockPasswordUtils(t)
 			tt.setupMock(mockRepo)
 
-			svc := NewSvc(mockRepo)
+			if tt.setupPwdUtils != nil {
+				tt.setupPwdUtils(mockPwdUtils)
+			}
+
+			svc := NewSvc(mockRepo, mockPwdUtils)
 			ctx := context.Background()
 
 			result, err := svc.UpdateUserProfile(ctx, tt.id, tt.input)
@@ -275,7 +341,10 @@ func TestUpdateUserProfile(t *testing.T) {
 			} else {
 				assert.NoError(t, err)
 				assert.NotNil(t, result)
-				assert.Equal(t, updateData.Name, result.Name)
+
+				if tt.input.Name != nil {
+					assert.Equal(t, *tt.input.Name, *result.Name)
+				}
 			}
 		})
 	}
@@ -313,9 +382,10 @@ func TestRemoveAccount(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			mockRepo := NewMockRepository(t)
+			mockPwdUtils := utils_mocks.NewMockPasswordUtils(t)
 			tt.setupMock(mockRepo)
 
-			svc := NewSvc(mockRepo)
+			svc := NewSvc(mockRepo, mockPwdUtils)
 			ctx := context.Background()
 
 			err := svc.RemoveAccount(ctx, tt.input)

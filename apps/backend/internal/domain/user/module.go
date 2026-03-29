@@ -1,6 +1,7 @@
 package user
 
 import (
+	"github.com/0xlebogang/envy/backend/internal/utils"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -15,7 +16,8 @@ func newModule(h Handler) *Module {
 
 func BuildModule(db *gorm.DB) *Module {
 	repo := NewRepo(db)
-	svc := NewSvc(repo)
+	pwdUtils := utils.NewPasswordUtils()
+	svc := NewSvc(repo, pwdUtils)
 	handler := NewHandler(svc)
 	return newModule(handler)
 }
