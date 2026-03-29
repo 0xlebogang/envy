@@ -25,3 +25,8 @@ packages:
   github.com/0xlebogang/envy/backend/internal/domain/user:
     config:
       all: true
+  github.com/0xlebogang/envy/backend/internal/utils:
+    config:
+      all: true
+      pkgName: "{{.SrcPackageName}}_mocks"
+      filename: "{{.SrcPackageName}}_mocks/mocks.go"
