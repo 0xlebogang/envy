@@ -19,8 +19,11 @@ func setupUserRepo(t *testing.T) (*gorm.DB, user.Repository) {
 	return db, repo
 }
 
-func TestCreate(t *testing.T) {
+func TestCreateUser(t *testing.T) {
 	db, repo := setupUserRepo(t)
+	testUser := &models.User{
+		Email: "test@email.com",
+	}
 
 	tests := []struct {
 		name        string
@@ -28,17 +31,13 @@ func TestCreate(t *testing.T) {
 		expectError bool
 	}{
 		{
-			name: "should create user successfully",
-			input: &models.User{
-				Email: "test@email.com",
-			},
+			name:        "should create user successfully",
+			input:       testUser,
 			expectError: false,
 		},
 		{
-			name: "should return error on duplicate email",
-			input: &models.User{
-				Email: "test@email.com",
-			},
+			name:        "should return error on duplicate email",
+			input:       testUser,
 			expectError: true,
 		},
 	}

@@ -11,6 +11,8 @@ type repo struct {
 	db *gorm.DB
 }
 
+type UserIDKey struct{}
+
 func NewRepo(db *gorm.DB) Repository {
 	return &repo{db: db}
 }
@@ -95,8 +97,8 @@ func (r *repo) Delete(ctx context.Context, projectID string) error {
 }
 
 func (r *repo) getUserID(ctx context.Context) (string, error) {
-	if ctx.Value("userID") == "" {
+	if ctx.Value(UserIDKey{}) == "" {
 		return "", ErrNoUserID
 	}
-	return ctx.Value("userID").(string), nil
+	return ctx.Value(UserIDKey{}).(string), nil
 }
