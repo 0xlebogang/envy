@@ -7,3 +7,8 @@ type Project struct {
 	Description  *string `json:"description" gorm:"type:text;default:null" binding:"omitempty,min=2"`
 	Environments []Environment
 }
+
+type ProjectUpdate struct {
+	Name        *string `json:"name,omitempty" gorm:"type:varchar(50);not null" binding:"omitempty,min=2,max=50"`
+	Description *string `json:"description,omitempty" gorm:"type:text;default:null" binding:"omitempty,min=2"`
+}
