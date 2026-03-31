@@ -25,6 +25,9 @@ packages:
   github.com/0xlebogang/envy/backend/internal/domain/user:
     config:
       all: true
+  github.com/0xlebogang/envy/backend/internal/domain/project:
+    config:
+      all: true
   github.com/0xlebogang/envy/backend/internal/utils:
     config:
       all: true
