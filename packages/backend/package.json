@@ -1,0 +1,13 @@
+{
+  "name": "@repo/backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "air",
+    "build": "go build -o ./build/main .",
+    "test": "go test -v ./...",
+    "lint": "golangci-lint run ./...",
+    "lint:fix": "golangci-lint run --fix ./...",
+    "prepare": "go mod tidy"
+  }
+}
